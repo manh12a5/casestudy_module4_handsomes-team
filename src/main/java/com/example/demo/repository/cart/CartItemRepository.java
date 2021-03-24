@@ -7,5 +7,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface CartItemRepository extends JpaRepository<CartItem,Long> {
     Iterable<CartItem>findAllByCart(Cart cart);
-//    CartItem getByCartIsAndProductIs(Cart cart, Product product);
+    CartItem getByCartIsAndProductIs(Cart cart, Product product);
 }

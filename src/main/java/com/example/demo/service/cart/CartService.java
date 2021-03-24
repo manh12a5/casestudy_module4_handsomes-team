@@ -1,14 +1,11 @@
 package com.example.demo.service.cart;
 
 import com.example.demo.model.cart.Cart;
-import com.example.demo.model.cart.CartItem;
 import com.example.demo.model.login.AppUser;
-import com.example.demo.model.product.Product;
 import com.example.demo.repository.cart.CartRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
