@@ -32,7 +32,7 @@
         <td th:text="${p.phoneNumber}"></td>
         <td th:text="${p.address}"></td>
         <td th:text="${p.appRole.name}"></td>
-        <td>
+        <td th:if="${p.appRole.id==2}">
             <a class="btn btn-success" role="button" th:href="@{'/account/edit/'+${p.id}}">Edit</a>
             <a class="btn btn-danger" role="button" th:href="@{'/account/delete/'+${p.id}}"
                onclick="return confirm('Are you sure to delete this product ?')">Delete</a>
