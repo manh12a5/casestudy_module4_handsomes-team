@@ -5,13 +5,18 @@ import com.example.demo.model.product.Product;
 import com.example.demo.service.category.ICategoryService;
 import com.example.demo.service.product.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -23,6 +28,9 @@ public class ProductController {
 
     @Autowired
     ICategoryService categoryService;
+
+    @Autowired
+    Environment environment;
 
     @ModelAttribute("listCategory")
     public List<Category> listCate() {
@@ -46,6 +54,16 @@ public class ProductController {
     @PostMapping("/create")
     private ModelAndView create(@ModelAttribute("product") Product product) {
         ModelAndView modelAndView = new ModelAndView("product/create");
+        MultipartFile multipartFile = product.getAvatar();
+        String fileName = multipartFile.getOriginalFilename();
+        String fileUpload = environment.getProperty("upload.path");
+        String newFile = fileUpload + fileName;
+        try {
+            FileCopyUtils.copy(multipartFile.getBytes(), new File(newFile));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        product.setImage(fileName);
         productService.save(product);
         modelAndView.addObject("product", product);
         modelAndView.addObject("message", "Tao moi thanh cong");
@@ -65,6 +83,7 @@ public class ProductController {
         ModelAndView modelAndView = new ModelAndView("product/edit");
         productService.save(product);
         modelAndView.addObject("product", product);
+        modelAndView.addObject("message", "Sua thanh cong");
         return modelAndView;
     }
 
