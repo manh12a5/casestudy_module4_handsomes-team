@@ -1,2 +1,7 @@
-package com.example.demo.controller;public class AccountController {
+package com.example.demo.controller;
+
+import org.springframework.stereotype.Controller;
+
+@Controller
+public class AccountController {
 }
