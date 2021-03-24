@@ -8,10 +8,15 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <body>
-<div th:align="center">
-    <div th:align="right">
-        <a type="button" class="btn btn-warning" href="/logout">Logout</a>
+<nav class="navbar navbar-light bg-light">
+    <div class="container-fluid">
+        <a  class="navbar-brand">HomePage</a>
+        <form class="d-flex">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
     </div>
+</nav>
 
     <table class="table table-hover">
         <thead>
