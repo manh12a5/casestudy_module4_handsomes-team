@@ -1,11 +1,9 @@
 package com.example.demo.model.login;
 
-import org.springframework.security.core.GrantedAuthority;
-
 import javax.persistence.*;
 
 @Entity
-public class AppRole implements GrantedAuthority {
+public class AppRole {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -36,8 +34,4 @@ public class AppRole implements GrantedAuthority {
         this.name = name;
     }
 
-    @Override
-    public String getAuthority() {
-        return name;
-    }
 }
