@@ -25,6 +25,7 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests().antMatchers("/").permitAll().and().
                 authorizeRequests().antMatchers("/categories").hasRole("ADMIN").and().
+                authorizeRequests().antMatchers("/account").hasRole("ADMIN").and().
                 formLogin().and()
                 .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
         http.csrf().disable();

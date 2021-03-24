@@ -8,38 +8,45 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <body>
-<table class="table table-hover">
-    <thead>
-    <tr>
-        <th scope="col">Username</th>
-        <th scope="col">FullName</th>
-        <th scope="col">Password</th>
-        <th scope="col">Gmail</th>
-        <th scope="col">Birthday</th>
-        <th scope="col">PhoneNumber</th>
-        <th scope="col">Address</th>
-        <th scope="col">Role</th>
-        <th scope="col">Action</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="p:${list}">
-        <td th:text="${p.username}"></td>
-        <td th:text="${p.fullName}"></td>
-        <td th:text="${p.password}"></td>
-        <td th:text="${p.gmail}"></td>
-        <td th:text="${p.birthday}"></td>
-        <td th:text="${p.phoneNumber}"></td>
-        <td th:text="${p.address}"></td>
-        <td th:text="${p.appRole.name}"></td>
-        <td th:if="${p.appRole.id==2}">
-            <a class="btn btn-success" role="button" th:href="@{'/account/edit/'+${p.id}}">Edit</a>
-            <a class="btn btn-danger" role="button" th:href="@{'/account/delete/'+${p.id}}"
-               onclick="return confirm('Are you sure to delete this product ?')">Delete</a>
-        </td>
-    </tr>
-    </tbody>
-</table>
+<div th:align="center">
+    <div th:align="right">
+        <a type="button" class="btn btn-warning" href="/logout">Logout</a>
+    </div>
+
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th scope="col">Username</th>
+            <th scope="col">FullName</th>
+            <th scope="col">Password</th>
+            <th scope="col">Gmail</th>
+            <th scope="col">Birthday</th>
+            <th scope="col">PhoneNumber</th>
+            <th scope="col">Address</th>
+            <th scope="col">Role</th>
+            <th scope="col">Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="p:${list}">
+            <td th:text="${p.username}"></td>
+            <td th:text="${p.fullName}"></td>
+            <td th:text="${p.password}"></td>
+            <td th:text="${p.gmail}"></td>
+            <td th:text="${p.birthday}"></td>
+            <td th:text="${p.phoneNumber}"></td>
+            <td th:text="${p.address}"></td>
+            <td th:text="${p.appRole.name}"></td>
+            <td th:if="${p.appRole.id==2}">
+                <a class="btn btn-success" role="button" th:href="@{'/account/edit/'+${p.id}}">Edit</a>
+                <a class="btn btn-danger" role="button" th:href="@{'/account/delete/'+${p.id}}"
+                   onclick="return confirm('Are you sure to delete this account ?')">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
 
 
 </body>

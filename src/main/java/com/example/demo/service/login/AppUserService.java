@@ -22,7 +22,7 @@ public class AppUserService implements IAppUserService, UserDetailsService {
 
     @Override
     public List<AppUser> findAll() {
-        return appUserRepository.findAll();
+        return appUserRepository.getAllByOrderByAppRole();
     }
 
     @Override
