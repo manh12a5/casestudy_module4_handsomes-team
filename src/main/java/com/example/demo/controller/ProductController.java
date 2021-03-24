@@ -37,6 +37,20 @@ public class ProductController {
         return categoryService.findAll();
     }
 
+    //Upload File
+    private void uploadFile(@ModelAttribute("product") Product product) {
+        MultipartFile multipartFile = product.getAvatar();
+        String fileName = multipartFile.getOriginalFilename();
+        String fileUpload = environment.getProperty("upload.path");
+        String newFile = fileUpload + fileName;
+        try {
+            FileCopyUtils.copy(multipartFile.getBytes(), new File(newFile));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        product.setImage(fileName);
+    }
+
     @GetMapping("")
     private ModelAndView showAll(@PageableDefault(size = 6) Pageable pageable) {
         ModelAndView modelAndView = new ModelAndView("product/list");
@@ -54,16 +68,7 @@ public class ProductController {
     @PostMapping("/create")
     private ModelAndView create(@ModelAttribute("product") Product product) {
         ModelAndView modelAndView = new ModelAndView("product/create");
-        MultipartFile multipartFile = product.getAvatar();
-        String fileName = multipartFile.getOriginalFilename();
-        String fileUpload = environment.getProperty("upload.path");
-        String newFile = fileUpload + fileName;
-        try {
-            FileCopyUtils.copy(multipartFile.getBytes(), new File(newFile));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        product.setImage(fileName);
+        uploadFile(product);
         productService.save(product);
         modelAndView.addObject("product", product);
         modelAndView.addObject("message", "Tao moi thanh cong");
@@ -81,6 +86,7 @@ public class ProductController {
     @PostMapping("/edit/{id}")
     private ModelAndView edit(@ModelAttribute("product") Product product) {
         ModelAndView modelAndView = new ModelAndView("product/edit");
+        uploadFile(product);
         productService.save(product);
         modelAndView.addObject("product", product);
         modelAndView.addObject("message", "Sua thanh cong");
