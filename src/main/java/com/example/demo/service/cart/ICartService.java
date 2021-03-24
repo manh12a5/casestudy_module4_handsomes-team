@@ -13,7 +13,7 @@ public interface ICartService {
 
     int getItemCount();
 
-    void addItem(CartItem cartItem);
+    void addItem(Product product,int quantity);
     void updateItem(Product product,int quantity);
     void remoteItem(Product product);
     void remoteCart();

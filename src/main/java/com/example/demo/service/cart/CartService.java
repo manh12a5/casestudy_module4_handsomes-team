@@ -38,11 +38,7 @@ public class CartService implements ICartService {
     }
 
     @Override
-    public void addItem(CartItem cartItem) {
-        addItem(cartItem.getProduct(),cartItem.getQuantity());
-    }
-
-    private void addItem(Product product, int quantity) {
+    public void addItem(Product product, int quantity) {
         CartItem cartItem=getItem(product);
         //add item khi tồn tại
         if (cartItem!=null){
