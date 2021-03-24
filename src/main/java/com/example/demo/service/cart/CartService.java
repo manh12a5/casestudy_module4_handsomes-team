@@ -1,7 +1,10 @@
 package com.example.demo.service.cart;
 
+import com.example.demo.model.cart.Cart;
 import com.example.demo.model.cart.CartItem;
+import com.example.demo.model.login.AppUser;
 import com.example.demo.model.product.Product;
+import com.example.demo.repository.cart.CartRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,65 +13,31 @@ import java.util.List;
 
 @Service
 public class CartService implements ICartService {
-    private List<CartItem>itemList;
+    @Autowired
+    private CartRepository cartRepository;
 
-    public CartService() {
-        itemList=new ArrayList<CartItem>();
+    @Override
+    public List<Cart> findAll() {
+        return (List<Cart>) cartRepository.findAll();
     }
 
     @Override
-    public CartItem getItem(Product product) {
-        for (CartItem item:itemList
-             ) {
-            if (item.getProduct().getId()== product.getId()){
-                return item;
-            }
-        }
-        return null;
+    public Cart findById(Long id) {
+        return cartRepository.findById(id).get();
     }
 
     @Override
-    public List<CartItem> getItems() {
-        return itemList;
+    public Cart save(Cart cart) {
+        return cartRepository.save(cart);
     }
 
     @Override
-    public int getItemCount() {
-        return itemList.size();
+    public void remove(Long id) {
+        cartRepository.deleteById(id);
     }
 
     @Override
-    public void addItem(Product product, int quantity) {
-        CartItem cartItem=getItem(product);
-        //add item khi tồn tại
-        if (cartItem!=null){
-            cartItem.setQuantity(cartItem.getQuantity()+quantity);
-        }
-    }
-
-    @Override
-    public void updateItem(Product product, int quantity) {
-        CartItem item=getItem(product);
-        if (item!=null){
-            item.setQuantity(quantity);
-        }
-    }
-
-    @Override
-    public void remoteItem(Product product) {
-        CartItem item=getItem(product);
-        if (item!=null){
-            itemList.remove(item);
-        }
-    }
-
-    @Override
-    public void remoteCart() {
-        itemList.clear();
-    }
-
-    @Override
-    public boolean isEmpty() {
-        return itemList.isEmpty();
+    public Cart findByAppUser(AppUser appUser) {
+        return cartRepository.findByAppUser(appUser);
     }
 }
