@@ -6,6 +6,7 @@ import com.example.demo.model.login.AppUser;
 import com.example.demo.model.product.Product;
 import com.example.demo.service.cart.ICartService;
 import com.example.demo.service.cartItem.ICartItemService;
+import com.example.demo.service.login.user.IAppUserService;
 import com.example.demo.service.product.IProductService;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,9 +31,12 @@ public class CartController {
     @Autowired
     private ICartItemService cartItemService;
 
+    @Autowired
+    private IAppUserService appUserService;
+
     @ModelAttribute()
     public AppUser appUser(){
-        return null;
+        return appUserService.getCurrentAccount();
     }
     @ModelAttribute("cart")
     public Cart cart(){
@@ -42,7 +46,7 @@ public class CartController {
     @GetMapping("/cart/add/{id}")
     public ResponseEntity<Iterable<Product>> postCart(@PathVariable Long id) throws NotFoundException {
         Product product = productService.findById(id);
-//        List<Product> allProductInCurrentCart = productService.findAllByCart(currentCart());
+        List<Product> allProductInCurrentCart = productService.findAllByCart(cart());
         Cart cart = null;
         if (cart() == null){
             cart = new Cart();
@@ -59,7 +63,7 @@ public class CartController {
         }else  {
             if (cart() == null){
                 cart = new Cart();
-                cart.setAppUser(cart());
+                cart.setAppUser(appUser());
                 cartService.save(cart);
             }
             CartItem cartItem = new CartItem();
@@ -68,7 +72,7 @@ public class CartController {
             cartItem.setCart(cart);
             cartItemService.save(cartItem);
         }
-        Iterable<Product> list= productService.findAllByCart(currentCart());
+        Iterable<Product> list= productService.findAllByCart(cart());
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
