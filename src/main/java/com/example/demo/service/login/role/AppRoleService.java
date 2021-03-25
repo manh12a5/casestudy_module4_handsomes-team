@@ -14,7 +14,7 @@ public class AppRoleService implements IAppRoleService{
 
     @Override
     public List<AppRole> findAll() {
-        return appRoleRepository.findAll();
+        return appRoleRepository.getAllByOrderByNameDesc();
     }
 
     @Override

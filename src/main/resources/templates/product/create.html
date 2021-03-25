@@ -38,7 +38,7 @@
         <label>Category</label> &ensp;
         <select th:field="*{category.id}">
             <th:block th:each="p: ${listCategory}">
-                <option th:value="${p.id}" th:text="${p.name}"></option>
+                <option th:value="${p.id}" th:text="${p.name}" th:if="" ></option>
             </th:block>
         </select>
     </div>

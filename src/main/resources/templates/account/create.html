@@ -26,7 +26,7 @@
             <label for="password" class="form-label">Password</label>
             <input type="password" class="form-control" id="password" name="password" th:field="*{password}">
         </div>
-        <div class="mb-3">
+        <div class="mb-3" hidden>
             <label for="role" class="form-label">Role</label>
             <select name="role" id="role" th:field="*{appRole.id}">
                 <th:block th:each="role:${listRole}">

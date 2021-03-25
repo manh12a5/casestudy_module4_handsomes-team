@@ -44,4 +44,5 @@ public class LoginController {
         appUserService.save(appUser);
         return new ModelAndView("redirect:/login");
     }
+
 }

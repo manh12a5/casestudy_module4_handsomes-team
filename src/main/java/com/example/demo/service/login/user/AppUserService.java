@@ -1,5 +1,6 @@
 package com.example.demo.service.login.user;
 
+import com.example.demo.model.login.AppRole;
 import com.example.demo.model.login.AppUser;
 import com.example.demo.repository.AppUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,6 +66,12 @@ public class AppUserService implements IAppUserService, UserDetailsService {
     public Page<AppUser> findAll(Pageable pageable) {
         return appUserRepository.getAllByOrderByAppRoleDesc(pageable);
     }
+
+    @Override
+    public List<AppUser> findAllByAppRole(AppRole appRole) {
+        return appUserRepository.findAllByAppRole(appRole);
+    }
+
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
