@@ -51,14 +51,4 @@ public class ProductService implements IProductService {
         return productRepository.findProductByName(name, pageable);
     }
 
-    @Override
-    public List<Product> findAllByCart(Cart cart) {
-        Iterable<CartItem> cartItems = cartItemService.findAllByCart(cart);
-        List<Product> productList = new ArrayList<>();
-        for (CartItem item:cartItems
-        ) {
-            productList.add(item.getProduct());
-        }
-        return productList;
-    }
 }
