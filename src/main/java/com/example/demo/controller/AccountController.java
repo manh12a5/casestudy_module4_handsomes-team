@@ -1,19 +1,32 @@
 package com.example.demo.controller;
 
+import com.example.demo.model.login.AppRole;
 import com.example.demo.model.login.AppUser;
+import com.example.demo.service.login.role.IAppRoleService;
 import com.example.demo.service.login.user.IAppUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/account")
 public class AccountController {
     @Autowired
     IAppUserService appUserService;
+
+    @Autowired
+    IAppRoleService appRoleService;
+
+    @ModelAttribute("listRole")
+    public List<AppRole> appRoleList() {
+        return appRoleService.findAll();
+    }
 
     @GetMapping()
     public ModelAndView showAll(@PageableDefault(size = 5) Pageable pageable) {
@@ -49,6 +62,12 @@ public class AccountController {
     public ModelAndView edit(@ModelAttribute AppUser appUser) {
         appUserService.save(appUser);
         return new ModelAndView("redirect:/account");
+    }
+
+    @GetMapping("/search")
+    public ModelAndView searchAccountByRole(@ModelAttribute AppRole appRole) {
+        List<AppUser> list = appUserService.findAllByAppRole(appRole);
+        return new ModelAndView("account/list", "list", list);
     }
 
 
