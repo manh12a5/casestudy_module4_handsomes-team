@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>header</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="../../image/shoes.jpg" type="image/png" th:fragment="logo">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../static/style.css">
+</head>
+<body>
+<div class="header">
+    <div class="container-fluid">
+        <div class="text-center" style="margin-bottom:0">
+            <div class="row background-header">
+                <div class="col">
+                    <a class="navbar-brand" href="/home">
+                    <img src="../../image/shoes-2.png" height="80" width="80" alt="logo"/>
+                </a>
+                </div>
+                <div class=" col">
+                    <form action="#" class="search-wrap">
+                        <div class="input-group w-100">
+                            <input type="text" class="form-control search-form" style="width:55%;margin-top: 5%" placeholder="Search">
+                            <button class="btn btn-primary search-button" type="submit"><i class="fa fa-search"></i> </button>
+                        </div>
+                    </form>
+                </div>
+                <div class="col"></div>
+            </div>
+
+        </div>
+        <nav class="navbar navbar-expand-sm bg-dark navbar-dark justify-content-center sticky-top">
+            <!-- Brand -->
+            <a class="navbar-brand" href="/home">
+                Trang chủ
+            </a>
+
+            <!-- Toggler/collapsibe Button -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse d-flex justify-content-center" id="collapsibleNavbar">
+                <!-- Links -->
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Giới thiệu</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Liên Hệ</a>
+                    </li>
+
+                    <!-- Dropdown -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                            Sản Phẩm
+                        </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">ADIDAS</a>
+                            <a class="dropdown-item" href="#">PUMA</a>
+                            <a class="dropdown-item" href="#">NIKE</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbardrop2" data-toggle="dropdown">
+                            Giỏ hàng
+                        </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">sp1</a>
+                            <a class="dropdown-item" href="#">sp2</a>
+                            <a class="dropdown-item" href="#">sp3</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbardrop1" data-toggle="dropdown">
+                            Login
+                        </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">Đăng nhập</a>
+                            <a class="dropdown-item" href="#">Đăng ký</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+        </nav>
+    </div>
+</div>
+</body>
+</html>
