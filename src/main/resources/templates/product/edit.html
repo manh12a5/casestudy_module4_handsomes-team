@@ -10,6 +10,10 @@
 
 <h3 style="text-align: center">Edit Product</h3>
 
+<th:block th:if="${message}">
+    <span th:text="${message}"></span>
+</th:block>
+
 <div>
     <form id="form" th:object="${product}" method="post" enctype="multipart/form-data">
         <div>
@@ -28,9 +32,11 @@
             <label>Size</label>
             <input type="text" th:field="*{size}"/>
         </div>
+
         <div>
             <label>Image</label>
-            <input type="file" th:field="*{image}">
+            <input type="text" th:field="*{image}" disabled>
+            <input type="file" th:field="*{avatar}">
         </div>
         <div>
             <label>Category</label> &ensp;
