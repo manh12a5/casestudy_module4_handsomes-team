@@ -3,6 +3,7 @@ package com.example.demo.service.login.user;
 import com.example.demo.model.login.AppUser;
 import com.example.demo.repository.AppUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
@@ -57,6 +58,14 @@ public class AppUserService implements IAppUserService, UserDetailsService {
         }
         appUser = this.getAccountByUserName(username);
         return appUser;
+    }
+
+    @Override
+    public AppUser getCurrentUser() {
+        Authentication authentication= SecurityContextHolder.getContext().getAuthentication();
+        String userName = authentication.getName();
+        AppUser user= appUserRepository.getAppUserByUsername(userName);
+        return user;
     }
 
     @Override

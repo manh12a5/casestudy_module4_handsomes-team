@@ -13,15 +13,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
+@RequestMapping("/cart")
 public class CartController {
+    @Autowired
+    private IAppUserService appUserService;
+
     @Autowired
     private ICartService cartService;
 
@@ -31,39 +38,45 @@ public class CartController {
     @Autowired
     private ICartItemService cartItemService;
 
-    @Autowired
-    private IAppUserService appUserService;
-
     @ModelAttribute()
-    public AppUser appUser(){
-        return appUserService.getCurrentAccount();
+    public AppUser currentUser(){
+        return appUserService.getCurrentUser();
     }
-    @ModelAttribute("cart")
-    public Cart cart(){
-        Cart cart=cartService.findByAppUser(appUser());
+
+    @ModelAttribute("currentCart")
+    public Cart currentCart() {
+        Cart cart = cartService.findByAppUser(currentUser());
         return cart;
     }
+    @GetMapping("")
+    public ModelAndView view(){
+        ModelAndView modelAndView=new ModelAndView("/cart/cart");
+       modelAndView.addObject("cart",productService.findAll());
+       return modelAndView;
+
+    }
+
     @GetMapping("/cart/add/{id}")
     public ResponseEntity<Iterable<Product>> postCart(@PathVariable Long id) throws NotFoundException {
         Product product = productService.findById(id);
-        List<Product> allProductInCurrentCart = productService.findAllByCart(cart());
+        List<Product> allProductInCurrentCart = productService.findAllByCart(currentCart());
         Cart cart = null;
-        if (cart() == null){
+        if (currentCart() == null){
             cart = new Cart();
         }else {
-            cart =                                                                                                                   cart();
+            cart = currentCart();
         }
         boolean isContains = allProductInCurrentCart.contains(product);
         if (isContains){
-            CartItem currentItems = cartItemService.getByCartIsAndProductIs(cart(), product);
+            CartItem currentItems = cartItemService.getByCartIsAndProductIs(currentCart(), product);
             int currentQuantity = currentItems.getQuantity();
             currentQuantity++;
             currentItems.setQuantity(currentQuantity);
             cartItemService.save(currentItems);
         }else  {
-            if (cart() == null){
+            if (currentCart() == null){
                 cart = new Cart();
-                cart.setAppUser(appUser());
+                cart.setAppUser(currentUser());
                 cartService.save(cart);
             }
             CartItem cartItem = new CartItem();
@@ -72,20 +85,20 @@ public class CartController {
             cartItem.setCart(cart);
             cartItemService.save(cartItem);
         }
-        Iterable<Product> list= productService.findAllByCart(cart());
-        return new ResponseEntity<>(list, HttpStatus.OK);
+        Iterable<Product> list= productService.findAllByCart(currentCart());
+        return new ResponseEntity<>(list,HttpStatus.OK);
     }
 
     @GetMapping("/cart/count")
     public ResponseEntity cout(@PathVariable Long id) throws NotFoundException {
-        List<CartItem> cartItems = (List<CartItem>) cartItemService.findAllByCart(cart());
+        List<CartItem> cartItems = cartItemService.findByCart(currentCart());
         return new ResponseEntity(cartItems,HttpStatus.OK);
     }
 
     @GetMapping("/total")
     public ResponseEntity total() {
         Double total  = 0.0;
-        List<CartItem> cartItems = cartItemService.findByCart(cart());
+        List<CartItem> cartItems = cartItemService.findByCart(currentCart());
         for (CartItem cartItem : cartItems){
             total += cartItem.getQuantity() * cartItem.getProduct().getPrice();
         }
@@ -94,11 +107,13 @@ public class CartController {
 
     @GetMapping("/quantity")
     public ResponseEntity quantity(){
-        List<CartItem> cartItems = cartItemService.findByCart(cart());
+        List<CartItem> cartItems = cartItemService.findByCart(currentCart());
         List<Integer> list = new ArrayList();
         for (CartItem cartItem : cartItems){
             list.add(cartItem.getQuantity());
         }
         return new ResponseEntity(list,HttpStatus.OK);
     }
+
+
 }
