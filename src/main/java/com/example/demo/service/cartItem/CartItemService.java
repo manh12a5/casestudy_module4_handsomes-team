@@ -5,9 +5,10 @@ import com.example.demo.model.cart.CartItem;
 import com.example.demo.model.product.Product;
 import com.example.demo.repository.cart.CartItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class CartItemService implements ICartItemService{
     @Autowired
     private CartItemRepository cartItemRepository;
