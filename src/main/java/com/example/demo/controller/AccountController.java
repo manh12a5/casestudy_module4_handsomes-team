@@ -65,9 +65,10 @@ public class AccountController {
     }
 
     @GetMapping("/search")
-    public ModelAndView searchAccountByRole(@ModelAttribute AppRole appRole) {
-        List<AppUser> list = appUserService.findAllByAppRole(appRole);
-        return new ModelAndView("account/list", "list", list);
+    public ModelAndView searchAccountByRole(@ModelAttribute AppRole role) {
+        List<AppUser> list = appUserService.findAllByAppRole(role);
+        System.out.println(list.size());
+        return new ModelAndView("/account/test", "list", list);
     }
 
 

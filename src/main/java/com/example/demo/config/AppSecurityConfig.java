@@ -16,6 +16,9 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     IAppUserService appUserService;
 
+    @Autowired
+    CustomizeSuccessHandle customizeSuccessHandle;
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService((UserDetailsService) appUserService).passwordEncoder(NoOpPasswordEncoder.getInstance());
@@ -24,9 +27,10 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests().antMatchers("/").permitAll().and().
-                authorizeRequests().antMatchers("/categories").hasRole("ADMIN").and().
-                authorizeRequests().antMatchers("/account").hasRole("ADMIN").and().
-                formLogin().loginPage("/login").permitAll().and()
+                authorizeRequests().antMatchers("/categories/**").hasRole("ADMIN").and().
+                authorizeRequests().antMatchers("/account/**").hasRole("ADMIN").and().
+                authorizeRequests().antMatchers("/products/**").hasRole("ADMIN").and().
+                formLogin().successHandler(customizeSuccessHandle).loginPage("/login").permitAll().and()
                 .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
         http.csrf().disable();
     }

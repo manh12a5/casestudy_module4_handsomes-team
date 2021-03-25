@@ -30,6 +30,7 @@ public class AppUser {
     public AppUser() {
     }
 
+
     public AppUser(Long id, String username, String fullName, String password, String gmail, Date birthday, String phoneNumber, String address, AppRole appRole) {
         this.id = id;
         this.username = username;
