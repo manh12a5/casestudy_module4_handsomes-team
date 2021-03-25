@@ -33,7 +33,7 @@
         <label><img th:src="${'../'+product.image}" width="100"></label>
     </div>
     <div>
-        <button>Add to Cart</button>
+        <button th:href="addCart/${product.id}">Add to Cart</button>
     </div>
 </div>
 </body>

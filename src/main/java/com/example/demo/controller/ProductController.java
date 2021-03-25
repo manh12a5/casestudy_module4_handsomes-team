@@ -100,7 +100,7 @@ public class ProductController {
         return modelAndView;
     }
 
-    @PostMapping("/view/{id}")
+    @GetMapping("/view/{id}")
     public ModelAndView viewDetail(@PathVariable Long id) {
         ModelAndView modelAndView = new ModelAndView("product/view");
         modelAndView.addObject("product", productService.findById(id));
@@ -116,4 +116,5 @@ public class ProductController {
         modelAndView.addObject("products", productList);
         return modelAndView;
     }
+
 }
