@@ -10,48 +10,54 @@
 <body>
 <nav class="navbar navbar-light bg-light">
     <div class="container-fluid">
-        <a  class="navbar-brand">HomePage</a>
+        <a class="navbar-brand">HomePage</a>
         <form class="d-flex">
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-success" type="submit">Search</button>
         </form>
     </div>
 </nav>
-
-    <table class="table table-hover">
-        <thead>
-        <tr>
-            <th scope="col">Username</th>
-            <th scope="col">FullName</th>
-            <th scope="col">Password</th>
-            <th scope="col">Gmail</th>
-            <th scope="col">Birthday</th>
-            <th scope="col">PhoneNumber</th>
-            <th scope="col">Address</th>
-            <th scope="col">Role</th>
-            <th scope="col">Action</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="p:${list}">
-            <td th:text="${p.username}"></td>
-            <td th:text="${p.fullName}"></td>
-            <td th:text="${p.password}"></td>
-            <td th:text="${p.gmail}"></td>
-            <td th:text="${p.birthday}"></td>
-            <td th:text="${p.phoneNumber}"></td>
-            <td th:text="${p.address}"></td>
-            <td th:text="${p.appRole.name}"></td>
-            <td th:if="${p.appRole.id==2}">
-                <a class="btn btn-success" role="button" th:href="@{'/account/edit/'+${p.id}}">Edit</a>
-                <a class="btn btn-danger" role="button" th:href="@{'/account/delete/'+${p.id}}"
-                   onclick="return confirm('Are you sure to delete this account ?')">Delete</a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+<a class="btn btn-primary" href="/login/register" role="button">Create Account</a>
+<table class="table table-hover">
+    <thead>
+    <tr>
+        <th scope="col">Username</th>
+        <th scope="col">FullName</th>
+        <th scope="col">Password</th>
+        <th scope="col">Gmail</th>
+        <th scope="col">Birthday</th>
+        <th scope="col">PhoneNumber</th>
+        <th scope="col">Address</th>
+        <th scope="col">Role</th>
+        <th scope="col">Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="p:${list}">
+        <td th:text="${p.username}"></td>
+        <td th:text="${p.fullName}"></td>
+        <td th:text="${p.password}"></td>
+        <td th:text="${p.gmail}"></td>
+        <td th:text="${p.birthday}"></td>
+        <td th:text="${p.phoneNumber}"></td>
+        <td th:text="${p.address}"></td>
+        <td th:text="${p.appRole.name}"></td>
+        <td th:if="${p.appRole.id==2}">
+            <a class="btn btn-success" role="button" th:href="@{'/account/edit/'+${p.id}}">Edit</a>
+            <a class="btn btn-danger" role="button" th:href="@{'/account/delete/'+${p.id}}"
+               onclick="return confirm('Are you sure to delete this account ?')">Delete</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<div>
+    <h3>
+        <a th:href="@{'/account'(page=${list.number - 1})}" th:if="${list.hasPrevious()}">Previous</a>
+        <span th:text="${list.number + 1}"></span>/<span th:text="${list.totalPages}"></span>
+        <a th:href="@{'/account'(page=${list.number + 1})}" th:if="${list.hasNext()}">Next</a>
+    </h3>
 </div>
-
+</div>
 
 
 </body>

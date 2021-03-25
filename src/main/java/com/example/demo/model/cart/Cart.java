@@ -24,6 +24,10 @@ public class Cart {
         this.cartItem = new ArrayList<>();
     }
 
+    public Cart(Long id, AppUser appUser) {
+        this.id = id;
+        this.appUser = appUser;
+    }
 
     public Long getId() {
         return id;

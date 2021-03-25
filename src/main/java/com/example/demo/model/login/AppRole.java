@@ -20,6 +20,10 @@ public class AppRole implements GrantedAuthority {
         this.name = name;
     }
 
+    public AppRole(Long id) {
+        this.id = id;
+    }
+
     public Long getId() {
         return id;
     }
