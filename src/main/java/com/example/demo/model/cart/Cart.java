@@ -46,7 +46,7 @@ public class Cart {
     }
 
     public double getTotal() {
-        double total = 0;
+        this.total = 0;
         for (int i = 0; i < cartItem.size(); i++) {
             total += cartItem.get(i).getTotal();
         }
