@@ -5,36 +5,6 @@
     <title>$Title$</title>
 </head>
 <body>
-<h3>View Product</h3>
-<p>
-    <a th:href="@{/products}">
-        Back to product list
-    </a>
-</p>
-<div>
-    <div>
-        <label>Name:</label>
-        <label th:text="${product.name}"></label>
-    </div>
-    <div>
-        <label>Price:</label>
-        <label th:text="${product.price}"></label>
-    </div>
-    <div>
-        <label>Description:</label>
-        <label th:text="${product.description}"></label>
-    </div>
-    <div>
-        <label>Size:</label>
-        <label th:text="${product.size}"></label>
-    </div>
-    <div>
-        <label>Image:</label>
-        <label><img th:src="${'../'+product.image}" width="100"></label>
-    </div>
-    <div>
-        <button th:href="addCart/${product.id}">Add to Cart</button>
-    </div>
-</div>
+$END$
 </body>
 </html>
