@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>List Account</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+<nav class="navbar navbar-light bg-light">
+    <div class="container-fluid">
+        <a  class="navbar-brand">HomePage</a>
+        <form class="d-flex">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+    </div>
+</nav>
+
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th scope="col">Username</th>
+            <th scope="col">FullName</th>
+            <th scope="col">Password</th>
+            <th scope="col">Gmail</th>
+            <th scope="col">Birthday</th>
+            <th scope="col">PhoneNumber</th>
+            <th scope="col">Address</th>
+            <th scope="col">Role</th>
+            <th scope="col">Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="p:${list}">
+            <td th:text="${p.username}"></td>
+            <td th:text="${p.fullName}"></td>
+            <td th:text="${p.password}"></td>
+            <td th:text="${p.gmail}"></td>
+            <td th:text="${p.birthday}"></td>
+            <td th:text="${p.phoneNumber}"></td>
+            <td th:text="${p.address}"></td>
+            <td th:text="${p.appRole.name}"></td>
+            <td th:if="${p.appRole.id==2}">
+                <a class="btn btn-success" role="button" th:href="@{'/account/edit/'+${p.id}}">Edit</a>
+                <a class="btn btn-danger" role="button" th:href="@{'/account/delete/'+${p.id}}"
+                   onclick="return confirm('Are you sure to delete this account ?')">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+
+
+</body>
+</html>
