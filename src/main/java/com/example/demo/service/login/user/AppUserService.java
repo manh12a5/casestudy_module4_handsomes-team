@@ -3,6 +3,8 @@ package com.example.demo.service.login.user;
 import com.example.demo.model.login.AppUser;
 import com.example.demo.repository.AppUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
@@ -22,7 +24,7 @@ public class AppUserService implements IAppUserService, UserDetailsService {
 
     @Override
     public List<AppUser> findAll() {
-        return appUserRepository.getAllByOrderByAppRole();
+        return appUserRepository.getAllByOrderByAppRoleDesc();
     }
 
     @Override
@@ -57,6 +59,11 @@ public class AppUserService implements IAppUserService, UserDetailsService {
         }
         appUser = this.getAccountByUserName(username);
         return appUser;
+    }
+
+    @Override
+    public Page<AppUser> findAll(Pageable pageable) {
+        return appUserRepository.getAllByOrderByAppRoleDesc(pageable);
     }
 
     @Override

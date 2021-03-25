@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.model.cart.Cart;
 import com.example.demo.model.login.AppRole;
 import com.example.demo.model.login.AppUser;
 import com.example.demo.service.login.role.IAppRoleService;
@@ -35,14 +36,12 @@ public class LoginController {
 
     @GetMapping("/register")
     public ModelAndView showFormCreate() {
-        return new ModelAndView("account/create", "user",new AppUser());
+        return new ModelAndView("account/create", "user", new AppUser());
     }
 
     @PostMapping("/register")
-    public ModelAndView createAccount(@ModelAttribute AppUser appUser){
-       appUserService.save(appUser);
+    public ModelAndView createAccount(@ModelAttribute AppUser appUser) {
+        appUserService.save(appUser);
         return new ModelAndView("redirect:/login");
     }
-
-
 }
