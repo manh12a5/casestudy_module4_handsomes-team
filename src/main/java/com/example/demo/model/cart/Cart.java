@@ -17,6 +17,8 @@ public class Cart {
     public Cart() {
     }
 
+
+
     public Cart(Long id, AppUser appUser) {
         this.id = id;
         this.appUser = appUser;

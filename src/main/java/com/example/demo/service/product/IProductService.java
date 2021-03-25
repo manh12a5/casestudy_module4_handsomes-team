@@ -14,6 +14,5 @@ public interface IProductService extends IService<Product> {
 
     Page<Product> findProductByName(String name, Pageable pageable);
 
-    List<Product> findAllByCart(Cart cart);
 
 }

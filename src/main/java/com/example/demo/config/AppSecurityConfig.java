@@ -10,7 +10,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-
 @EnableWebSecurity
 public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
@@ -26,7 +25,7 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/").permitAll().and().
                 authorizeRequests().antMatchers("/categories").hasRole("ADMIN").and().
                 authorizeRequests().antMatchers("/account").hasRole("ADMIN").and().
-                formLogin().and()
+                formLogin().loginPage("/login").permitAll().and()
                 .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
         http.csrf().disable();
     }

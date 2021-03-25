@@ -3,8 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <style>
+        form{
+            width: 400px;
+            height: 200px;
+        }
+    </style>
+
 </head>
 <body>
+<div th:align="center">
+    <a type="button" class="btn btn-info" href="/account">Back to List Account</a>
+    <form method="post" th:object="${user}" th:action="@{/login/register}">
+        <div class="mb-3">
+            <label for="username" class="form-label">Username</label>
+            <input type="text" class="form-control" id="username" name="username" th:field="*{username}">
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password" name="password" th:field="*{password}">
+        </div>
+        <div class="mb-3" hidden>
+            <label for="role" class="form-label">Role</label>
+            <select name="role" id="role" th:field="*{appRole.id}">
+                <th:block th:each="role:${listRole}">
+                    <option th:value="${role.id}" th:text="${role.name}"></option>
+                </th:block>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="gmail" class="form-label">Gmail</label>
+            <input type="email" class="form-control" id="gmail" name="gmail" th:field="*{gmail}">
+        </div>
+        <div class="mb-3">
+            <label for="fullname" class="form-label">Fullname</label>
+            <input type="text" class="form-control" id="fullname" name="fullname" th:field="*{fullName}">
+        </div>
+        <div class="mb-3">
+            <label for="birthday" class="form-label">Birthday</label>
+            <input type="date" class="form-control" id="birthday" name="birthday" th:field="*{birthday}">
+        </div>
+        <div class="mb-3">
+            <label for="phonenumber" class="form-label">Phone Number</label>
+            <input type="number" class="form-control" id="phonenumber" name="phonenumber" th:field="*{phoneNumber}">
+        </div>
+        <div class="mb-3">
+            <label for="address" class="form-label">Address</label>
+            <input type="text" class="form-control" id="address" name="address" th:field="*{address}">
+        </div>
+
+        <input class="btn btn-primary" type="submit" value="Create">
+        <!--    <p style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</p>-->
+    </form>
+
+</div>
+
+
 
 </body>
 </html>
