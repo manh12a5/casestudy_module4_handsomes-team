@@ -75,7 +75,7 @@
         <label>Category</label>
         <select class="form-select" aria-label="Default select example" th:field="*{category.id}">
             <th:block th:each="p: ${listCategory}">
-                <option th:value="${p.id}" th:text="${p.name}" th:if="" ></option>
+                <option th:value="${p.id}" th:text="${p.name}"></option>
             </th:block>
         </select>
     </div>

@@ -1,4 +1,6 @@
 package com.example.demo.service.Cart;
 
-public interface ICartService {
+
+public interface ICartItemService {
+
 }

@@ -24,17 +24,12 @@ public class Cart {
         this.cartItem = new ArrayList<>();
     }
 
-    public Cart(Long id, AppUser appUser) {
+    public Cart(Long id, Date date, double total, List<CartItem> cartItem, AppUser appUser) {
         this.id = id;
+        this.date = date;
+        this.total = total;
+        this.cartItem = cartItem;
         this.appUser = appUser;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public Date getDate() {
@@ -46,10 +41,6 @@ public class Cart {
     }
 
     public double getTotal() {
-        this.total = 0;
-        for (int i = 0; i < cartItem.size(); i++) {
-            total += cartItem.get(i).getTotal();
-        }
         return total;
     }
 

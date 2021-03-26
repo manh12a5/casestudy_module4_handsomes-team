@@ -6,16 +6,14 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-public class CartItem {
+public class CartItem{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @OneToOne
     private Product product;
     private int quantity;
-    private double unit_price;
-    private double total;
-    private int status;
+    private boolean status;
     @ManyToOne
     private Cart cart;
 
@@ -23,12 +21,11 @@ public class CartItem {
     public CartItem() {
     }
 
-    public CartItem(Long id, Product product, int quantity, double price, double total, Cart cart) {
+    public CartItem(Long id, Product product, int quantity, boolean status, Cart cart) {
         this.id = id;
         this.product = product;
         this.quantity = quantity;
-        this.unit_price = price;
-        this.total = total;
+        this.status = status;
         this.cart = cart;
     }
 
@@ -56,20 +53,12 @@ public class CartItem {
         this.quantity = quantity;
     }
 
-    public double getPrice_product() {
-        return this.product.getPrice();
+    public boolean isStatus() {
+        return status;
     }
 
-    public void setPrice(double price) {
-        this.unit_price = price;
-    }
-
-    public double getTotal() {
-        return total = getPrice_product() * getQuantity();
-    }
-
-    public void setTotal(double total) {
-        this.total = total;
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 
     public Cart getCart() {
@@ -79,4 +68,5 @@ public class CartItem {
     public void setCart(Cart cart) {
         this.cart = cart;
     }
+
 }
