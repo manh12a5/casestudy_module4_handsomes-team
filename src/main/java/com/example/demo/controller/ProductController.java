@@ -126,17 +126,32 @@ public class ProductController {
         return modelAndView;
     }
 
-    @PostMapping("/searchCategory")
+    @PostMapping("/searchcategory")
     public ModelAndView searchProductByCategory(@RequestParam Long id, @PageableDefault(size = 6) Pageable pageable) {
         Page<Product> productPage = productService.findProductByCategoryName(id, pageable);
-        return new ModelAndView("index", "products", productPage);
+        return new ModelAndView("shop/shop", "products", productPage);
     }
 
-    @GetMapping("/top5priceMax")
-    public ModelAndView find5PriceMax(@PageableDefault(size = 6) Pageable pageable) {
-        ModelAndView modelAndView = new ModelAndView("index");
-        modelAndView.addObject("top5price", productService.findTop5ByOrderByPriceDesc(pageable));
+    @GetMapping("/top5price")
+    public ModelAndView find5Price(@PageableDefault(size = 6) Pageable pageable) {
+        ModelAndView modelAndView = new ModelAndView("shop/shop");
+        modelAndView.addObject("products", productService.findTop5ByOrderByPriceDesc(pageable));
         return modelAndView;
     }
+
+    @GetMapping("/sortpricemax")
+    public ModelAndView sortPriceMax(@PageableDefault(size = 6) Pageable pageable) {
+        ModelAndView modelAndView = new ModelAndView("shop/shop");
+        modelAndView.addObject("products", productService.findAllByOrderByPriceDesc(pageable));
+        return modelAndView;
+    }
+
+    @GetMapping("/sortpricemin")
+    public ModelAndView sortPriceMin(@PageableDefault(size = 6) Pageable pageable) {
+        ModelAndView modelAndView = new ModelAndView("shop/shop");
+        modelAndView.addObject("products", productService.findTop5ByOrderByPriceDesc(pageable));
+        return modelAndView;
+    }
+
 
 }

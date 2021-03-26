@@ -121,53 +121,17 @@
                         <div class="title-left">
                             <h3>Categories</h3>
                         </div>
-                        <div class="list-group list-group-collapse list-group-sm list-group-tree" id="list-group-men"
-                             data-children=".sub-men">
-                            <div class="list-group-collapse sub-men">
-                                <a class="list-group-item list-group-item-action" href="#sub-men1"
-                                   data-toggle="collapse" aria-expanded="true" aria-controls="sub-men1">Clothing <small
-                                        class="text-muted">(100)</small>
-                                </a>
-                                <div class="collapse show" id="sub-men1" data-parent="#list-group-men">
-                                    <div class="list-group">
-                                        <a href="#" class="list-group-item list-group-item-action active">T-Shirts
-                                            <small class="text-muted">(50)</small></a>
-                                        <a href="#" class="list-group-item list-group-item-action">Polo T-Shirts <small
-                                                class="text-muted">(10)</small></a>
-                                        <a href="#" class="list-group-item list-group-item-action">Round Neck T-Shirts
-                                            <small class="text-muted">(10)</small></a>
-                                        <a href="#" class="list-group-item list-group-item-action">V Neck T-Shirts
-                                            <small class="text-muted">(10)</small></a>
-                                        <a href="#" class="list-group-item list-group-item-action">Hooded T-Shirts
-                                            <small class="text-muted">(20)</small></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="list-group-collapse sub-men">
-                                <a class="list-group-item list-group-item-action" href="#sub-men2"
-                                   data-toggle="collapse" aria-expanded="false" aria-controls="sub-men2">Footwear
-                                    <small class="text-muted">(50)</small>
-                                </a>
-                                <div class="collapse" id="sub-men2" data-parent="#list-group-men">
-                                    <div class="list-group">
-                                        <a href="#" class="list-group-item list-group-item-action">Sports Shoes <small
-                                                class="text-muted">(10)</small></a>
-                                        <a href="#" class="list-group-item list-group-item-action">Sneakers <small
-                                                class="text-muted">(20)</small></a>
-                                        <a href="#" class="list-group-item list-group-item-action">Formal Shoes <small
-                                                class="text-muted">(20)</small></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="#" class="list-group-item list-group-item-action"> Men <small class="text-muted">(150) </small></a>
-                            <a href="#" class="list-group-item list-group-item-action">Accessories <small
-                                    class="text-muted">(11)</small></a>
-                            <a href="#" class="list-group-item list-group-item-action">Bags <small class="text-muted">(22)</small></a>
+                        <div class="list-group list-group-collapse list-group-sm list-group-tree" id="list-group-men">
+                            <a href="/categories" class="list-group-item list-group-item-action">Adidas<small class="text-muted"></small></a>
+                            <a href="/categories" class="list-group-item list-group-item-action">Nike<small class="text-muted"></small></a>
+                            <a href="/categories" class="list-group-item list-group-item-action">Converse<small class="text-muted"></small></a>
+                            <a href="/categories" class="list-group-item list-group-item-action">Puma<small class="text-muted"></small></a>
+                            <a href="/categories" class="list-group-item list-group-item-action">Gucci<small class="text-muted"></small></a>
+                            <a href="/categories" class="list-group-item list-group-item-action">Lacoste<small class="text-muted"></small></a>
                         </div>
                     </div>
                 </div>
             </div>
-
 
             <div class="col-xl-9 col-lg-9 col-sm-12 col-xs-12 shop-content-right">
                 <div class="right-product-box">
@@ -175,19 +139,24 @@
                         <div class="col-12 col-sm-8 text-center text-sm-left">
                             <div class="toolbar-sorter-right">
                                 <span>Sort by </span>
-                                <ul class="nav">
+                                <ul class="nav nav-tabs">
                                     <li class="nav-item">
-                                        <a class="nav-link active" aria-current="page" href="#">Lọc danh sách:</a>
+                                        <a class="nav-link active" aria-current="page" href="/products/top5price">Top 5</a>
+                                    </li>
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Sắp xếp giá</a>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="/products/sortpricemax">Cao->Thấp</a></li>
+                                            <li><a class="dropdown-item" href="/products/sortpricemin">Thấp->Cao</a></li>
+                                            <li><hr class="dropdown-divider"></li>
+                                            <li><a class="dropdown-item" href="#">Link</a></li>
+                                        </ul>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#">A->Z</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#">Z->A</a>
+                                        <a class="nav-link" href="#">Link</a>
                                     </li>
                                 </ul>
                             </div>
-                            <p>Showing all 4 results</p>
                         </div>
                         <div class="col-12 col-sm-4 text-center text-sm-right">
                             <ul class="nav nav-tabs ml-auto">
@@ -422,6 +391,8 @@
 <script src="js/form-validator.min.js"></script>
 <script src="js/contact-form-script.js"></script>
 <script src="js/custom.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js" integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js" integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous"></script>
 </body>
 
 </html>
