@@ -49,4 +49,19 @@ public class ProductService implements IProductService {
         return productRepository.findProductByName(name, pageable);
     }
 
+    @Override
+    public Page<Product> findProductByCategoryName(Long id, Pageable pageable) {
+        return productRepository.findProductByCategoryName(id, pageable);
+    }
+
+    @Override
+    public Page<Product> findTop5ByOrderByPriceDesc(Pageable pageable) {
+        return productRepository.findTop5ByOrderByPriceDesc(pageable);
+    }
+
+    @Override
+    public Page<Product> findTop5ByOrderByPriceAsc(Pageable pageable) {
+        return productRepository.findTop5ByOrderByPriceAsc(pageable);
+    }
+
 }

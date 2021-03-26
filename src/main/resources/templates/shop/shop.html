@@ -110,11 +110,12 @@
             <div class="col-xl-3 col-lg-3 col-sm-12 col-xs-12 sidebar-shop-left">
                 <div class="product-categori">
                     <div class="search-product">
-                        <form action="#">
-                            <input class="form-control" placeholder="Search here..." type="text">
+                        <form action="/products/search" method="post">
+                            <input type="text" name="name" class="form-control" placeholder="Search name product...">
                             <button type="submit"><i class="fa fa-search"></i></button>
                         </form>
                     </div>
+                    <br>
                     <div class="filter-sidebar-left">
                         <div class="title-left">
                             <h3>Categories</h3>
@@ -163,91 +164,10 @@
                             <a href="#" class="list-group-item list-group-item-action">Bags <small class="text-muted">(22)</small></a>
                         </div>
                     </div>
-                    <div class="filter-price-left">
-                        <div class="title-left">
-                            <h3>Price</h3>
-                        </div>
-                        <div class="price-box-slider">
-                            <div id="slider-range"></div>
-                            <p>
-                                <input type="text" id="amount" readonly
-                                       style="border:0; color:#fbb714; font-weight:bold;">
-                                <button class="btn hvr-hover" type="submit">Filter</button>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="filter-brand-left">
-                        <div class="title-left">
-                            <h3>Brand</h3>
-                        </div>
-                        <div class="brand-box">
-                            <ul>
-                                <li>
-                                    <div class="radio radio-danger">
-                                        <input name="survey" id="Radios1" value="Yes" type="radio">
-                                        <label for="Radios1"> Supreme </label>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="radio radio-danger">
-                                        <input name="survey" id="Radios2" value="No" type="radio">
-                                        <label for="Radios2"> A Bathing Ape </label>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="radio radio-danger">
-                                        <input name="survey" id="Radios3" value="declater" type="radio">
-                                        <label for="Radios3"> The Hundreds </label>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="radio radio-danger">
-                                        <input name="survey" id="Radios4" value="declater" type="radio">
-                                        <label for="Radios4"> Alife </label>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="radio radio-danger">
-                                        <input name="survey" id="Radios5" value="declater" type="radio">
-                                        <label for="Radios5"> Neighborhood </label>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="radio radio-danger">
-                                        <input name="survey" id="Radios6" value="declater" type="radio">
-                                        <label for="Radios6"> CLOT </label>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="radio radio-danger">
-                                        <input name="survey" id="Radios7" value="declater" type="radio">
-                                        <label for="Radios7"> Acapulco Gold </label>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="radio radio-danger">
-                                        <input name="survey" id="Radios8" value="declater" type="radio">
-                                        <label for="Radios8"> UNDFTD </label>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="radio radio-danger">
-                                        <input name="survey" id="Radios9" value="declater" type="radio">
-                                        <label for="Radios9"> Mighty Healthy </label>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="radio radio-danger">
-                                        <input name="survey" id="Radios10" value="declater" type="radio">
-                                        <label for="Radios10"> Fiberops </label>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-
                 </div>
             </div>
+
+
             <div class="col-xl-9 col-lg-9 col-sm-12 col-xs-12 shop-content-right">
                 <div class="right-product-box">
                     <div class="product-item-filter row">
@@ -256,10 +176,12 @@
                                 <span>Sort by </span>
                                 <select id="basic" class="selectpicker show-tick form-control" data-placeholder="$ USD">
                                     <option data-display="Select">Nothing</option>
-                                    <option value="1">Popularity</option>
-                                    <option value="2">High Price → High Price</option>
-                                    <option value="3">Low Price → High Price</option>
-                                    <option value="4">Best Selling</option>
+                                    <option value="1">
+                                        <a href="/products/top5PriceMax">Top 5 Price Max</a>
+                                    </option>
+                                    <option value="2">
+                                        Low Price → High Price
+                                    </option>
                                 </select>
                             </div>
                             <p>Showing all 4 results</p>
@@ -291,7 +213,8 @@
                                                 <img th:src="${'../'+p.image}" class="img-fluid" alt="Image">
                                                 <div class="mask-icon">
                                                     <ul>
-                                                        <li><a th:href="@{/products/view/{id}(id=${p.id})}" data-toggle="tooltip" data-placement="right"
+                                                        <li><a th:href="@{/products/view/{id}(id=${p.id})}"
+                                                               data-toggle="tooltip" data-placement="right"
                                                                title="View"><i class="fas fa-eye"></i></a></li>
                                                         <li><a href="#" data-toggle="tooltip" data-placement="right"
                                                                title="Compare"><i class="fas fa-sync-alt"></i></a>
