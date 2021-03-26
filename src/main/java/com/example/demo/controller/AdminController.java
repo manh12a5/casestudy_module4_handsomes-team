@@ -15,8 +15,8 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
 
 @Controller
-@RequestMapping("/account")
-public class AccountController {
+@RequestMapping("/admin")
+public class AdminController {
     @Autowired
     IAppUserService appUserService;
 
@@ -28,26 +28,26 @@ public class AccountController {
         return appRoleService.findAll();
     }
 
-    @GetMapping()
+    @GetMapping("/account")
     public ModelAndView showAll(@PageableDefault(size = 5) Pageable pageable) {
         return new ModelAndView("account/list", "list", appUserService.findAll(pageable));
     }
 
-    @GetMapping("/create")
+    @GetMapping("/account/create")
     public ModelAndView showFormCreate() {
         return new ModelAndView("account/create", "account", new AppUser());
     }
 
-    @PostMapping("/create")
+    @PostMapping("/account/create")
     public ModelAndView createAccount(@ModelAttribute AppUser appUser) {
         appUserService.save(appUser);
-        return new ModelAndView("redirect:/account");
+        return new ModelAndView("redirect:/admin/account");
     }
 
-    @GetMapping("/delete/{id}")
+    @GetMapping("account/delete/{id}")
     public ModelAndView delete(@PathVariable Long id) {
         appUserService.remove(id);
-        return new ModelAndView("redirect:/account");
+        return new ModelAndView("redirect:/admin/account");
     }
 
     @GetMapping("/edit/{id}")
@@ -61,7 +61,7 @@ public class AccountController {
     @PostMapping("/edit/{id}")
     public ModelAndView edit(@ModelAttribute AppUser appUser) {
         appUserService.save(appUser);
-        return new ModelAndView("redirect:/account");
+        return new ModelAndView("redirect:/admin/account");
     }
 
     @GetMapping("/search")
