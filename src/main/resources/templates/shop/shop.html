@@ -28,6 +28,7 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/custom.css">
 
+
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -174,15 +175,17 @@
                         <div class="col-12 col-sm-8 text-center text-sm-left">
                             <div class="toolbar-sorter-right">
                                 <span>Sort by </span>
-                                <select id="basic" class="selectpicker show-tick form-control" data-placeholder="$ USD">
-                                    <option data-display="Select">Nothing</option>
-                                    <option value="1">
-                                        <a href="/products/top5PriceMax">Top 5 Price Max</a>
-                                    </option>
-                                    <option value="2">
-                                        Low Price → High Price
-                                    </option>
-                                </select>
+                                <ul class="nav">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" aria-current="page" href="#">Lọc danh sách:</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#">A->Z</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#">Z->A</a>
+                                    </li>
+                                </ul>
                             </div>
                             <p>Showing all 4 results</p>
                         </div>

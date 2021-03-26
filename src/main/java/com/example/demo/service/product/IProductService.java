@@ -16,4 +16,10 @@ public interface IProductService extends IService<Product> {
     Page<Product> findTop5ByOrderByPriceDesc(Pageable pageable);
 
     Page<Product> findTop5ByOrderByPriceAsc(Pageable pageable);
+
+    //Sắp xếp
+    Page<Product> findAllByOrderByPriceAsc(Pageable pageable);
+
+    //Sắp xếp
+    Page<Product> findAllByOrderByPriceDesc(Pageable pageable);
 }

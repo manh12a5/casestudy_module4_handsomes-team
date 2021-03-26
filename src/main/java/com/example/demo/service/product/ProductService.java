@@ -64,4 +64,14 @@ public class ProductService implements IProductService {
         return productRepository.findTop5ByOrderByPriceAsc(pageable);
     }
 
+    @Override
+    public Page<Product> findAllByOrderByPriceAsc(Pageable pageable) {
+        return productRepository.findAllByOrderByPriceAsc(pageable);
+    }
+
+    @Override
+    public Page<Product> findAllByOrderByPriceDesc(Pageable pageable) {
+        return productRepository.findAllByOrderByPriceDesc(pageable);
+    }
+
 }
