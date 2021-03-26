@@ -14,4 +14,5 @@ public interface IProductRepository extends PagingAndSortingRepository<Product, 
     @Query(value = "select * from product where product.name like ?", nativeQuery = true)
     Page<Product> findProductByName(String name, Pageable pageable);
 
+
 }
