@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.model.category.Category;
 import com.example.demo.model.comment.Comment;
 import com.example.demo.model.login.AppUser;
 import com.example.demo.model.product.Product;
@@ -8,6 +9,8 @@ import com.example.demo.service.login.user.IAppUserService;
 import com.example.demo.service.product.IProductService;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -15,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping("/comment")
+@RequestMapping("/comments")
 public class CommentController {
     @Autowired
     IProductService productService;
@@ -37,29 +40,81 @@ public class CommentController {
         modelAndView.addObject("comment",commentService.findAll());
         return modelAndView;
     }
-    @PostMapping("/comment/create")
-    public ResponseEntity<Comment> addComment(@RequestBody Comment comment) throws NotFoundException {
-        String commentCommentt = comment.getComment();
-        Product product  = productService.findById(comment.getProduct().getId());
-        Comment comment1 = new Comment();
-        comment1.setComment(commentCommentt);
-        comment1.setProduct(product);
-        comment1.setUser(currentUser());
-        commentService.save(comment1);
-        return new ResponseEntity<>(HttpStatus.OK);
+
+    @GetMapping("/create")
+    public ModelAndView formCreate(){
+        ModelAndView modelAndView = new ModelAndView("/comment/create");
+        modelAndView.addObject("comment",new Comment());
+        return modelAndView;
     }
 
-    @GetMapping("/comment/{id}")
-    public ResponseEntity<Iterable<Comment>> loadList(@PathVariable Long id) throws NotFoundException {
-        Product product = productService.findById(id);
-        Iterable<Comment> comments = commentService.findAllByProduct(product);
-        return new ResponseEntity<>(comments,HttpStatus.OK);
+    @PostMapping("/create")
+    public ModelAndView createCate(@ModelAttribute Comment comment){
+        ModelAndView modelAndView = new ModelAndView("redirect:/comments");
+        commentService.save(comment);
+        modelAndView.addObject("comment",new Comment());
+        return modelAndView;
     }
 
-    @GetMapping("/comment/sum/{id}")
-    public ResponseEntity getSum(@PathVariable Long id)throws NotFoundException {
-        Product product = productService.findById(id);
-        Integer cmtSum = commentService.countAllByProduct(product);
-        return new ResponseEntity(cmtSum,HttpStatus.OK);
+//    @GetMapping("/create")
+//    public ModelAndView create(@ModelAttribute Comment comment){
+//        commentService.save(comment);
+//        ModelAndView modelAndView=new ModelAndView("redirect:/comments");
+//        modelAndView.addObject("comment",new Comment());
+//        return modelAndView;
+//    }
+
+//    @GetMapping ("/delete/{id}")
+//    public ModelAndView delete(@PathVariable Long id) {
+//        ModelAndView modelAndView = new ModelAndView("redirect:/comments");
+//        commentService.remove(id);
+//        return modelAndView;
+//    }
+
+
+//    @PostMapping("/comment/create")
+//    public ResponseEntity<Comment> addComment(@RequestBody Comment comment) throws NotFoundException {
+//        String commentCommentt = comment.getComment();
+//        Product product  = productService.findById(comment.getProduct().getId());
+//        Comment comment1 = new Comment();
+//        comment1.setComment(commentCommentt);
+//        comment1.setProduct(product);
+//        comment1.setUser(currentUser());
+//        commentService.save(comment1);
+//        return new ResponseEntity<>(HttpStatus.OK);
+//    }
+//
+//    @GetMapping("/comment/{id}")
+//    public ResponseEntity<Iterable<Comment>> loadList(@PathVariable Long id) throws NotFoundException {
+//        Product product = productService.findById(id);
+//        Iterable<Comment> comments = commentService.findAllByProduct(product);
+//        return new ResponseEntity<>(comments,HttpStatus.OK);
+//    }
+//
+//    @GetMapping("/comment/sum/{id}")
+//    public ResponseEntity getSum(@PathVariable Long id)throws NotFoundException {
+//        Product product = productService.findById(id);
+//        Integer cmtSum = commentService.countAllByProduct(product);
+//        return new ResponseEntity(cmtSum,HttpStatus.OK);
+//    }
+
+
+
+
+    @GetMapping("/create")
+    private ModelAndView showCreate() {
+        ModelAndView modelAndView = new ModelAndView("comment/create");
+        modelAndView.addObject("comment", new Comment());
+        return modelAndView;
     }
+
+    @PostMapping("/create")
+    private ModelAndView create(@ModelAttribute Comment comment) {
+        ModelAndView modelAndView = new ModelAndView("comment/create");
+        commentService.save(comment);
+        modelAndView.addObject("comment", comment);
+        return modelAndView;
+    }
+
+
 }
