@@ -33,6 +33,11 @@ public class DefautController {
         return new ModelAndView("view/index");
     }
 
+    @RequestMapping("about")
+    public ModelAndView about(){
+        return new ModelAndView("view/about");
+    }
+
 
 
 
