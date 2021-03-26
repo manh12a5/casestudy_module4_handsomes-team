@@ -28,7 +28,7 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/").permitAll().and().
                 authorizeRequests().antMatchers("/categories/**").hasRole("ADMIN").and().
                 authorizeRequests().antMatchers("/account/**").hasRole("ADMIN").and().
-                authorizeRequests().antMatchers("/products/**").hasRole("ADMIN").and().
+                authorizeRequests().antMatchers("/products/**").permitAll().and().
                 formLogin().successHandler(customizeSuccessHandle).loginPage("/login").permitAll().and()
                 .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
         http.csrf().disable();
