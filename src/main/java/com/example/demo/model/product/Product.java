@@ -4,6 +4,7 @@ import com.example.demo.model.category.Category;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
+import java.sql.Date;
 
 @Entity
 public class Product {
