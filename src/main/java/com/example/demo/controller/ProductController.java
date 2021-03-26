@@ -25,13 +25,13 @@ import java.util.List;
 public class ProductController {
 
     @Autowired
-    IProductService productService;
+    private IProductService productService;
 
     @Autowired
-    ICategoryService categoryService;
+    private ICategoryService categoryService;
 
     @Autowired
-    Environment environment;
+    private Environment environment;
 
     @ModelAttribute("listCategory")
     public List<Category> listCate() {
@@ -54,9 +54,14 @@ public class ProductController {
 
     //Show All
     @GetMapping("")
-    private ModelAndView showAll(@PageableDefault(size = 6) Pageable pageable) {
-        ModelAndView modelAndView = new ModelAndView("shop/shop");
-        modelAndView.addObject("products", productService.findAll(pageable));
+    private ModelAndView showAll(Pageable pageable) {
+        ModelAndView modelAndView = new ModelAndView("view/shop");
+        List<Category> categories = categoryService.findAll();
+        Page<Product> productPage = productService.findAll(pageable);
+        Long numberOfProducts = productPage.getTotalElements();
+        modelAndView.addObject("products",productPage );
+        modelAndView.addObject("categoriesProduct",categories);
+        modelAndView.addObject("numberOfProducts",numberOfProducts );
         return modelAndView;
     }
 
@@ -111,7 +116,7 @@ public class ProductController {
 
     @GetMapping("/view/{id}")
     public ModelAndView viewDetail(@PathVariable Long id) {
-        ModelAndView modelAndView = new ModelAndView("shop/shop-detail");
+        ModelAndView modelAndView = new ModelAndView("view/shop-detail");
         modelAndView.addObject("product", productService.findById(id));
         return modelAndView;
     }
