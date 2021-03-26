@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Products</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand">Manager</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02"
+                aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/admin">Account</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/admin/category">Categories</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="/admin/product" aria-current="page">Products</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<a class="btn btn-primary" href="/admin/product/create" role="button">Create Product</a>
+<a class="btn btn-warning" href="/logout" role="button"
+   onclick="return confirm('Are you sure want to logout ?')">Logout</a>
+<table class="table table-hover">
+    <thead>
+    <tr>
+
+        <th scope="col">Product Name</th>
+        <th scope="col">Price</th>
+        <th scope="col">Size</th>
+        <th scope="col">Image</th>
+        <th scope="col">Description</th>
+        <th scope="col">Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="p:${list}">
+        <td th:text="${p.name}"></td>
+        <td th:text="${p.price}"></td>
+        <td th:text="${p.size}"></td>
+        <td th:text="${p.image}"></td>
+        <td th:text="${p.description}"></td >
+        <td >
+            <a class="btn btn-success" role="button" th:href="@{'/admin/category/edit/'+${p.id}}">Edit</a>
+            <a class="btn btn-danger" role="button" th:href="@{'/admin/category/delete/'+${p.id}}"
+               onclick="return confirm('Are you sure to delete this account ?')">Delete</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
