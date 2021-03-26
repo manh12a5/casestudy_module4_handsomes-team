@@ -51,8 +51,16 @@ public class ProductController {
         product.setImage(fileName);
     }
 
+    //Show All
     @GetMapping("")
     private ModelAndView showAll(@PageableDefault(size = 6) Pageable pageable) {
+        ModelAndView modelAndView = new ModelAndView("shop/shop");
+        modelAndView.addObject("products", productService.findAll(pageable));
+        return modelAndView;
+    }
+
+    @GetMapping("/manager")
+    private ModelAndView showAllFormAdmin(@PageableDefault(size = 6) Pageable pageable) {
         ModelAndView modelAndView = new ModelAndView("product/list");
         modelAndView.addObject("products", productService.findAll(pageable));
         return modelAndView;
@@ -95,14 +103,14 @@ public class ProductController {
 
     @GetMapping ("/delete/{id}")
     public ModelAndView showDelete(@PathVariable Long id) {
-        ModelAndView modelAndView = new ModelAndView("redirect:/products");
+        ModelAndView modelAndView = new ModelAndView("redirect:/products/manager");
         productService.remove(id);
         return modelAndView;
     }
 
     @GetMapping("/view/{id}")
     public ModelAndView viewDetail(@PathVariable Long id) {
-        ModelAndView modelAndView = new ModelAndView("product/view");
+        ModelAndView modelAndView = new ModelAndView("shop/shop-detail");
         modelAndView.addObject("product", productService.findById(id));
         return modelAndView;
     }
