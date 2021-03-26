@@ -69,9 +69,8 @@ public class AppUserService implements IAppUserService, UserDetailsService {
 
     @Override
     public List<AppUser> findAllByAppRole(AppRole appRole) {
-        return appUserRepository.findAllByAppRole(appRole);
+        return appUserRepository.getAllByAppRole(appRole);
     }
-
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

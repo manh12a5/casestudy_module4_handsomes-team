@@ -12,12 +12,12 @@
     <div class="container-fluid">
         <a class="navbar-brand">Manager</a>
         <form class="d-flex" th:action="@{/account/search}">
-            <select th:name="r" th:id="r">
-                <th:block th:each="r:${listRole}">
-                    <option th:value="${r.id}" th:text="${r.name}"></option>
+            <select th:name="role" th:id="role">
+                <th:block th:each="role:${listRole}">
+                    <option th:value="${role.id}" th:text="${role.name}"></option>
                 </th:block>
             </select>
-            <button class="btn btn-outline-success" type="submit">Search</button>
+            <input class="btn btn-outline-success" type="submit" value="search">
         </form>
     </div>
 </nav>
