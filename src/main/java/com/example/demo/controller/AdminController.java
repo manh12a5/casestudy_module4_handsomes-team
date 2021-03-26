@@ -1,9 +1,13 @@
 package com.example.demo.controller;
 
+import com.example.demo.model.category.Category;
 import com.example.demo.model.login.AppRole;
 import com.example.demo.model.login.AppUser;
+import com.example.demo.model.product.Product;
+import com.example.demo.service.category.ICategoryService;
 import com.example.demo.service.login.role.IAppRoleService;
 import com.example.demo.service.login.user.IAppUserService;
+import com.example.demo.service.product.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -23,52 +27,106 @@ public class AdminController {
     @Autowired
     IAppRoleService appRoleService;
 
+    @Autowired
+    ICategoryService categoryService;
+
+    @Autowired
+    IProductService productService;
+
     @ModelAttribute("listRole")
     public List<AppRole> appRoleList() {
         return appRoleService.findAll();
     }
 
-    @GetMapping("/account")
+    //// acount
+    @GetMapping("")
     public ModelAndView showAll(@PageableDefault(size = 5) Pageable pageable) {
-        return new ModelAndView("account/list", "list", appUserService.findAll(pageable));
+        return new ModelAndView("admin/account/list", "list", appUserService.findAll(pageable));
     }
 
     @GetMapping("/account/create")
     public ModelAndView showFormCreate() {
-        return new ModelAndView("account/create", "account", new AppUser());
+        return new ModelAndView("login/create", "user", new AppUser());
     }
 
     @PostMapping("/account/create")
     public ModelAndView createAccount(@ModelAttribute AppUser appUser) {
         appUserService.save(appUser);
-        return new ModelAndView("redirect:/admin/account");
+        return new ModelAndView("redirect:/admin/");
     }
 
     @GetMapping("account/delete/{id}")
     public ModelAndView delete(@PathVariable Long id) {
         appUserService.remove(id);
-        return new ModelAndView("redirect:/admin/account");
+        return new ModelAndView("redirect:/admin/");
     }
 
-    @GetMapping("/edit/{id}")
+    @GetMapping("account/edit/{id}")
     public ModelAndView showFormEdit(@PathVariable Long id) {
-        ModelAndView modelAndView = new ModelAndView("account/edit");
+        ModelAndView modelAndView = new ModelAndView("admin/account/edit");
         AppUser user = appUserService.findById(id);
         modelAndView.addObject("user", user);
         return modelAndView;
     }
 
-    @PostMapping("/edit/{id}")
+    @PostMapping("account/edit/{id}")
     public ModelAndView edit(@ModelAttribute AppUser appUser) {
         appUserService.save(appUser);
-        return new ModelAndView("redirect:/admin/account");
+        return new ModelAndView("redirect:/admin/");
     }
 
     @GetMapping("/search")
     public ModelAndView searchAccountByRole(@ModelAttribute AppRole role) {
         List<AppUser> list = appUserService.findAllByAppRole(role);
         System.out.println(list.size());
-        return new ModelAndView("/account/test", "list", list);
+        return new ModelAndView("admin/account/list", "list", list);
+    }
+
+    ////category
+    @GetMapping("/category")
+    public ModelAndView showAllCategory() {
+        return new ModelAndView("admin/category/list", "list", categoryService.findAll());
+    }
+
+    @GetMapping("/category/delete/{id}")
+    public ModelAndView deleteCategory(@PathVariable Long id) {
+        categoryService.remove(id);
+        return new ModelAndView("redirect:/admin/category");
+    }
+
+    @GetMapping("/category/create")
+    public ModelAndView showFormCreateCate() {
+        return new ModelAndView("admin/category/create", "category", new Category());
+    }
+
+    @PostMapping("/category/create")
+    public ModelAndView createCate(@ModelAttribute Category category) {
+        categoryService.save(category);
+        return new ModelAndView("redirect:/admin/category");
+    }
+
+    @GetMapping("/category/edit/{id}")
+    public ModelAndView showFormEditCate(@PathVariable Long id) {
+        ModelAndView modelAndView = new ModelAndView("admin/category/edit");
+        Category category = categoryService.findById(id);
+        modelAndView.addObject("category", category);
+        return modelAndView;
+    }
+
+    @PostMapping("/category/edit/{id}")
+    public ModelAndView editCate(@ModelAttribute Category category) {
+        categoryService.save(category);
+        return new ModelAndView("redirect:/admin/category");
+    }
+
+
+    ///// Products
+    @GetMapping("/product")
+    public ModelAndView showAllProduct(@PageableDefault Pageable pageable){
+        ModelAndView modelAndView = new ModelAndView("admin/product/list");
+        Page<Product> list = productService.findAll(pageable);
+        modelAndView.addObject("list",list);
+        return modelAndView;
     }
 
 

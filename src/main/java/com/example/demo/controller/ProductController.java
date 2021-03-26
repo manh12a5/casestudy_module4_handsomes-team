@@ -9,6 +9,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
@@ -117,11 +118,24 @@ public class ProductController {
 
     //SearchNameProduct
     @PostMapping("/search")
-    public ModelAndView showSearchNameProduct(@RequestParam String name, @PageableDefault(size = 5) Pageable pageable) {
-        ModelAndView modelAndView = new ModelAndView("product/list");
+    public ModelAndView showSearchNameProduct(@RequestParam String name, @PageableDefault(size = 6) Pageable pageable) {
+        ModelAndView modelAndView = new ModelAndView("shop/shop");
         String nameProduct = "%" + name + "%";
         Page<Product> productList = productService.findProductByName(nameProduct, pageable);
         modelAndView.addObject("products", productList);
+        return modelAndView;
+    }
+
+    @PostMapping("/searchCategory")
+    public ModelAndView searchProductByCategory(@RequestParam Long id, @PageableDefault(size = 6) Pageable pageable) {
+        Page<Product> productPage = productService.findProductByCategoryName(id, pageable);
+        return new ModelAndView("index", "products", productPage);
+    }
+
+    @GetMapping("/top5priceMax")
+    public ModelAndView find5PriceMax(@PageableDefault(size = 6) Pageable pageable) {
+        ModelAndView modelAndView = new ModelAndView("index");
+        modelAndView.addObject("top5price", productService.findTop5ByOrderByPriceDesc(pageable));
         return modelAndView;
     }
 
