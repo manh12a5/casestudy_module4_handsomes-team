@@ -183,28 +183,17 @@
             <div class="col-lg-12">
                 <div class="title-all text-center">
                     <h1>Featured Products</h1>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet lacus enim.</p>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="special-menu text-center">
-                    <div class="button-group filter-button-group">
-                        <button class="active" data-filter="*">All</button>
-                        <button data-filter=".top-featured">Top featured</button>
-                        <button data-filter=".best-seller">Best seller</button>
-                    </div>
+                    <p>Top nhũng sản phẩm bán chạy</p>
                 </div>
             </div>
         </div>
 
-        <div class="row special-list">
+        <div class="row special-list" th:each="top5: ${top5price}">
             <div class="col-lg-3 col-md-6 special-grid best-seller">
                 <div class="products-single fix">
                     <div class="box-img-hover">
                         <div class="type-lb">
-                            <p class="sale">Sale</p>
+                            <p class="sale">Hot Sale</p>
                         </div>
                         <img src="images/img-pro-01.jpg" class="img-fluid" alt="Image">
                         <div class="mask-icon">
@@ -217,7 +206,7 @@
                         </div>
                     </div>
                     <div class="why-text">
-                        <h4>Lorem ipsum dolor sit amet</h4>
+                        <h4 th:text="${top5.name}"></h4>
                         <h5> $7.79</h5>
                     </div>
                 </div>
