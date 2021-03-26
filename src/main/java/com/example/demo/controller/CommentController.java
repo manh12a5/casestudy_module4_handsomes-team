@@ -10,8 +10,12 @@ import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
+@Controller
+@RequestMapping("/comment")
 public class CommentController {
     @Autowired
     IProductService productService;
@@ -27,6 +31,12 @@ public class CommentController {
         return appUserService.getCurrentUser();
     }
 
+    @GetMapping("")
+    public ModelAndView showAll(){
+        ModelAndView modelAndView=new ModelAndView("comment/list");
+        modelAndView.addObject("comment",commentService.findAll());
+        return modelAndView;
+    }
     @PostMapping("/comment/create")
     public ResponseEntity<Comment> addComment(@RequestBody Comment comment) throws NotFoundException {
         String commentCommentt = comment.getComment();
