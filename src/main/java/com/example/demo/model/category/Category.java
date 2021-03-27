@@ -11,16 +11,18 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+    private String image;
     @Transient
-    private MultipartFile image;
+    private MultipartFile avatar;
 
     public Category() {
     }
 
-    public Category(Long id, String name, MultipartFile image) {
+    public Category(Long id, String name, String image, MultipartFile avatar) {
         this.id = id;
         this.name = name;
         this.image = image;
+        this.avatar = avatar;
     }
 
     public Long getId() {
@@ -39,11 +41,19 @@ public class Category {
         this.name = name;
     }
 
-    public MultipartFile getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setImage(MultipartFile image) {
+    public void setImage(String image) {
         this.image = image;
+    }
+
+    public MultipartFile getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(MultipartFile avatar) {
+        this.avatar = avatar;
     }
 }

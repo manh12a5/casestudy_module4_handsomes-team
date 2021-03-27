@@ -10,23 +10,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Site Metas -->
-    <title>ThewayShop - Ecommerce Bootstrap 4 HTML Template</title>
+    <title>Trang chủ</title>
     <meta name="keywords" content="">
     <meta name="description" content="">
     <meta name="author" content="">
 
     <!-- Site Icons -->
-    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="images/favicon.jpg" type="image/x-icon">
     <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" >
     <!-- Site CSS -->
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="/css/style.css" >
     <!-- Responsive CSS -->
-    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" type="text/css" href="/css/responsive.css" >
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="css/custom.css">
+    <link rel="stylesheet" type="text/css" href="/css/custom.css" >
+
 
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -38,6 +39,66 @@
 <body>
 
 <!-- Start Main Top -->
+<div class="main-top">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <div class="text-slid-box">
+                    <div id="offer-box" class="carouselTicker">
+                        <ul class="offer-box">
+                            <li>
+                                <i class="fab fa-opencart"></i> Off 10%! Shop Now Man
+                            </li>
+                            <li>
+                                <i class="fab fa-opencart"></i> 50% - 80% off on Fashion
+                            </li>
+                            <li>
+                                <i class="fab fa-opencart"></i> 20% off Entire Purchase Promo code: offT20
+                            </li>
+                            <li>
+                                <i class="fab fa-opencart"></i> Off 50%! Shop Now
+                            </li>
+                            <li>
+                                <i class="fab fa-opencart"></i> Off 10%! Shop Now Man
+                            </li>
+                            <li>
+                                <i class="fab fa-opencart"></i> 50% - 80% off on Fashion
+                            </li>
+                            <li>
+                                <i class="fab fa-opencart"></i> 20% off Entire Purchase Promo code: offT20
+                            </li>
+                            <li>
+                                <i class="fab fa-opencart"></i> Off 50%! Shop Now
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <div class="custom-select-box">
+                    <select id="basic" class="selectpicker show-tick form-control" data-placeholder="$ USD">
+                        <option>¥ JPY</option>
+                        <option>$ USD</option>
+                        <option>€ EUR</option>
+                    </select>
+                </div>
+                <div class="right-phone-box">
+                    <p>Call US :- <a href="#"> 0989999999</a></p>
+                </div>
+                <div class="our-link">
+                    <ul>
+                        <li><a href="/login">Login</a></li>
+                        <li><a href="#">Our location</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Main Top -->
+
+<!-- Start Main Top -->
 <header class="main-header">
     <!-- Start Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-default bootsnav">
@@ -47,17 +108,73 @@
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand" href="/"><img src="images/logo.png" class="logo" alt=""></a>
+                <a class="navbar-brand" href="/home"><img src="images/logo.png" class="logo" alt="logo" height="100" width="100"></a>
             </div>
             <!-- End Header Navigation -->
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="navbar-menu">
                 <ul class="nav navbar-nav ml-auto" data-in="fadeInDown" data-out="fadeOutUp">
-                    <li class="nav-item active"><a class="nav-link" href="/">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/products">Products</a></li>
-                    <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
-                    <li class="nav-item"><a class="nav-link" href="contact-us.html">Contact Us</a></li>
+                    <li class="nav-item active"><a class="nav-link" href="/">Trang chủ</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/about">About Us</a></li>
+                    <li class="dropdown megamenu-fw">
+                        <a class="nav-link dropdown-toggle arrow" data-toggle="dropdown" th:href="@{/products}">Sản phẩm</a>
+                        <ul class="dropdown-menu megamenu-content" role="menu">
+                            <li>
+                                <div class="row">
+                                    <div class="col-menu col-md-3">
+                                        <h6 class="title">Adidas</h6>
+                                        <div class="content">
+                                            <ul class="menu-col">
+                                                <li><a href="shop.html">shoes</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <!-- end col-3 -->
+                                    <div class="col-menu col-md-3">
+                                        <h6 class="title">Nike</h6>
+                                        <div class="content">
+                                            <ul class="menu-col">
+                                                <li><a href="shop.html">shoes</a></li>
+
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <!-- end col-3 -->
+                                    <div class="col-menu col-md-3">
+                                        <h6 class="title">Converse</h6>
+                                        <div class="content">
+                                            <ul class="menu-col">
+                                                <li><a href="shop.html">shoes</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-menu col-md-3">
+                                        <h6 class="title">Puma</h6>
+                                        <div class="content">
+                                            <ul class="menu-col">
+                                                <li><a href="shop.html">shoes</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <!-- end col-3 -->
+                                </div>
+                                <!-- end row -->
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">SHOP</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="cart.html">Cart</a></li>
+                            <li><a href="checkout.html">Checkout</a></li>
+                            <li><a href="my-account.html">My Account</a></li>
+                            <li><a href="wishlist.html">Wishlist</a></li>
+                            <li><a href="shop-detail.html">Shop Detail</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="service.html">Our Service</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact-us.html">Liên hệ</a></li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -68,11 +185,40 @@
                     <li class="search"><a href="#"><i class="fa fa-search"></i></a></li>
                     <li class="side-menu"><a href="#">
                         <i class="fa fa-shopping-bag"></i>
+                        <span class="badge">3</span>
                     </a></li>
                 </ul>
             </div>
             <!-- End Atribute Navigation -->
         </div>
+        <!-- Start Side Menu -->
+        <div class="side">
+            <a href="#" class="close-side"><i class="fa fa-times"></i></a>
+            <li class="cart-box">
+                <ul class="cart-list">
+                    <li>
+                        <a href="#" class="photo"><img src="images/img-pro-01.jpg" class="cart-thumb" alt="" /></a>
+                        <h6><a href="#">Delica omtantur </a></h6>
+                        <p>1x - <span class="price">$80.00</span></p>
+                    </li>
+                    <li>
+                        <a href="#" class="photo"><img src="images/img-pro-02.jpg" class="cart-thumb" alt="" /></a>
+                        <h6><a href="#">Omnes ocurreret</a></h6>
+                        <p>1x - <span class="price">$60.00</span></p>
+                    </li>
+                    <li>
+                        <a href="#" class="photo"><img src="images/img-pro-03.jpg" class="cart-thumb" alt="" /></a>
+                        <h6><a href="#">Agam facilisis</a></h6>
+                        <p>1x - <span class="price">$40.00</span></p>
+                    </li>
+                    <li class="total">
+                        <a href="#" class="btn btn-default hvr-hover btn-cart">VIEW CART</a>
+                        <span class="float-right"><strong>Total</strong>: $180.00</span>
+                    </li>
+                </ul>
+            </li>
+        </div>
+        <!-- End Side Menu -->
     </nav>
     <!-- End Navigation -->
 </header>
@@ -98,8 +244,8 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
-                        <h1 class="m-b-20"><strong>Welcome To <br> Thewayshop</strong></h1>
-                        <p class="m-b-40">See how your users experience your website in realtime or view <br> trends to see any changes in performance over time.</p>
+                        <h1 class="m-b-20"><strong>Welcome To <br>Shop dày</strong></h1>
+                        <p class="m-b-40">Nâng niu bàn chân Việt<br>Cất bước mỏi nẻo đường</p>
                         <p><a class="btn hvr-hover" href="#">Shop New</a></p>
                     </div>
                 </div>
@@ -110,8 +256,8 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
-                        <h1 class="m-b-20"><strong>Welcome To <br> Thewayshop</strong></h1>
-                        <p class="m-b-40">See how your users experience your website in realtime or view <br> trends to see any changes in performance over time.</p>
+                        <h1 class="m-b-20"><strong>Welcome To <br>Shop dày</strong></h1>
+                        <p class="m-b-40">Nâng niu bàn chân Việt<br>Cất bước mỏi nẻo đường</p>
                         <p><a class="btn hvr-hover" href="#">Shop New</a></p>
                     </div>
                 </div>
@@ -122,8 +268,8 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
-                        <h1 class="m-b-20"><strong>Welcome To <br> Thewayshop</strong></h1>
-                        <p class="m-b-40">See how your users experience your website in realtime or view <br> trends to see any changes in performance over time.</p>
+                        <h1 class="m-b-20"><strong>Welcome To <br>Shop dày</strong></h1>
+                        <p class="m-b-40">Nâng niu bàn chân Việt<br>Cất bước mỏi nẻo đường</p>
                         <p><a class="btn hvr-hover" href="#">Shop New</a></p>
                     </div>
                 </div>
@@ -143,32 +289,32 @@
         <div class="row">
             <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                 <div class="shop-cat-box">
-                    <img class="img-fluid" src="images/t-shirts-img.jpg" alt="" />
-                    <a class="btn hvr-hover" href="#">T-shirts</a>
+                    <img  src="images/adidas-logo.jpg" alt="adidas" width="350" height="350"/>
+                    <a class="btn hvr-hover" href="#">Adidas</a>
                 </div>
                 <div class="shop-cat-box">
-                    <img class="img-fluid" src="images/shirt-img.jpg" alt="" />
-                    <a class="btn hvr-hover" href="#">Shirt</a>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                <div class="shop-cat-box">
-                    <img class="img-fluid" src="images/wallet-img.jpg" alt="" />
-                    <a class="btn hvr-hover" href="#">Wallet</a>
-                </div>
-                <div class="shop-cat-box">
-                    <img class="img-fluid" src="images/women-bag-img.jpg" alt="" />
-                    <a class="btn hvr-hover" href="#">Bags</a>
+                    <img  src="images/nike-logo.jpg" alt="nike" width="350" height="350"/>
+                    <a class="btn hvr-hover" href="#">Nike</a>
                 </div>
             </div>
             <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                 <div class="shop-cat-box">
-                    <img class="img-fluid" src="images/shoes-img.jpg" alt="" />
-                    <a class="btn hvr-hover" href="#">Shoes</a>
+                    <img  src="images/puma-logo.jpg" alt="puma" width="350" height="350"/>
+                    <a class="btn hvr-hover" href="#">Puma</a>
                 </div>
                 <div class="shop-cat-box">
-                    <img class="img-fluid" src="images/women-shoes-img.jpg" alt="" />
-                    <a class="btn hvr-hover" href="#">Women Shoes</a>
+                    <img  src="images/converse-logo.jpg" alt="converse" width="350" height="350"/>
+                    <a class="btn hvr-hover" href="#">Converse</a>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                <div class="shop-cat-box">
+                    <img  src="images/bitis-logo.png" alt="bitis" width="350" height="350"/>
+                    <a class="btn hvr-hover" href="#">Biti's</a>
+                </div>
+                <div class="shop-cat-box">
+                    <img  src="images/nb-logo.png" alt="NewBalance" width="350" height="350"/>
+                    <a class="btn hvr-hover" href="#">New Balance</a>
                 </div>
             </div>
         </div>
@@ -183,17 +329,28 @@
             <div class="col-lg-12">
                 <div class="title-all text-center">
                     <h1>Featured Products</h1>
-                    <p>Top nhũng sản phẩm bán chạy</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet lacus enim.</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="special-menu text-center">
+                    <div class="button-group filter-button-group">
+                        <button class="active" data-filter="*">All</button>
+                        <button data-filter=".top-featured">Top featured</button>
+                        <button data-filter=".best-seller">Best seller</button>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div class="row special-list" th:each="top5: ${top5price}">
+        <div class="row special-list">
             <div class="col-lg-3 col-md-6 special-grid best-seller">
                 <div class="products-single fix">
                     <div class="box-img-hover">
                         <div class="type-lb">
-                            <p class="sale">Hot Sale</p>
+                            <p class="sale">Sale</p>
                         </div>
                         <img src="images/img-pro-01.jpg" class="img-fluid" alt="Image">
                         <div class="mask-icon">
@@ -206,7 +363,7 @@
                         </div>
                     </div>
                     <div class="why-text">
-                        <h4 th:text="${top5.name}"></h4>
+                        <h4>Lorem ipsum dolor sit amet</h4>
                         <h5> $7.79</h5>
                     </div>
                 </div>
@@ -431,29 +588,29 @@
 
 <!-- Start copyright  -->
 <div class="footer-copyright">
-    <p class="footer-company">All Rights Reserved. &copy; 2018 <a href="#">ThewayShop</a> Design By :
-        <a href="https://html.design/">html design</a></p>
+    <p class="footer-company">All Rights Reserved. &copy; 2021 <a href="#">ThewayShop</a> Design By :
+        <a href="https://html.design/">Handsomes Team</a></p>
 </div>
 <!-- End copyright  -->
 
 <a href="#" id="back-to-top" title="Back to top" style="display: none;">&uarr;</a>
 
 <!-- ALL JS FILES -->
-<script src="js/jquery-3.2.1.min.js"></script>
-<script src="js/popper.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
+<script src="/js/jquery-3.2.1.min.js"></script>
+<script src="/js/popper.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
 <!-- ALL PLUGINS -->
-<script src="js/jquery.superslides.min.js"></script>
-<script src="js/bootstrap-select.js"></script>
-<script src="js/inewsticker.js"></script>
-<script src="js/bootsnav.js."></script>
-<script src="js/images-loded.min.js"></script>
-<script src="js/isotope.min.js"></script>
-<script src="js/owl.carousel.min.js"></script>
-<script src="js/baguetteBox.min.js"></script>
-<script src="js/form-validator.min.js"></script>
-<script src="js/contact-form-script.js"></script>
-<script src="js/custom.js"></script>
+<script src="/js/jquery.superslides.min.js"></script>
+<script src="/js/bootstrap-select.js"></script>
+<script src="/js/inewsticker.js"></script>
+<script src="/js/bootsnav.js"></script>
+<script src="/js/images-loded.min.js"></script>
+<script src="/js/isotope.min.js"></script>
+<script src="/js/owl.carousel.min.js"></script>
+<script src="/js/baguetteBox.min.js"></script>
+<script src="/js/form-validator.min.js"></script>
+<script src="/js/contact-form-script.js"></script>
+<script src="/js/custom.js"></script>
 </body>
 
 </html>
