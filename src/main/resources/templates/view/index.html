@@ -115,10 +115,17 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="navbar-menu">
                 <ul class="nav navbar-nav ml-auto" data-in="fadeInDown" data-out="fadeOutUp">
+<<<<<<< HEAD:src/main/resources/templates/view/index.html
                     <li class="nav-item active"><a class="nav-link" href="/home">Trang chủ</a></li>
                     <li class="nav-item"><a class="nav-link" href="about">About Us</a></li>
                     <li class="dropdown megamenu-fw">
                         <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">Sản phẩm</a>
+=======
+                    <li class="nav-item active"><a class="nav-link" href="/">Trang chủ</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/about">About Us</a></li>
+                    <li class="dropdown megamenu-fw">
+                        <a class="nav-link dropdown-toggle arrow" data-toggle="dropdown" th:href="@{/products}">Sản phẩm</a>
+>>>>>>> demo-of-khai:src/main/resources/templates/index.html
                         <ul class="dropdown-menu megamenu-content" role="menu">
                             <li>
                                 <div class="row">

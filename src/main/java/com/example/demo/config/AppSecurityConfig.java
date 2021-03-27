@@ -1,3 +1,4 @@
+
 package com.example.demo.config;
 
 import com.example.demo.service.login.user.IAppUserService;
@@ -26,9 +27,13 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests().antMatchers("/").permitAll().and().
-                authorizeRequests().antMatchers("/categories/**").hasRole("ADMIN").and().
-                authorizeRequests().antMatchers("/account/**").hasRole("ADMIN").and().
-                authorizeRequests().antMatchers("/products/**").hasRole("ADMIN").and().
+                authorizeRequests().antMatchers("/categories/**").permitAll().and().
+                authorizeRequests().antMatchers("/admin/**").hasRole("ADMIN").and().
+                authorizeRequests().antMatchers("/products/manager").hasRole("ADMIN").and().
+                authorizeRequests().antMatchers("/products/create").hasRole("ADMIN").and().
+                authorizeRequests().antMatchers("/products/edit/{id}").hasRole("ADMIN").and().
+                authorizeRequests().antMatchers("/products/delete/{id}").hasRole("ADMIN").and().
+                authorizeRequests().antMatchers("/products/**").permitAll().and().
                 formLogin().successHandler(customizeSuccessHandle).loginPage("/login").permitAll().and()
                 .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
         http.csrf().disable();

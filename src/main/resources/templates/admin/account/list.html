@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>List Account</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" >Manager</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/admin">Account</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page"  href="/admin/category">Categories</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="/products/manager" aria-current="page"  >Products</a>
+                </li>
+            </ul>
+            <form class="d-flex" th:action="@{/admin/account/search}">
+                <select th:name="role" th:id="role">
+                    <th:block th:each="role:${listRole}">
+                        <option th:value="${role.id}" th:text="${role.name}"></option>
+                    </th:block>
+                </select>
+                <input class="btn btn-outline-success" type="submit" value="search">
+            </form>
+        </div>
+    </div>
+</nav>
+
+<a class="btn btn-primary" href="/admin/account/create" role="button">Create Account</a>
+<a class="btn btn-warning" href="/logout" role="button"
+   onclick="return confirm('Are you sure want to logout ?')">Logout</a>
+<table class="table table-bordered">
+    <thead>
+    <tr>
+        <th scope="col">Username</th>
+        <th scope="col">FullName</th>
+        <th scope="col">Password</th>
+        <th scope="col">Gmail</th>
+        <th scope="col">Birthday</th>
+        <th scope="col">PhoneNumber</th>
+        <th scope="col">Address</th>
+        <th scope="col">Role</th>
+        <th scope="col">Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="p:${list}">
+        <td th:text="${p.username}"></td>
+        <td th:text="${p.fullName}"></td>
+        <td th:text="${p.password}"></td>
+        <td th:text="${p.gmail}"></td>
+        <td th:text="${p.birthday}"></td>
+        <td th:text="${p.phoneNumber}"></td>
+        <td th:text="${p.address}"></td>
+        <td th:text="${p.appRole.name}"></td>
+        <td th:if="${p.appRole.id==2}">
+            <a class="btn btn-success" role="button" th:href="@{'/admin/account/edit/'+${p.id}}">Edit</a>
+            <a class="btn btn-danger" role="button" th:href="@{'/admin/account/delete/'+${p.id}}"
+               onclick="return confirm('Are you sure to delete this account ?')">Delete</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<div>
+    <h3>
+        <a th:href="@{'/admin/'(page=${list.number - 1})}" th:if="${list.hasPrevious()}">Previous</a>
+        <span th:text="${list.number + 1}"></span>/<span th:text="${list.totalPages}"></span>
+        <a th:href="@{'/admin/'(page=${list.number + 1})}" th:if="${list.hasNext()}">Next</a>
+    </h3>
+</div>
+
+
+</body>
+</html>

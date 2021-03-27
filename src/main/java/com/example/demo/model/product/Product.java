@@ -16,6 +16,7 @@ public class Product {
     private double price;
     private int size;
     private String image;
+    private Date date;
     @Transient
     private MultipartFile avatar;
 
