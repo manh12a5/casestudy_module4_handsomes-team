@@ -29,7 +29,4 @@ public class DefautController {
         return new ModelAndView("view/about");
     }
 
-
-
-
 }

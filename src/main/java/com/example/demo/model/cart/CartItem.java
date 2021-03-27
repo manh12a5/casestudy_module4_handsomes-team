@@ -1,6 +1,7 @@
 package com.example.demo.model.cart;
 
 import com.example.demo.model.product.Product;
+import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 import java.util.List;
@@ -13,6 +14,7 @@ public class CartItem{
     @OneToOne
     private Product product;
     private int quantity;
+    @Column(columnDefinition = "boolean default false")
     private boolean status;
     @ManyToOne
     private Cart cart;
@@ -21,12 +23,9 @@ public class CartItem{
     public CartItem() {
     }
 
-    public CartItem(Long id, Product product, int quantity, boolean status, Cart cart) {
-        this.id = id;
+    public CartItem(Product product, int quantity) {
         this.product = product;
         this.quantity = quantity;
-        this.status = status;
-        this.cart = cart;
     }
 
     public Long getId() {

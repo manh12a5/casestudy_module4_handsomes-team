@@ -102,4 +102,12 @@ public class Product {
     public void setCategory(Category category) {
         this.category = category;
     }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
 }

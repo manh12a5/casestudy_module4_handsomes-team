@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 
+import com.example.demo.model.cart.Cart;
+import com.example.demo.model.cart.CartItem;
 import com.example.demo.model.category.Category;
 import com.example.demo.model.product.Product;
 import com.example.demo.service.category.ICategoryService;
@@ -114,12 +116,21 @@ public class ProductController {
         return modelAndView;
     }
 
-    @GetMapping("/view/{id}")
-    public ModelAndView viewDetail(@PathVariable Long id) {
+    @GetMapping("/detail")
+    public ModelAndView viewDetail(@RequestParam Long id) {
         ModelAndView modelAndView = new ModelAndView("view/shop-detail");
         modelAndView.addObject("product", productService.findById(id));
         return modelAndView;
     }
+
+//    @PostMapping("/detail")
+//    public ModelAndView createCartItem(@RequestParam Long id, int size, int quantity){
+//        Product product = productService.findById(id);
+//        product.setSize(size);
+//        CartItem cartItem = new CartItem()
+//        ModelAndView mav = new ModelAndView("view/shop-detail");
+//        return null;
+//    }
 
     //SearchNameProduct
     @PostMapping("/search")
@@ -143,5 +154,7 @@ public class ProductController {
         modelAndView.addObject("top5price", productService.findTop5ByOrderByPriceDesc(pageable));
         return modelAndView;
     }
+
+
 
 }

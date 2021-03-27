@@ -12,14 +12,8 @@ public class CartItemServiceImp implements ICartItemService {
     @Autowired
     private CartItemRepository cartItemRepository;
 
-    public double getUnitPriceProduct(CartItem cartItem){
-        double unitPrice = cartItem.getProduct().getPrice();
-        return unitPrice;
-    }
-
-
-    public double totalPriceOfProduct(CartItem cartItem, int quantity){
-        double total = this.getUnitPriceProduct(cartItem) * quantity;
-        return total;
+    @Override
+    public CartItem save(CartItem cartItem){
+        return cartItemRepository.save(cartItem);
     }
 }

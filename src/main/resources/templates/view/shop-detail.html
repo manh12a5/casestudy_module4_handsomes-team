@@ -266,6 +266,7 @@
     <!-- Start Shop Detail  -->
     <div class="shop-detail-box-main">
         <div class="container">
+            <form th:action="@{'/products/detail/?id='+${product.id}}" method="get">
             <div class="row">
                 <div class="col-xl-5 col-lg-5 col-md-6">
                     <div id="carousel-example-1" class="single-product-slider carousel slide" data-ride="carousel">
@@ -297,6 +298,7 @@
                 </div>
                 <div class="col-xl-7 col-lg-7 col-md-6">
                     <div class="single-product-details">
+                        <input type="hidden" name="id" th:value="${product.id}">
                         <h2 th:text="${product.name}"></h2>
                         <h5 th:text="${product.price}"></h5>
                         <p class="available-stock"><span> More than 20 available / <a href="#">8 sold </a></span>
@@ -307,7 +309,7 @@
                                     <li>
                                         <div class="form-group size-st">
                                             <label class="size-label">Size</label>
-                                            <select id="basic1" class="selectpicker show-tick form-control">
+                                            <select id="basic1" class="selectpicker show-tick form-control" name="size">
 									<option value="0">Size</option>
 									<option value="4">4</option>
 									<option value="5">5</option>
@@ -324,18 +326,17 @@
                                     <li>
                                         <div class="form-group quantity-box">
                                             <label class="control-label">Quantity</label>
-                                            <input class="form-control" value="0" min="0" max="20" type="number">
+                                            <input class="form-control" value="1" min="0" max="20" type="number" name="quantity">
                                         </div>
                                     </li>
                                 </ul>
-
                                 <div class="price-box-bar">
                                     <div class="cart-and-bay-btn">
-                                        <a class="btn hvr-hover" data-fancybox-close="" href="#">Buy New</a>
-                                        <a class="btn hvr-hover" data-fancybox-close="" href="#">Add to cart</a>
+                                        <a class="btn hvr-hover" data-fancybox-close="" href="/cart">Buy New</a>
+                                        <a class="btn hvr-hover" data-fancybox-close="" th:href="@{#}">Add to cart</a>
+                                        <button type="submit" name="sb" value="add" class="btcustom">Add to card</button>
                                     </div>
                                 </div>
-
                                 <div class="add-to-btn">
                                     <div class="add-comp">
                                         <a class="btn hvr-hover" href="#"><i class="fas fa-heart"></i> Add to wishlist</a>
@@ -351,7 +352,7 @@
                     </div>
                 </div>
             </div>
-
+            </form>
             <div class="row my-5">
                 <div class="col-lg-12">
                     <div class="title-all text-center">
