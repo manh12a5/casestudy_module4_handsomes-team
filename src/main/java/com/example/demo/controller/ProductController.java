@@ -61,7 +61,7 @@ public class ProductController {
         Long numberOfProducts = productPage.getTotalElements();
         modelAndView.addObject("products",productPage );
         modelAndView.addObject("categoriesProduct",categories);
-        modelAndView.addObject("numberOfProducts",numberOfProducts );
+        modelAndView.addObject("numberOfProducts",numberOfProducts);
         return modelAndView;
     }
 
@@ -164,6 +164,5 @@ public class ProductController {
         modelAndView.addObject("products", productService.findTop5ByOrderByPriceDesc(pageable));
         return modelAndView;
     }
-
 
 }

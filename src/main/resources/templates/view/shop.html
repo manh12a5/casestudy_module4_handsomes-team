@@ -280,15 +280,6 @@
                         <div class="title-left">
                             <h3>Categories</h3>
                         </div>
-<<<<<<< HEAD:src/main/resources/templates/shop/shop.html
-                        <div class="list-group list-group-collapse list-group-sm list-group-tree" id="list-group-men">
-                            <a href="/categories" class="list-group-item list-group-item-action">Adidas<small class="text-muted"></small></a>
-                            <a href="/categories" class="list-group-item list-group-item-action">Nike<small class="text-muted"></small></a>
-                            <a href="/categories" class="list-group-item list-group-item-action">Converse<small class="text-muted"></small></a>
-                            <a href="/categories" class="list-group-item list-group-item-action">Puma<small class="text-muted"></small></a>
-                            <a href="/categories" class="list-group-item list-group-item-action">Gucci<small class="text-muted"></small></a>
-                            <a href="/categories" class="list-group-item list-group-item-action">Lacoste<small class="text-muted"></small></a>
-=======
                         <th:block th:each="c:${categoriesProduct}">
                             <div class="list-group list-group-collapse list-group-sm list-group-tree">
 
@@ -310,42 +301,17 @@
                                        style="border:0; color:#fbb714; font-weight:bold;">
                                 <button class="btn hvr-hover" type="submit">Filter</button>
                             </p>
->>>>>>> 10f8c0d720b6fc450d8f50e2a90bb6c0080b347b:src/main/resources/templates/view/shop.html
                         </div>
                     </div>
 
                 </div>
             </div>
-<<<<<<< HEAD:src/main/resources/templates/shop/shop.html
-
-=======
->>>>>>> 10f8c0d720b6fc450d8f50e2a90bb6c0080b347b:src/main/resources/templates/view/shop.html
             <div class="col-xl-9 col-lg-9 col-sm-12 col-xs-12 shop-content-right">
                 <div class="right-product-box">
                     <div class="product-item-filter row">
                         <div class="col-12 col-sm-8 text-center text-sm-left">
                             <div class="toolbar-sorter-right">
                                 <span>Sort by </span>
-<<<<<<< HEAD:src/main/resources/templates/shop/shop.html
-                                <ul class="nav nav-tabs">
-                                    <li class="nav-item">
-                                        <a class="nav-link active" aria-current="page" href="/products/top5price">Top 5</a>
-                                    </li>
-                                    <li class="nav-item dropdown">
-                                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Sắp xếp giá</a>
-                                        <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="/products/sortpricemax">Cao->Thấp</a></li>
-                                            <li><a class="dropdown-item" href="/products/sortpricemin">Thấp->Cao</a></li>
-                                            <li><hr class="dropdown-divider"></li>
-                                            <li><a class="dropdown-item" href="#">Link</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#">Link</a>
-                                    </li>
-                                </ul>
-                            </div>
-=======
                                 <select id="basic" class="selectpicker show-tick form-control" data-placeholder="$ USD">
                                     <option data-display="Select">Nothing</option>
                                     <option value="1">Popularity</option>
@@ -355,7 +321,6 @@
                                 </select>
                             </div>
                             <p>Showing all <span th:text="${numberOfProducts}" style="color: red"></span> results</p>
->>>>>>> 10f8c0d720b6fc450d8f50e2a90bb6c0080b347b:src/main/resources/templates/view/shop.html
                         </div>
                         <div class="col-12 col-sm-4 text-center text-sm-right">
                             <ul class="nav nav-tabs ml-auto">
@@ -628,8 +593,6 @@
 <script src="js/form-validator.min.js"></script>
 <script src="js/contact-form-script.js"></script>
 <script src="js/custom.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js" integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js" integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous"></script>
 </body>
 
 </html>

@@ -26,8 +26,6 @@ public class DefautController {
     @Autowired
     private IProductService productService;
 
-
-
     @RequestMapping("")
     public ModelAndView home() {
         return new ModelAndView("view/index");
