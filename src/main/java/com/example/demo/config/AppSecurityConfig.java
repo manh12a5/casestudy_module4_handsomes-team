@@ -29,6 +29,10 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/").permitAll().and().
                 authorizeRequests().antMatchers("/categories/**").permitAll().and().
                 authorizeRequests().antMatchers("/admin/**").hasRole("ADMIN").and().
+                authorizeRequests().antMatchers("/products/manager").hasRole("ADMIN").and().
+                authorizeRequests().antMatchers("/products/create").hasRole("ADMIN").and().
+                authorizeRequests().antMatchers("/products/edit/{id}").hasRole("ADMIN").and().
+                authorizeRequests().antMatchers("/products/delete/{id}").hasRole("ADMIN").and().
                 authorizeRequests().antMatchers("/products/**").permitAll().and().
                 formLogin().successHandler(customizeSuccessHandle).loginPage("/login").permitAll().and()
                 .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"));

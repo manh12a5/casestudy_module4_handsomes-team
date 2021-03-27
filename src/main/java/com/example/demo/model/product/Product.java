@@ -4,6 +4,7 @@ import com.example.demo.model.category.Category;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
+import java.sql.Date;
 
 @Entity
 public class Product {
@@ -15,6 +16,7 @@ public class Product {
     private double price;
     private int size;
     private String image;
+    private Date date;
     @Transient
     private MultipartFile avatar;
 

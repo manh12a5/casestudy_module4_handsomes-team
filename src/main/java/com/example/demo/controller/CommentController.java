@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping("/comments")
 public class CommentController {
     @Autowired
     IProductService productService;
@@ -41,20 +40,20 @@ public class CommentController {
         return modelAndView;
     }
 
-    @GetMapping("/create")
-    public ModelAndView formCreate(){
-        ModelAndView modelAndView = new ModelAndView("/comment/create");
-        modelAndView.addObject("comment",new Comment());
-        return modelAndView;
-    }
-
-    @PostMapping("/create")
-    public ModelAndView createCate(@ModelAttribute Comment comment){
-        ModelAndView modelAndView = new ModelAndView("redirect:/comments");
-        commentService.save(comment);
-        modelAndView.addObject("comment",new Comment());
-        return modelAndView;
-    }
+//    @GetMapping("/create")
+//    public ModelAndView formCreate(){
+//        ModelAndView modelAndView = new ModelAndView("/comment/create");
+//        modelAndView.addObject("comment",new Comment());
+//        return modelAndView;
+//    }
+//
+//    @PostMapping("/create")
+//    public ModelAndView createCate(@ModelAttribute Comment comment){
+//        ModelAndView modelAndView = new ModelAndView("redirect:/comments");
+//        commentService.save(comment);
+//        modelAndView.addObject("comment",new Comment());
+//        return modelAndView;
+//    }
 
 //    @GetMapping("/create")
 //    public ModelAndView create(@ModelAttribute Comment comment){
@@ -71,13 +70,25 @@ public class CommentController {
 //        return modelAndView;
 //    }
 
+//    @RequestMapping("/comment")
+//    public ModelAndView getDetails(@PathVariable Long id) {
+//        ModelAndView modelAndView = new ModelAndView("comment/create");
+//        Product product = productService.findById(id);
+//        Iterable<Comment> comments = commentService.findAllByProduct(product);
+//        Integer cmtSum = commentService.countAllByProduct(product);
+//        modelAndView.addObject("product",product);
+//        modelAndView.addObject("cmtSum",cmtSum);
+//        modelAndView.addObject("comments",comments);
+//        return modelAndView;
+//    }
+
 
 //    @PostMapping("/comment/create")
-//    public ResponseEntity<Comment> addComment(@RequestBody Comment comment) throws NotFoundException {
-//        String commentCommentt = comment.getComment();
+//    public ResponseEntity<Comment> addComment(@RequestBody Comment comment){
+//        String commentComment = comment.getComment();
 //        Product product  = productService.findById(comment.getProduct().getId());
 //        Comment comment1 = new Comment();
-//        comment1.setComment(commentCommentt);
+//        comment1.setComment(commentComment);
 //        comment1.setProduct(product);
 //        comment1.setUser(currentUser());
 //        commentService.save(comment1);
@@ -85,14 +96,14 @@ public class CommentController {
 //    }
 //
 //    @GetMapping("/comment/{id}")
-//    public ResponseEntity<Iterable<Comment>> loadList(@PathVariable Long id) throws NotFoundException {
+//    public ResponseEntity<Iterable<Comment>> loadList(@PathVariable Long id) {
 //        Product product = productService.findById(id);
 //        Iterable<Comment> comments = commentService.findAllByProduct(product);
 //        return new ResponseEntity<>(comments,HttpStatus.OK);
 //    }
 //
 //    @GetMapping("/comment/sum/{id}")
-//    public ResponseEntity getSum(@PathVariable Long id)throws NotFoundException {
+//    public ResponseEntity getSum(@PathVariable Long id) {
 //        Product product = productService.findById(id);
 //        Integer cmtSum = commentService.countAllByProduct(product);
 //        return new ResponseEntity(cmtSum,HttpStatus.OK);
@@ -101,20 +112,20 @@ public class CommentController {
 
 
 
-    @GetMapping("/create")
-    private ModelAndView showCreate() {
-        ModelAndView modelAndView = new ModelAndView("comment/create");
-        modelAndView.addObject("comment", new Comment());
-        return modelAndView;
-    }
-
-    @PostMapping("/create")
-    private ModelAndView create(@ModelAttribute Comment comment) {
-        ModelAndView modelAndView = new ModelAndView("comment/create");
-        commentService.save(comment);
-        modelAndView.addObject("comment", comment);
-        return modelAndView;
-    }
+//    @GetMapping("/create")
+//    private ModelAndView showCreate() {
+//        ModelAndView modelAndView = new ModelAndView("comment/create");
+//        modelAndView.addObject("comment", new Comment());
+//        return modelAndView;
+//    }
+//
+//    @PostMapping("/create")
+//    private ModelAndView create(@ModelAttribute Comment comment) {
+//        ModelAndView modelAndView = new ModelAndView("comment/create");
+//        commentService.save(comment);
+//        modelAndView.addObject("comment", comment);
+//        return modelAndView;
+//    }
 
 
 }
