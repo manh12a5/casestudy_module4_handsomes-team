@@ -131,8 +131,6 @@ public class ProductController {
         return modelAndView;
     }
 
-<<<<<<< HEAD
-=======
     @PostMapping("/searchCategory")
     public ModelAndView searchProductByCategory(@RequestParam Long id, @PageableDefault(size = 6) Pageable pageable) {
         Page<Product> productPage = productService.findProductByCategoryName(id, pageable);
@@ -145,6 +143,5 @@ public class ProductController {
         modelAndView.addObject("top5price", productService.findTop5ByOrderByPriceDesc(pageable));
         return modelAndView;
     }
->>>>>>> demo-of-khai
 
 }
