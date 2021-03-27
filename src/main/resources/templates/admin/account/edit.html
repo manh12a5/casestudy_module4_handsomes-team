@@ -7,24 +7,22 @@
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <style>
-        form{
+        form {
             width: 400px;
             height: 200px;
         }
     </style>
-
 </head>
 <body>
-<div th:align="center">
     <a type="button" class="btn btn-info" href="/account">Back to List Account</a>
-    <form method="post" th:object="${user}" th:action="@{/login/register}">
+    <form method="post" th:object="${user}">
         <div class="mb-3">
             <label for="username" class="form-label">Username</label>
             <input type="text" class="form-control" id="username" name="username" th:field="*{username}">
         </div>
         <div class="mb-3">
             <label for="password" class="form-label">Password</label>
-            <input type="password" class="form-control" id="password" name="password" th:field="*{password}">
+            <input type="text" class="form-control" id="password" name="password" th:field="*{password}">
         </div>
         <div class="mb-3" hidden>
             <label for="role" class="form-label">Role</label>
@@ -55,12 +53,8 @@
             <input type="text" class="form-control" id="address" name="address" th:field="*{address}">
         </div>
 
-        <input class="btn btn-primary" type="submit" value="Create">
-        <!--    <p style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</p>-->
+        <input class="btn btn-primary" type="submit" value="Edit">
     </form>
-
-</div>
-
 
 
 </body>

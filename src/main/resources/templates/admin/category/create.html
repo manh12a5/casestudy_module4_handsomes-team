@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Category</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+<div class="input-group">
+    <form method="post" th:object="${category}" th:action="@{/admin/category/create}">
+        <span class="input-group-text">Category Name</span>
+        <input type="text" aria-label="Last name" class="form-control" th:field="*{name}">
+        <input type="submit" value="Create">
+    </form>
+</div>
+
+
+</body>
+</html>

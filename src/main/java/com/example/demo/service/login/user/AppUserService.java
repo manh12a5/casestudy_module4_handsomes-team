@@ -6,6 +6,7 @@ import com.example.demo.repository.AppUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
@@ -69,9 +70,14 @@ public class AppUserService implements IAppUserService, UserDetailsService {
 
     @Override
     public List<AppUser> findAllByAppRole(AppRole appRole) {
-        return appUserRepository.findAllByAppRole(appRole);
+        return appUserRepository.getAllByAppRole(appRole);
     }
-
+    public AppUser getCurrentUser() {
+        Authentication authentication= SecurityContextHolder.getContext().getAuthentication();
+        String userName = authentication.getName();
+        AppUser user= appUserRepository.getAppUserByUsername(userName);
+        return user;
+    }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
