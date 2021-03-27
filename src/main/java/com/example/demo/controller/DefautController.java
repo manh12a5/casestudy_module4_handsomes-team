@@ -8,10 +8,9 @@ import com.example.demo.service.product.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -21,14 +20,16 @@ import java.util.List;
 public class DefautController {
 
     @Autowired
-    private ICategoryService categoryService;
+    private ICategoryService categoryServiceImp;
 
     @Autowired
     private IProductService productService;
 
     @RequestMapping("")
     public ModelAndView home() {
-        return new ModelAndView("view/index");
+        ModelAndView modelAndView = new ModelAndView("view/index");
+        modelAndView.addObject("categories", categoryServiceImp.findAll());
+        return modelAndView;
     }
 
     @RequestMapping("about")
@@ -36,7 +37,14 @@ public class DefautController {
         return new ModelAndView("view/about");
     }
 
-
-
+    //SearchNameProduct
+    @PostMapping("/search")
+    public ModelAndView showSearchNameProduct(@RequestParam String name, @PageableDefault(size = 6) Pageable pageable) {
+        ModelAndView modelAndView = new ModelAndView("view/index");
+        String nameProduct = "%" + name + "%";
+        Page<Product> productList = productService.findProductByName(nameProduct, pageable);
+        modelAndView.addObject("products", productList);
+        return modelAndView;
+    }
 
 }

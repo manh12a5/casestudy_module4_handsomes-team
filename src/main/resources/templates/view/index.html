@@ -20,14 +20,13 @@
     <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" >
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
     <!-- Site CSS -->
-    <link rel="stylesheet" type="text/css" href="/css/style.css" >
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
     <!-- Responsive CSS -->
-    <link rel="stylesheet" type="text/css" href="/css/responsive.css" >
+    <link rel="stylesheet" type="text/css" href="/css/responsive.css">
     <!-- Custom CSS -->
-    <link rel="stylesheet" type="text/css" href="/css/custom.css" >
-
+    <link rel="stylesheet" type="text/css" href="/css/custom.css">
 
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -105,10 +104,12 @@
         <div class="container">
             <!-- Start Header Navigation -->
             <div class="navbar-header">
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu"
+                        aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand" href="/home"><img src="images/logo.png" class="logo" alt="logo" height="100" width="100"></a>
+                <a class="navbar-brand" href="/home"><img src="images/logo.png" class="logo" alt="logo" height="100"
+                                                          width="100"></a>
             </div>
             <!-- End Header Navigation -->
 
@@ -117,50 +118,10 @@
                 <ul class="nav navbar-nav ml-auto" data-in="fadeInDown" data-out="fadeOutUp">
                     <li class="nav-item active"><a class="nav-link" href="/">Trang chủ</a></li>
                     <li class="nav-item"><a class="nav-link" href="/about">About Us</a></li>
-                    <li class="dropdown megamenu-fw">
-                        <a class="nav-link dropdown-toggle arrow" data-toggle="dropdown" th:href="@{/products}">Sản phẩm</a>
-                        <ul class="dropdown-menu megamenu-content" role="menu">
-                            <li>
-                                <div class="row">
-                                    <div class="col-menu col-md-3">
-                                        <h6 class="title">Adidas</h6>
-                                        <div class="content">
-                                            <ul class="menu-col">
-                                                <li><a href="shop.html">shoes</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <!-- end col-3 -->
-                                    <div class="col-menu col-md-3">
-                                        <h6 class="title">Nike</h6>
-                                        <div class="content">
-                                            <ul class="menu-col">
-                                                <li><a href="shop.html">shoes</a></li>
-
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <!-- end col-3 -->
-                                    <div class="col-menu col-md-3">
-                                        <h6 class="title">Converse</h6>
-                                        <div class="content">
-                                            <ul class="menu-col">
-                                                <li><a href="shop.html">shoes</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="col-menu col-md-3">
-                                        <h6 class="title">Puma</h6>
-                                        <div class="content">
-                                            <ul class="menu-col">
-                                                <li><a href="shop.html">shoes</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <!-- end col-3 -->
-                                </div>
-                                <!-- end row -->
-                            </li>
+                    <li class="dropdown">
+                        <a href="/products" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">Sản phẩm</a>
+                        <ul class="dropdown-menu" th:each="c:${categories}">
+                            <li th:text="${c.name}"><a href="/"></a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
@@ -197,17 +158,17 @@
             <li class="cart-box">
                 <ul class="cart-list">
                     <li>
-                        <a href="#" class="photo"><img src="images/img-pro-01.jpg" class="cart-thumb" alt="" /></a>
+                        <a href="#" class="photo"><img src="images/img-pro-01.jpg" class="cart-thumb" alt=""/></a>
                         <h6><a href="#">Delica omtantur </a></h6>
                         <p>1x - <span class="price">$80.00</span></p>
                     </li>
                     <li>
-                        <a href="#" class="photo"><img src="images/img-pro-02.jpg" class="cart-thumb" alt="" /></a>
+                        <a href="#" class="photo"><img src="images/img-pro-02.jpg" class="cart-thumb" alt=""/></a>
                         <h6><a href="#">Omnes ocurreret</a></h6>
                         <p>1x - <span class="price">$60.00</span></p>
                     </li>
                     <li>
-                        <a href="#" class="photo"><img src="images/img-pro-03.jpg" class="cart-thumb" alt="" /></a>
+                        <a href="#" class="photo"><img src="images/img-pro-03.jpg" class="cart-thumb" alt=""/></a>
                         <h6><a href="#">Agam facilisis</a></h6>
                         <p>1x - <span class="price">$40.00</span></p>
                     </li>
@@ -225,15 +186,17 @@
 <!-- End Main Top -->
 
 <!-- Start Top Search -->
-<div class="top-search">
-    <div class="container">
-        <div class="input-group">
-            <span class="input-group-addon"><i class="fa fa-search"></i></span>
-            <input type="text" class="form-control" placeholder="Search">
-            <span class="input-group-addon close-search"><i class="fa fa-times"></i></span>
+<form action="/products/search" method="post">
+    <div class="top-search">
+        <div class="container">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                <input name="name" type="text" class="form-control" placeholder="Tìm kiếm tên sản phẩm">
+                <span class="input-group-addon close-search"><i class="fa fa-times"></i></span>
+            </div>
         </div>
     </div>
-</div>
+</form>
 <!-- End Top Search -->
 
 <!-- Start Slider -->
@@ -289,31 +252,31 @@
         <div class="row">
             <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                 <div class="shop-cat-box">
-                    <img  src="images/adidas-logo.jpg" alt="adidas" width="350" height="350"/>
+                    <img src="images/adidas-logo.jpg" alt="adidas" width="350" height="350"/>
                     <a class="btn hvr-hover" href="#">Adidas</a>
                 </div>
                 <div class="shop-cat-box">
-                    <img  src="images/nike-logo.jpg" alt="nike" width="350" height="350"/>
+                    <img src="images/nike-logo.jpg" alt="nike" width="350" height="350"/>
                     <a class="btn hvr-hover" href="#">Nike</a>
                 </div>
             </div>
             <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                 <div class="shop-cat-box">
-                    <img  src="images/puma-logo.jpg" alt="puma" width="350" height="350"/>
+                    <img src="images/puma-logo.jpg" alt="puma" width="350" height="350"/>
                     <a class="btn hvr-hover" href="#">Puma</a>
                 </div>
                 <div class="shop-cat-box">
-                    <img  src="images/converse-logo.jpg" alt="converse" width="350" height="350"/>
+                    <img src="images/converse-logo.jpg" alt="converse" width="350" height="350"/>
                     <a class="btn hvr-hover" href="#">Converse</a>
                 </div>
             </div>
             <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                 <div class="shop-cat-box">
-                    <img  src="images/bitis-logo.png" alt="bitis" width="350" height="350"/>
+                    <img src="images/bitis-logo.png" alt="bitis" width="350" height="350"/>
                     <a class="btn hvr-hover" href="#">Biti's</a>
                 </div>
                 <div class="shop-cat-box">
-                    <img  src="images/nb-logo.png" alt="NewBalance" width="350" height="350"/>
+                    <img src="images/nb-logo.png" alt="NewBalance" width="350" height="350"/>
                     <a class="btn hvr-hover" href="#">New Balance</a>
                 </div>
             </div>
@@ -355,9 +318,12 @@
                         <img src="images/img-pro-01.jpg" class="img-fluid" alt="Image">
                         <div class="mask-icon">
                             <ul>
-                                <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
-                                <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
-                                <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
+                                <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i
+                                        class="fas fa-eye"></i></a></li>
+                                <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i
+                                        class="fas fa-sync-alt"></i></a></li>
+                                <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i
+                                        class="far fa-heart"></i></a></li>
                             </ul>
                             <a class="cart" href="#">Add to Cart</a>
                         </div>
@@ -378,9 +344,12 @@
                         <img src="images/img-pro-02.jpg" class="img-fluid" alt="Image">
                         <div class="mask-icon">
                             <ul>
-                                <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
-                                <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
-                                <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
+                                <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i
+                                        class="fas fa-eye"></i></a></li>
+                                <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i
+                                        class="fas fa-sync-alt"></i></a></li>
+                                <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i
+                                        class="far fa-heart"></i></a></li>
                             </ul>
                             <a class="cart" href="#">Add to Cart</a>
                         </div>
@@ -401,9 +370,12 @@
                         <img src="images/img-pro-03.jpg" class="img-fluid" alt="Image">
                         <div class="mask-icon">
                             <ul>
-                                <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
-                                <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
-                                <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
+                                <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i
+                                        class="fas fa-eye"></i></a></li>
+                                <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i
+                                        class="fas fa-sync-alt"></i></a></li>
+                                <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i
+                                        class="far fa-heart"></i></a></li>
                             </ul>
                             <a class="cart" href="#">Add to Cart</a>
                         </div>
@@ -424,9 +396,12 @@
                         <img src="images/img-pro-04.jpg" class="img-fluid" alt="Image">
                         <div class="mask-icon">
                             <ul>
-                                <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
-                                <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
-                                <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
+                                <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i
+                                        class="fas fa-eye"></i></a></li>
+                                <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i
+                                        class="fas fa-sync-alt"></i></a></li>
+                                <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i
+                                        class="far fa-heart"></i></a></li>
                             </ul>
                             <a class="cart" href="#">Add to Cart</a>
                         </div>
@@ -447,7 +422,7 @@
     <div class="main-instagram owl-carousel owl-theme">
         <div class="item">
             <div class="ins-inner-box">
-                <img src="images/instagram-img-01.jpg" alt="" />
+                <img src="images/instagram-img-01.jpg" alt=""/>
                 <div class="hov-in">
                     <a href="#"><i class="fab fa-instagram"></i></a>
                 </div>
@@ -455,7 +430,7 @@
         </div>
         <div class="item">
             <div class="ins-inner-box">
-                <img src="images/instagram-img-02.jpg" alt="" />
+                <img src="images/instagram-img-02.jpg" alt=""/>
                 <div class="hov-in">
                     <a href="#"><i class="fab fa-instagram"></i></a>
                 </div>
@@ -463,7 +438,7 @@
         </div>
         <div class="item">
             <div class="ins-inner-box">
-                <img src="images/instagram-img-03.jpg" alt="" />
+                <img src="images/instagram-img-03.jpg" alt=""/>
                 <div class="hov-in">
                     <a href="#"><i class="fab fa-instagram"></i></a>
                 </div>
@@ -471,7 +446,7 @@
         </div>
         <div class="item">
             <div class="ins-inner-box">
-                <img src="images/instagram-img-04.jpg" alt="" />
+                <img src="images/instagram-img-04.jpg" alt=""/>
                 <div class="hov-in">
                     <a href="#"><i class="fab fa-instagram"></i></a>
                 </div>
@@ -479,7 +454,7 @@
         </div>
         <div class="item">
             <div class="ins-inner-box">
-                <img src="images/instagram-img-05.jpg" alt="" />
+                <img src="images/instagram-img-05.jpg" alt=""/>
                 <div class="hov-in">
                     <a href="#"><i class="fab fa-instagram"></i></a>
                 </div>
@@ -487,7 +462,7 @@
         </div>
         <div class="item">
             <div class="ins-inner-box">
-                <img src="images/instagram-img-06.jpg" alt="" />
+                <img src="images/instagram-img-06.jpg" alt=""/>
                 <div class="hov-in">
                     <a href="#"><i class="fab fa-instagram"></i></a>
                 </div>
@@ -495,7 +470,7 @@
         </div>
         <div class="item">
             <div class="ins-inner-box">
-                <img src="images/instagram-img-07.jpg" alt="" />
+                <img src="images/instagram-img-07.jpg" alt=""/>
                 <div class="hov-in">
                     <a href="#"><i class="fab fa-instagram"></i></a>
                 </div>
@@ -503,7 +478,7 @@
         </div>
         <div class="item">
             <div class="ins-inner-box">
-                <img src="images/instagram-img-08.jpg" alt="" />
+                <img src="images/instagram-img-08.jpg" alt=""/>
                 <div class="hov-in">
                     <a href="#"><i class="fab fa-instagram"></i></a>
                 </div>
@@ -511,7 +486,7 @@
         </div>
         <div class="item">
             <div class="ins-inner-box">
-                <img src="images/instagram-img-09.jpg" alt="" />
+                <img src="images/instagram-img-09.jpg" alt=""/>
                 <div class="hov-in">
                     <a href="#"><i class="fab fa-instagram"></i></a>
                 </div>
@@ -519,7 +494,7 @@
         </div>
         <div class="item">
             <div class="ins-inner-box">
-                <img src="images/instagram-img-05.jpg" alt="" />
+                <img src="images/instagram-img-05.jpg" alt=""/>
                 <div class="hov-in">
                     <a href="#"><i class="fab fa-instagram"></i></a>
                 </div>
@@ -538,7 +513,9 @@
                 <div class="col-lg-4 col-md-12 col-sm-12">
                     <div class="footer-widget">
                         <h4>About ThewayShop</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                            laboris nisi ut aliquip ex ea commodo consequat.
                         </p>
                         <ul>
                             <li><a href="#"><i class="fab fa-facebook" aria-hidden="true"></i></a></li>
@@ -569,13 +546,16 @@
                         <h4>Contact Us</h4>
                         <ul>
                             <li>
-                                <p><i class="fas fa-map-marker-alt"></i>Address: Michael I. Days 3756 <br>Preston Street Wichita,<br> KS 67213 </p>
+                                <p><i class="fas fa-map-marker-alt"></i>Address: Michael I. Days 3756 <br>Preston Street
+                                    Wichita,<br> KS 67213 </p>
                             </li>
                             <li>
-                                <p><i class="fas fa-phone-square"></i>Phone: <a href="tel:+1-888705770">+1-888 705 770</a></p>
+                                <p><i class="fas fa-phone-square"></i>Phone: <a href="tel:+1-888705770">+1-888 705
+                                    770</a></p>
                             </li>
                             <li>
-                                <p><i class="fas fa-envelope"></i>Email: <a href="mailto:contactinfo@gmail.com">contactinfo@gmail.com</a></p>
+                                <p><i class="fas fa-envelope"></i>Email: <a href="mailto:contactinfo@gmail.com">contactinfo@gmail.com</a>
+                                </p>
                             </li>
                         </ul>
                     </div>
