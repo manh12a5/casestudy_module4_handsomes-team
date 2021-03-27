@@ -26,9 +26,10 @@ public class DefautController {
     private IProductService productService;
 
     @RequestMapping("")
-    public ModelAndView home() {
+    public ModelAndView home(@PageableDefault(size = 5) Pageable pageable) {
         ModelAndView modelAndView = new ModelAndView("view/index");
         modelAndView.addObject("categories", categoryServiceImp.findAll());
+        modelAndView.addObject("top5products", productService.findTop5ByOrderByPriceDesc(pageable));
         return modelAndView;
     }
 

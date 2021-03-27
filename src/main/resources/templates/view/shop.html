@@ -116,10 +116,10 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="navbar-menu">
                 <ul class="nav navbar-nav ml-auto" data-in="fadeInDown" data-out="fadeOutUp">
-                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/about">About Us</a></li>
                     <li class="dropdown active megamenu-fw">
-                        <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">Product</a>
+                        <a href="/products" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">Sản phẩm</a>
                         <ul class="dropdown-menu megamenu-content" role="menu">
                             <li>
                                 <div class="row">
@@ -237,15 +237,17 @@
 <!-- End Main Top -->
 
 <!-- Start Top Search -->
-<div class="top-search">
-    <div class="container">
-        <div class="input-group">
-            <span class="input-group-addon"><i class="fa fa-search"></i></span>
-            <input type="text" class="form-control" placeholder="Search">
-            <span class="input-group-addon close-search"><i class="fa fa-times"></i></span>
+<form action="/products/search" method="post">
+    <div class="top-search">
+        <div class="container">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                <input name="name" type="text" class="form-control" placeholder="Tìm kiếm tên sản phẩm">
+                <span class="input-group-addon close-search"><i class="fa fa-times"></i></span>
+            </div>
         </div>
     </div>
-</div>
+</form>
 <!-- End Top Search -->
 
 <!-- Start All Title Box -->
@@ -255,7 +257,7 @@
             <div class="col-lg-12">
                 <h2>Shop</h2>
                 <ul class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
                     <li class="breadcrumb-item active">Shop</li>
                 </ul>
             </div>
@@ -271,8 +273,8 @@
             <div class="col-xl-3 col-lg-3 col-sm-12 col-xs-12 sidebar-shop-left">
                 <div class="product-categori">
                     <div class="search-product">
-                        <form action="#">
-                            <input class="form-control" placeholder="Search here..." type="text">
+                        <form action="/products/search" method="post">
+                            <input name="name" class="form-control" placeholder="Tìm kiếm tên sản phẩm" type="text">
                             <button type="submit"><i class="fa fa-search"></i></button>
                         </form>
                     </div>
@@ -282,13 +284,13 @@
                         </div>
                         <th:block th:each="c:${categoriesProduct}">
                             <div class="list-group list-group-collapse list-group-sm list-group-tree">
-
-                                <a th:href="@{'category/'+${c.id}}" class="list-group-item list-group-item-action"><span th:text="${c.name}" style="color: red"></span>
-                                    <small class="text-muted"><span th:text="${productSize}" style="color: #007bff"></span></small></a>
+                                <a th:href="@{'category/'+${c.id}}" class="list-group-item list-group-item-action">
+                                    <span th:text="${c.name}" style="color: red"></span>
+                                    <small class="text-muted"><span style="color: #007bff"></span></small>
+                                </a>
                             </div>
                         </th:block>
                     </div>
-
 
                     <div class="filter-price-left">
                         <div class="title-left">
@@ -314,10 +316,8 @@
                                 <span>Sort by </span>
                                 <select id="basic" class="selectpicker show-tick form-control" data-placeholder="$ USD">
                                     <option data-display="Select">Nothing</option>
-                                    <option value="1">Popularity</option>
-                                    <option value="2">High Price → High Price</option>
-                                    <option value="3">Low Price → High Price</option>
-                                    <option value="4">Best Selling</option>
+                                    <option value="1">High Price → Low Price</option>
+                                    <option value="2">Low Price → High Price</option>
                                 </select>
                             </div>
                             <p>Showing all <span th:text="${numberOfProducts}" style="color: red"></span> results</p>

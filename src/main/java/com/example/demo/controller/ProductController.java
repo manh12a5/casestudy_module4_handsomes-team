@@ -121,7 +121,6 @@ public class ProductController {
         return modelAndView;
     }
 
-    //SearchNameProduct
     @PostMapping("/search")
     public ModelAndView showSearchNameProduct(@RequestParam String name, @PageableDefault(size = 6) Pageable pageable) {
         ModelAndView modelAndView = new ModelAndView("view/shop");
@@ -137,24 +136,10 @@ public class ProductController {
         return new ModelAndView("view/shop", "products", productPage);
     }
 
-    @GetMapping("/top5price")
-    public ModelAndView find5Price(@PageableDefault(size = 6) Pageable pageable) {
-        ModelAndView modelAndView = new ModelAndView("view/shop");
-        modelAndView.addObject("products", productService.findTop5ByOrderByPriceDesc(pageable));
-        return modelAndView;
-    }
-
     @GetMapping("/sortpricemax")
     public ModelAndView sortPriceMax(@PageableDefault(size = 6) Pageable pageable) {
         ModelAndView modelAndView = new ModelAndView("view/shop");
         modelAndView.addObject("products", productService.findAllByOrderByPriceDesc(pageable));
-        return modelAndView;
-    }
-
-    @GetMapping("/top5priceMax")
-    public ModelAndView find5PriceMax(@PageableDefault(size = 6) Pageable pageable) {
-        ModelAndView modelAndView = new ModelAndView("view/shop");
-        modelAndView.addObject("top5price", productService.findTop5ByOrderByPriceDesc(pageable));
         return modelAndView;
     }
 

@@ -118,12 +118,7 @@
                 <ul class="nav navbar-nav ml-auto" data-in="fadeInDown" data-out="fadeOutUp">
                     <li class="nav-item active"><a class="nav-link" href="/">Trang chủ</a></li>
                     <li class="nav-item"><a class="nav-link" href="/about">About Us</a></li>
-                    <li class="dropdown">
-                        <a href="/products" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">Sản phẩm</a>
-                        <ul class="dropdown-menu" th:each="c:${categories}">
-                            <li th:text="${c.name}"><a href="/"></a></li>
-                        </ul>
-                    </li>
+                    <li class="nav-item"><a class="nav-link" href="/products">Sản phẩm</a></li>
                     <li class="dropdown">
                         <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">SHOP</a>
                         <ul class="dropdown-menu">
@@ -247,37 +242,13 @@
 <!-- End Slider -->
 
 <!-- Start Categories  -->
-<div class="categories-shop">
+<div class="categories-shop" >
     <div class="container">
         <div class="row">
-            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12" th:each="c:${categories}">
                 <div class="shop-cat-box">
-                    <img src="images/adidas-logo.jpg" alt="adidas" width="350" height="350"/>
-                    <a class="btn hvr-hover" href="#">Adidas</a>
-                </div>
-                <div class="shop-cat-box">
-                    <img src="images/nike-logo.jpg" alt="nike" width="350" height="350"/>
-                    <a class="btn hvr-hover" href="#">Nike</a>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                <div class="shop-cat-box">
-                    <img src="images/puma-logo.jpg" alt="puma" width="350" height="350"/>
-                    <a class="btn hvr-hover" href="#">Puma</a>
-                </div>
-                <div class="shop-cat-box">
-                    <img src="images/converse-logo.jpg" alt="converse" width="350" height="350"/>
-                    <a class="btn hvr-hover" href="#">Converse</a>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                <div class="shop-cat-box">
-                    <img src="images/bitis-logo.png" alt="bitis" width="350" height="350"/>
-                    <a class="btn hvr-hover" href="#">Biti's</a>
-                </div>
-                <div class="shop-cat-box">
-                    <img src="images/nb-logo.png" alt="NewBalance" width="350" height="350"/>
-                    <a class="btn hvr-hover" href="#">New Balance</a>
+                    <img th:src="${'../'+c.image}" alt="adidas" width="350" height="350"/>
+                    <a class="btn hvr-hover" href="#" th:text="${c.name}"></a>
                 </div>
             </div>
         </div>
@@ -296,29 +267,16 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="special-menu text-center">
-                    <div class="button-group filter-button-group">
-                        <button class="active" data-filter="*">All</button>
-                        <button data-filter=".top-featured">Top featured</button>
-                        <button data-filter=".best-seller">Best seller</button>
-                    </div>
-                </div>
-            </div>
-        </div>
 
         <div class="row special-list">
-            <div class="col-lg-3 col-md-6 special-grid best-seller">
+            <div class="col-lg-3 col-md-6 special-grid best-seller" th:each="p:${top5products}">
                 <div class="products-single fix">
                     <div class="box-img-hover">
-                        <div class="type-lb">
-                            <p class="sale">Sale</p>
-                        </div>
-                        <img src="images/img-pro-01.jpg" class="img-fluid" alt="Image">
+                        <img th:src="${'../'+p.image}" class="img-fluid" alt="Image">
                         <div class="mask-icon">
                             <ul>
-                                <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i
+                                <li><a th:href="@{/products/view/{id}(id=${p.id})}"
+                                       data-toggle="tooltip" data-placement="right" title="View"><i
                                         class="fas fa-eye"></i></a></li>
                                 <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i
                                         class="fas fa-sync-alt"></i></a></li>
@@ -329,86 +287,8 @@
                         </div>
                     </div>
                     <div class="why-text">
-                        <h4>Lorem ipsum dolor sit amet</h4>
-                        <h5> $7.79</h5>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-3 col-md-6 special-grid top-featured">
-                <div class="products-single fix">
-                    <div class="box-img-hover">
-                        <div class="type-lb">
-                            <p class="new">New</p>
-                        </div>
-                        <img src="images/img-pro-02.jpg" class="img-fluid" alt="Image">
-                        <div class="mask-icon">
-                            <ul>
-                                <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i
-                                        class="fas fa-eye"></i></a></li>
-                                <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i
-                                        class="fas fa-sync-alt"></i></a></li>
-                                <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i
-                                        class="far fa-heart"></i></a></li>
-                            </ul>
-                            <a class="cart" href="#">Add to Cart</a>
-                        </div>
-                    </div>
-                    <div class="why-text">
-                        <h4>Lorem ipsum dolor sit amet</h4>
-                        <h5> $9.79</h5>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-3 col-md-6 special-grid top-featured">
-                <div class="products-single fix">
-                    <div class="box-img-hover">
-                        <div class="type-lb">
-                            <p class="sale">Sale</p>
-                        </div>
-                        <img src="images/img-pro-03.jpg" class="img-fluid" alt="Image">
-                        <div class="mask-icon">
-                            <ul>
-                                <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i
-                                        class="fas fa-eye"></i></a></li>
-                                <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i
-                                        class="fas fa-sync-alt"></i></a></li>
-                                <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i
-                                        class="far fa-heart"></i></a></li>
-                            </ul>
-                            <a class="cart" href="#">Add to Cart</a>
-                        </div>
-                    </div>
-                    <div class="why-text">
-                        <h4>Lorem ipsum dolor sit amet</h4>
-                        <h5> $10.79</h5>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-3 col-md-6 special-grid best-seller">
-                <div class="products-single fix">
-                    <div class="box-img-hover">
-                        <div class="type-lb">
-                            <p class="sale">Sale</p>
-                        </div>
-                        <img src="images/img-pro-04.jpg" class="img-fluid" alt="Image">
-                        <div class="mask-icon">
-                            <ul>
-                                <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i
-                                        class="fas fa-eye"></i></a></li>
-                                <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i
-                                        class="fas fa-sync-alt"></i></a></li>
-                                <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i
-                                        class="far fa-heart"></i></a></li>
-                            </ul>
-                            <a class="cart" href="#">Add to Cart</a>
-                        </div>
-                    </div>
-                    <div class="why-text">
-                        <h4>Lorem ipsum dolor sit amet</h4>
-                        <h5> $15.79</h5>
+                        <h4 th:text="${p.name}"></h4>
+                        <h5 th:text="${p.price}"></h5>
                     </div>
                 </div>
             </div>
