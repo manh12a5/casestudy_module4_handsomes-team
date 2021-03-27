@@ -75,7 +75,7 @@ public class AdminController {
         return new ModelAndView("redirect:/admin/");
     }
 
-    @GetMapping("/search")
+    @GetMapping("account/search")
     public ModelAndView searchAccountByRole(@ModelAttribute AppRole role) {
         List<AppUser> list = appUserService.findAllByAppRole(role);
         System.out.println(list.size());

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
 <head>
     <meta charset="UTF-8">
     <title>List Account</title>
@@ -37,6 +37,9 @@
         </div>
     </div>
 </nav>
+
+<h3>Hello [[${#request.userPrincipal.principal.username}]]!</h3>
+<br>
 
 <a class="btn btn-primary" href="/admin/account/create" role="button">Create Account</a>
 <a class="btn btn-warning" href="/logout" role="button"
@@ -80,6 +83,7 @@
         <a th:href="@{'/admin/'(page=${list.number + 1})}" th:if="${list.hasNext()}">Next</a>
     </h3>
 </div>
+
 
 
 </body>

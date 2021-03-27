@@ -16,7 +16,7 @@ public interface AppUserRepository extends JpaRepository<AppUser, Long> {
     List<AppUser> getAllByOrderByAppRoleDesc();
     Page<AppUser> getAllByOrderByAppRoleDesc(Pageable pageable);
 
-    List<AppUser> getAllByAppRole(AppRole appRole);
+    List<AppUser> findAllByAppRole(AppRole appRole);
 
 
 }
