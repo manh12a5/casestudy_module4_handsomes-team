@@ -30,7 +30,7 @@ import java.sql.Date;
 import java.util.List;
 
 @Controller
-@RequestMapping("/products")
+@RequestMapping("products")
 public class ProductController {
 
     @Autowired
@@ -132,7 +132,7 @@ public class ProductController {
 
     @GetMapping("/detail/{id}")
     public ModelAndView viewDetail(@PathVariable Long id) {
-        ModelAndView modelAndView = new ModelAndView("shop-detail");
+        ModelAndView modelAndView = new ModelAndView("view/shop-detail");
         modelAndView.addObject("product", productService.findById(id));
         modelAndView.addObject("cartItem", new CartItem());
         return modelAndView;

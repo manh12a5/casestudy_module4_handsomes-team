@@ -29,4 +29,9 @@ public class DefautController {
         return new ModelAndView("view/about");
     }
 
+    @RequestMapping("detail")
+    public ModelAndView test(){
+        return new ModelAndView("shop-detail");
+    }
+
 }
