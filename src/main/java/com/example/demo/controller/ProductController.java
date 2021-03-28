@@ -133,7 +133,7 @@ public class ProductController {
     @PostMapping("/searchcategory")
     public ModelAndView searchProductByCategory(@RequestParam Long id, @PageableDefault(size = 6) Pageable pageable) {
         Page<Product> productPage = productService.findProductByCategoryName(id, pageable);
-        return new ModelAndView("view/shop", "products", productPage);
+        return new ModelAndView("view/shop", "categories", productPage);
     }
 
     @GetMapping("/sortpricemax")
