@@ -39,7 +39,7 @@
 <body>
 
 <!-- Start Main Top -->
-<div class="main-top">
+<div class="main-top" th:fragment="main-top">
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
@@ -99,7 +99,7 @@
 <!-- End Main Top -->
 
 <!-- Start Main Top -->
-<header class="main-header">
+<header class="main-header" th:fragment="main-header">
     <!-- Start Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-default bootsnav">
         <div class="container">
@@ -225,7 +225,7 @@
 <!-- End Main Top -->
 
 <!-- Start Top Search -->
-<div class="top-search">
+<div class="top-search" th:fragment="top-search">
     <div class="container">
         <div class="input-group">
             <span class="input-group-addon"><i class="fa fa-search"></i></span>
@@ -443,7 +443,7 @@
 <!-- End Products  -->
 
 <!-- Start Instagram Feed  -->
-<div class="instagram-box">
+<div class="instagram-box" th:fragment="instagram-box">
     <div class="main-instagram owl-carousel owl-theme">
         <div class="item">
             <div class="ins-inner-box">
@@ -531,7 +531,7 @@
 
 
 <!-- Start Footer  -->
-<footer>
+<footer th:fragment="footer">
     <div class="footer-main">
         <div class="container">
             <div class="row">
@@ -587,7 +587,7 @@
 <!-- End Footer  -->
 
 <!-- Start copyright  -->
-<div class="footer-copyright">
+<div class="footer-copyright" th:fragment="copyright">
     <p class="footer-company">All Rights Reserved. &copy; 2021 <a href="#">ThewayShop</a> Design By :
         <a href="https://html.design/">Handsomes Team</a></p>
 </div>

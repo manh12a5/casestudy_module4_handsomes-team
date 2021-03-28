@@ -8,6 +8,7 @@ import com.example.demo.model.product.Product;
 import com.example.demo.service.Cart.CartItemServiceImp;
 import com.example.demo.service.cartItem.ICartItemService;
 import com.example.demo.service.category.ICategoryService;
+import com.example.demo.service.login.user.IAppUserService;
 import com.example.demo.service.product.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
@@ -34,15 +35,16 @@ public class ProductController {
 
     @Autowired
     private IProductService productService;
-
     @Autowired
     private ICategoryService categoryService;
-
+    @Autowired
+    private CartItemServiceImp cartItemService;
+    @Autowired
+    private IAppUserService appUserService;
     @Autowired
     private Environment environment;
 
-    @Autowired
-    private CartItemServiceImp cartItemService;
+
 
     @ModelAttribute("listCategory")
     public List<Category> listCate() {
@@ -130,7 +132,7 @@ public class ProductController {
 
     @GetMapping("/detail/{id}")
     public ModelAndView viewDetail(@PathVariable Long id) {
-        ModelAndView modelAndView = new ModelAndView("view/shop-detail");
+        ModelAndView modelAndView = new ModelAndView("shop-detail");
         modelAndView.addObject("product", productService.findById(id));
         modelAndView.addObject("cartItem", new CartItem());
         return modelAndView;
@@ -141,7 +143,9 @@ public class ProductController {
         Product product = productService.findById(id);
         cartItem.setProduct(product);
         cartItemService.createCartItem(cartItem);
-        SecurityContext context = SecurityContextHolder.getContext();
+        AppUser appUser = appUserService.getCurrentUser();
+        appUser.getCart().getCartItem().add(cartItem);
+        appUserService.save(appUser);
         ModelAndView mav = new ModelAndView("redirect:/products/detail/" + id);
         return mav;
     }
