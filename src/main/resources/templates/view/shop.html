@@ -280,16 +280,17 @@
                     </div>
                     <div class="filter-sidebar-left">
                         <div class="title-left">
-                            <h3>Categories</h3>
+                            <h3>Hãng giầy</h3>
                         </div>
-                        <th:block th:each="c:${categoriesProduct}">
-                            <div class="list-group list-group-collapse list-group-sm list-group-tree">
-                                <a th:href="@{'category/'+${c.id}}" class="list-group-item list-group-item-action">
-                                    <span th:text="${c.name}" style="color: red"></span>
-                                    <small class="text-muted"><span style="color: #007bff"></span></small>
-                                </a>
-                            </div>
-                        </th:block>
+                        <form action="/products/searchCategory" method="post">
+                            <th:block th:each="c:${categoriesProduct}">
+                                <div class="list-group list-group-collapse list-group-sm list-group-tree">
+                                    <a href="/products/searchcategory" class="list-group-item list-group-item-action">
+                                        <span th:value="${c.id}" th:text="${c.name}" style="color: red"></span>
+                                    </a>
+                                </div>
+                            </th:block>
+                        </form>
                     </div>
 
                     <div class="filter-price-left">
@@ -313,14 +314,16 @@
                     <div class="product-item-filter row">
                         <div class="col-12 col-sm-8 text-center text-sm-left">
                             <div class="toolbar-sorter-right">
-                                <span>Sort by</span>
+                                <span>Sắp xếp:</span>
                                 <select id="basic" class="selectpicker show-tick form-control" data-placeholder="$ USD">
                                     <option data-display="Select">Nothing</option>
-                                    <option value="1">High Price → Low Price</option>
-                                    <option value="2">Low Price → High Price</option>
+                                    <option value="1">A → Z</option>
+                                    <option value="2">Z → A</option>
+                                    <option value="3">High Price → Low Price</option>
+                                    <option value="4">Low Price → High Price</option>
                                 </select>
                             </div>
-                            <p>Showing all <span th:text="${numberOfProducts}" style="color: red"></span> results</p>
+                            <p>Có: <span th:text="${numberOfProducts}" style="color: red"></span> sản phẩm</p>
                         </div>
                         <div class="col-12 col-sm-4 text-center text-sm-right">
                             <ul class="nav nav-tabs ml-auto">
@@ -345,9 +348,6 @@
                                     <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4" th:each="p: ${products}">
                                         <div class="products-single fix">
                                             <div class="box-img-hover">
-                                                <div class="type-lb">
-                                                    <p class="sale">Sale</p>
-                                                </div>
                                                 <img th:src="${'../'+p.image}" class="img-fluid" alt="Image">
                                                 <div class="mask-icon">
                                                     <ul>
