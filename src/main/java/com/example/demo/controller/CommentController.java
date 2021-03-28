@@ -158,12 +158,42 @@ public class CommentController {
         return modelAndView;
     }
 
+    @GetMapping(value = "/create")
+    public ModelAndView formCreate() {
+        ModelAndView mav = new ModelAndView("comment/create");
+        mav.addObject("comment", new Comment());
+        return mav;
+    }
 
     @PostMapping(value = "/create",produces = MediaType.APPLICATION_JSON_VALUE,consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public Comment create(@RequestBody Comment comment) {
-        commentService.save(comment);
         return commentService.save(comment);
+    }
+
+    @GetMapping (value = "/edit/{id}")
+    public ModelAndView formEdit(@PathVariable Long id){
+        Comment comment = commentService.findById(id);
+        if(comment != null) {
+            ModelAndView modelAndView = new ModelAndView("comment/edit");
+            modelAndView.addObject("comment",comment);
+            return modelAndView;
+        }
+        return null;
+    }
+
+    @RequestMapping(value = "/edit/{id}", method = RequestMethod.POST,
+            produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public Comment edit(@PathVariable Long id, @RequestBody Comment comment){
+        comment.setId(id);
+        return commentService.save(comment);
+    }
+
+    @PostMapping(value = "/delete/{id}",produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public void delete(@PathVariable Long id) {
+        commentService.remove(id);
     }
 
 }

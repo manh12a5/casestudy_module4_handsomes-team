@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#editCommentForm').submit(function (event) {
+                var user = $('#user.id').val();
+                var product = $('#product.id').val();
+                var comment = $('#comment').val();
+                var date = $('#date').val();
+                var json = { "user" : user.id, "product" : product.id, "comment": comment,"date":date};
+                $.ajax({
+                    url: $("#editCommentForm").attr("action"),
+                    data: JSON.stringify(json),
+                    type: "POST",
+
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader("Accept", "application/json");
+                        xhr.setRequestHeader("Content-Type", "application/json");
+                    },
+                    success: function (comment) {
+                        var respContent = "";
+
+                        respContent += "<span class='success'>Comment was edited: [";
+                        respContent += comment.user.id + " : ";
+                        respContent += comment.product.id + " : ";
+                        respContent += comment.comment + " : " ;
+                        respContent += comment.date + "]</span>"
+                        $("#commentFromResponse").html(respContent);
+                    }
+                });
+                event.preventDefault();
+            });
+        });
+    </script>
+</head>
+<body>
+<div id="container">
+    <h1>Edit Smartphone</h1>
+    <div>
+        <p>Here you can edit Smartphone info:</p>
+        <div id="sPhoneFromResponse"></div>
+    </div>
+    <form id="editCommentForm" th:object="${comment}">
+        <table>
+            <tbody>
+            <tr>
+                <td>User:</td>
+<!--                <td>-->
+<!--                    <select id="producer" th:field="*{producer}">-->
+<!--                        <option value="NOKIA">Nokia</option>-->
+<!--                        <option value="IPHONE">iPhone</option>-->
+<!--                        <option value="HTC">HTC</option>-->
+<!--                        <option value="SAMSUNG">Samsung</option>-->
+<!--                    </select>-->
+<!--                </td>-->
+                <td><input type="number" th:field="*{user.id}" /></td>
+            </tr>
+            <tr>
+                <td>Product:</td>
+                <td><input type="number" th:field="*{product.id}" /></td>
+            </tr>
+            <tr>
+                <td>Comment:</td>
+                <td><input type="text" th:field="*{comment}"/></td>
+            </tr>
+            <tr>
+                <td>Date:</td>
+                <td><input type="text" th:field="*{date}"/></td>
+            </tr>
+            <tr>
+                <td><input type="submit" value="Edit" /></td>
+                <td></td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
+    <a th:href="@{/comments}">List</a>
+</div>
+
+</body>
+</html>
