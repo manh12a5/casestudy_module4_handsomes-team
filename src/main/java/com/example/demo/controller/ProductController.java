@@ -3,7 +3,9 @@ package com.example.demo.controller;
 import com.example.demo.model.cart.Cart;
 import com.example.demo.model.cart.CartItem;
 import com.example.demo.model.category.Category;
+import com.example.demo.model.login.AppUser;
 import com.example.demo.model.product.Product;
+import com.example.demo.service.Cart.CartItemServiceImp;
 import com.example.demo.service.cartItem.ICartItemService;
 import com.example.demo.service.category.ICategoryService;
 import com.example.demo.service.product.IProductService;
@@ -12,6 +14,8 @@ import org.springframework.core.env.Environment;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
@@ -38,7 +42,7 @@ public class ProductController {
     private Environment environment;
 
     @Autowired
-    private ICartItemService cartItemService;
+    private CartItemServiceImp cartItemService;
 
     @ModelAttribute("listCategory")
     public List<Category> listCate() {
@@ -66,9 +70,9 @@ public class ProductController {
         List<Category> categories = categoryService.findAll();
         Page<Product> productPage = productService.findAll(pageable);
         Long numberOfProducts = productPage.getTotalElements();
-        modelAndView.addObject("products",productPage );
-        modelAndView.addObject("categoriesProduct",categories);
-        modelAndView.addObject("numberOfProducts",numberOfProducts );
+        modelAndView.addObject("products", productPage);
+        modelAndView.addObject("categoriesProduct", categories);
+        modelAndView.addObject("numberOfProducts", numberOfProducts);
         return modelAndView;
     }
 
@@ -117,7 +121,7 @@ public class ProductController {
         return modelAndView;
     }
 
-    @GetMapping ("/delete/{id}")
+    @GetMapping("/delete/{id}")
     public ModelAndView showDelete(@PathVariable Long id) {
         ModelAndView modelAndView = new ModelAndView("redirect:/products/manager");
         productService.remove(id);
@@ -125,17 +129,20 @@ public class ProductController {
     }
 
     @GetMapping("/detail/{id}")
-    public ModelAndView viewDetail(@PathVariable Long id){
+    public ModelAndView viewDetail(@PathVariable Long id) {
         ModelAndView modelAndView = new ModelAndView("view/shop-detail");
         modelAndView.addObject("product", productService.findById(id));
         modelAndView.addObject("cartItem", new CartItem());
         return modelAndView;
     }
 
-    @PostMapping("/detail")
-    public ModelAndView createCartItem(@ModelAttribute CartItem cartItem){
-        cartItemService.save(cartItem);
-        ModelAndView mav = new ModelAndView("view/shop-detail");
+    @PostMapping("/detail/{id}")
+    public ModelAndView createCartItem(@PathVariable Long id, @ModelAttribute CartItem cartItem) {
+        Product product = productService.findById(id);
+        cartItem.setProduct(product);
+        cartItemService.createCartItem(cartItem);
+        SecurityContext context = SecurityContextHolder.getContext();
+        ModelAndView mav = new ModelAndView("redirect:/products/detail/" + id);
         return mav;
     }
 
@@ -161,7 +168,6 @@ public class ProductController {
         modelAndView.addObject("top5price", productService.findTop5ByOrderByPriceDesc(pageable));
         return modelAndView;
     }
-
 
 
 }

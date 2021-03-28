@@ -14,14 +14,11 @@ public class Product {
     private Long id;
     private String name;
     private double price;
-
     private String image;
     private Date date;
+    private String description;
     @Transient
     private MultipartFile avatar;
-
-    private String description;
-
     @ManyToOne
     private Category category;
 
