@@ -10,12 +10,13 @@
 <table border="1">
     <tr>
         <th>Name</th>
-        <th>Edit</th>
-        <th>Delete</th>
+        <th>Image</th>
+        <th colspan="2"></th>
     </tr>
     <th:block th:each="c : ${categories}">
         <tr>
             <td th:text="${c.name}"></td>
+            <td><img th:src="${'../'+c.image}" width="100"></td>
             <td><a th:href="@{/categories/edit-cate/__${c.id}__ }">Edit</a></td>
             <td><a th:href="@{/categories/del-cate/__${c.id}__ }">Delete</a></td>
         </tr>

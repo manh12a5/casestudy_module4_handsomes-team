@@ -12,12 +12,16 @@
 <th:block th:if="${message}">
     <p th:text="${message}"></p>
 </th:block>
-<form th:action="@{/categories/edit-cate}" th:object="${category}" method="post">
-    <input th:type="hidden" name="id" th:field="*{id}">
+<form th:action="@{/categories/edit-cate}" th:object="${category}" method="post" enctype="multipart/form-data">
     <table>
         <tr>
             <td>First name:</td>
             <td><input type="text" th:field="*{name}"/></td>
+        </tr>
+        <tr>
+            <td>Image:</td>
+            <td></td><input type="text" th:field="*{image}" class="form-control" disabled></td>
+            <td><input type="file" th:field="*{avatar}"/></td>
         </tr>
         <tr>
             <td></td>

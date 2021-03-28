@@ -21,17 +21,39 @@ public class DefautController {
 
     @RequestMapping("")
     public ModelAndView home() {
-        return new ModelAndView("view/index");
+        ModelAndView mav = new ModelAndView("/view/index");
+        mav.addObject("categories",categoryService.findAll());
+        return mav;
     }
 
-    @RequestMapping("about")
+    @RequestMapping("/about")
     public ModelAndView about(){
-        return new ModelAndView("view/about");
+        return new ModelAndView("/view/about");
     }
 
-    @RequestMapping("detail")
-    public ModelAndView test(){
-        return new ModelAndView("shop-detail");
+    @RequestMapping("/checkout")
+    public ModelAndView checkout(){
+        return new ModelAndView("/view/checkout");
+    }
+
+    @RequestMapping("/contact")
+    public ModelAndView contact(){
+        return new ModelAndView("/view/contact-us");
+    }
+
+    @RequestMapping("/my-account")
+    public ModelAndView myAccount(){
+        return new ModelAndView("/view/my-account");
+    }
+
+    @RequestMapping("/service")
+    public ModelAndView service(){
+        return new ModelAndView("/view/service");
+    }
+
+    @RequestMapping("/wishlist")
+    public ModelAndView wishList(){
+        return new ModelAndView("/view/wishlist");
     }
 
 }
