@@ -30,7 +30,7 @@ import java.sql.Date;
 import java.util.List;
 
 @Controller
-@RequestMapping("products")
+@RequestMapping("/products")
 public class ProductController {
 
     @Autowired
@@ -68,7 +68,7 @@ public class ProductController {
     //Show All
     @GetMapping("")
     private ModelAndView showAll(Pageable pageable) {
-        ModelAndView modelAndView = new ModelAndView("view/shop");
+        ModelAndView modelAndView = new ModelAndView("/view/shop");
         List<Category> categories = categoryService.findAll();
         Page<Product> productPage = productService.findAll(pageable);
         Long numberOfProducts = productPage.getTotalElements();
@@ -80,21 +80,21 @@ public class ProductController {
 
     @GetMapping("/manager")
     private ModelAndView showAllFormAdmin(@PageableDefault(size = 6) Pageable pageable) {
-        ModelAndView modelAndView = new ModelAndView("product/list");
+        ModelAndView modelAndView = new ModelAndView("/product/list");
         modelAndView.addObject("products", productService.findAll(pageable));
         return modelAndView;
     }
 
     @GetMapping("/create")
     private ModelAndView showCreate() {
-        ModelAndView modelAndView = new ModelAndView("product/create");
+        ModelAndView modelAndView = new ModelAndView("/product/create");
         modelAndView.addObject("product", new Product());
         return modelAndView;
     }
 
     @PostMapping("/create")
     private ModelAndView create(@ModelAttribute("product") Product product) {
-        ModelAndView modelAndView = new ModelAndView("product/create");
+        ModelAndView modelAndView = new ModelAndView("/product/create");
         long millis = System.currentTimeMillis();
         Date releaseDate = new Date(millis);
         product.setDate(releaseDate);
@@ -107,7 +107,7 @@ public class ProductController {
 
     @GetMapping("/edit/{id}")
     private ModelAndView showEdit(@PathVariable Long id) {
-        ModelAndView modelAndView = new ModelAndView("product/edit");
+        ModelAndView modelAndView = new ModelAndView("/product/edit");
         Product product = productService.findById(id);
         modelAndView.addObject("product", product);
         return modelAndView;
@@ -115,7 +115,7 @@ public class ProductController {
 
     @PostMapping("/edit/{id}")
     private ModelAndView edit(@ModelAttribute("product") Product product) {
-        ModelAndView modelAndView = new ModelAndView("product/edit");
+        ModelAndView modelAndView = new ModelAndView("/product/edit");
         uploadFile(product);
         productService.save(product);
         modelAndView.addObject("product", product);
@@ -132,7 +132,7 @@ public class ProductController {
 
     @GetMapping("/detail/{id}")
     public ModelAndView viewDetail(@PathVariable Long id) {
-        ModelAndView modelAndView = new ModelAndView("view/shop-detail");
+        ModelAndView modelAndView = new ModelAndView("/view/shop-detail");
         modelAndView.addObject("product", productService.findById(id));
         modelAndView.addObject("cartItem", new CartItem());
         return modelAndView;
@@ -168,7 +168,7 @@ public class ProductController {
 
     @GetMapping("/top5priceMax")
     public ModelAndView find5PriceMax(@PageableDefault(size = 6) Pageable pageable) {
-        ModelAndView modelAndView = new ModelAndView("view/shop");
+        ModelAndView modelAndView = new ModelAndView("/view/shop");
         modelAndView.addObject("top5price", productService.findTop5ByOrderByPriceDesc(pageable));
         return modelAndView;
     }
