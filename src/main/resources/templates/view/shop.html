@@ -363,8 +363,8 @@
                                                 </div>
                                             </div>
                                             <div class="why-text">
-                                                <h4 th:text="${p.name}"></h4>
-                                                <h5 th:text="${p.price}"></h5>
+                                                <h4><a th:href="@{/products/detail/{id}(id=${p.id})}" th:text="${p.name}"></a></h4>
+                                                <h5 th:text="${p.price}" style="color: dodgerblue"></h5>
                                             </div>
                                         </div>
                                     </div>

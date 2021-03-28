@@ -266,7 +266,7 @@
     <!-- Start Shop Detail  -->
     <div class="shop-detail-box-main">
         <div class="container">
-            <form method="post">
+            <form action="/products/detail" method="post" th:object="${cartItem}">
             <div class="row">
                 <div class="col-xl-5 col-lg-5 col-md-6">
                     <div id="carousel-example-1" class="single-product-slider carousel slide" data-ride="carousel">
@@ -298,7 +298,7 @@
                 </div>
                 <div class="col-xl-7 col-lg-7 col-md-6">
                     <div class="single-product-details">
-<!--                        <input type="hidden" name="id" th:value="${product.id}">-->
+                        <input type="hidden"  name="id" th:value="${product.id}">
                         <h2 th:text="${product.name}"></h2>
                         <h5 th:text="${product.price}"></h5>
                         <p class="available-stock"><span> More than 20 available / <a href="#">8 sold </a></span>
@@ -309,7 +309,7 @@
                                     <li>
                                         <div class="form-group size-st">
                                             <label class="size-label">Size</label>
-                                            <select id="basic1" class="selectpicker show-tick form-control" name="size">
+                                            <select id="basic1" class="selectpicker show-tick form-control" th:field="*{size}">
 									<option value="0">Size</option>
 									<option value="4">4</option>
 									<option value="5">5</option>
@@ -326,7 +326,7 @@
                                     <li>
                                         <div class="form-group quantity-box">
                                             <label class="control-label">Quantity</label>
-                                            <input class="form-control" value="1" min="0" max="20" type="number" name="quantity">
+                                            <input class="form-control" value="1" min="0" max="20" type="number" th:field="*{quantity}">
                                         </div>
                                     </li>
                                 </ul>

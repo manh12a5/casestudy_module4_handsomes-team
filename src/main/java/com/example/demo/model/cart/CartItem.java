@@ -14,6 +14,7 @@ public class CartItem{
     @OneToOne
     private Product product;
     private int quantity;
+    private int size;
     @Column(columnDefinition = "boolean default false")
     private boolean status;
     @ManyToOne
@@ -23,9 +24,13 @@ public class CartItem{
     public CartItem() {
     }
 
-    public CartItem(Product product, int quantity) {
+    public CartItem(Long id, Product product, int quantity, int size, boolean status, Cart cart) {
+        this.id = id;
         this.product = product;
         this.quantity = quantity;
+        this.size = size;
+        this.status = status;
+        this.cart = cart;
     }
 
     public Long getId() {
@@ -52,6 +57,14 @@ public class CartItem{
         this.quantity = quantity;
     }
 
+    public int getSize() {
+        return size;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
+    }
+
     public boolean isStatus() {
         return status;
     }
@@ -67,5 +80,4 @@ public class CartItem{
     public void setCart(Cart cart) {
         this.cart = cart;
     }
-
 }

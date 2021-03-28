@@ -4,6 +4,7 @@ import com.example.demo.model.cart.Cart;
 import com.example.demo.model.cart.CartItem;
 import com.example.demo.model.category.Category;
 import com.example.demo.model.product.Product;
+import com.example.demo.service.cartItem.ICartItemService;
 import com.example.demo.service.category.ICategoryService;
 import com.example.demo.service.product.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,9 @@ public class ProductController {
 
     @Autowired
     private Environment environment;
+
+    @Autowired
+    private ICartItemService cartItemService;
 
     @ModelAttribute("listCategory")
     public List<Category> listCate() {
@@ -121,15 +125,16 @@ public class ProductController {
     }
 
     @GetMapping("/detail/{id}")
-    public ModelAndView viewDetail(@PathVariable Long id) {
+    public ModelAndView viewDetail(@PathVariable Long id){
         ModelAndView modelAndView = new ModelAndView("view/shop-detail");
         modelAndView.addObject("product", productService.findById(id));
+        modelAndView.addObject("cartItem", new CartItem());
         return modelAndView;
     }
 
     @PostMapping("/detail")
-    public ModelAndView createCartItem(@PathVariable Long id){
-        Long a = id;
+    public ModelAndView createCartItem(@ModelAttribute CartItem cartItem){
+        cartItemService.save(cartItem);
         ModelAndView mav = new ModelAndView("view/shop-detail");
         return mav;
     }
