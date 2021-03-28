@@ -33,9 +33,7 @@ public class Comment {
         this.id = id;
     }
 
-    public String getComment() {
-        return comment;
-    }
+
 
     public Comment(Long id, String comment, AppUser user, Product product, Timestamp date) {
         this.id = id;
@@ -49,6 +47,9 @@ public class Comment {
         this.comment = comment;
     }
 
+    public String getComment() {
+        return comment;
+    }
     public AppUser getUser() {
         return user;
     }

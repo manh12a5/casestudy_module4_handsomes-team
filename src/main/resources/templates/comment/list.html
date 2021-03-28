@@ -3,29 +3,98 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var deleteLink = $("a:contains('Delete')");
+            $(deleteLink).click(function (event) {
+                $.ajax({
+                    url: $(event.target).attr("href"),
+                    type: "POST",
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader("Accept", "application/json");
+                        xhr.setRequestHeader("Content-Type", "application/json");
+
+                    },
+                    success: function (comment) {
+                        var respContent = "";
+                        var rowToDelete = $(event.target).closest("tr");
+                        rowToDelete.remove();
+                        respContent += "<span class='success'>Comment was deleted: [";
+                        respContent += comment.c+ " : ";
+                        respContent += comment.product.name + " : ";
+                        respContent += comment.user.name + " : ";
+                        respContent += comment.day+ "]</span>";
+                        $("#commentFromResponse").html(respContent);
+                    }
+                });
+                event.preventDefault();
+            });
+        });
+    </script>
 </head>
 <body>
-<table border="1">
-    <th:block th:each="c : ${comment}">
+<div id="container">
+    <h1>All Comment</h1>
+    <a th:href="@{/comments/create}">Create</a>
+<!--    <div>-->
+<!--        <p>Here you can see a list of Smartphones:</p>-->
+<!--        <div id="sPhoneFromResponse"></div>-->
+<!--    </div>-->
+    <table border="1px" cellpadding="0" cellspacing="0">
+        <thead>
         <tr>
-            <td th:text="${c.user.fullName}"></td>
-            <td th:text="${c.date}" colspan="2"></td>
+            <th>User</th>
+            <th>Product</th>
+            <th>Comment</th>
+            <th>Date</th>
         </tr>
-        <tr>
-            <td th:text="${c.comment}"></td>
-            <td>
-                <a th:href="@{/comments/edit/{id}(id=${c.id})}">
-                    <button type="button" class="btn btn-success">Edit</button>
-                </a>
-            </td>
-            <td>
-                <a th:href="@{/comments/delete/{id}(id=${c.id})}" onclick="return confirm('Do you want delete ?');">
-                    <button type="button" class="btn btn-danger">Delete</button>
-                </a>
-            </td>
-        </tr>
+        </thead>
+        <tbody>
+        <th:block th:each="c : ${allComment}">
+            <tr>
+                <td th:text="${c.user.fullName}"></td>
+                <td th:text="${c.product.name}"></td>
+                <td th:text="${c.comment}"></td>
+                <td th:text="${c.date}"></td>
+                <td>
+                    <a th:href="@{/smartphones/edit/__${c.id}__}">Edit</a><br/>
+                    <a th:href="@{/smartphones/delete/__${c.id}__}">Delete</a><br/>
+                </td>
+            </tr>
+        </th:block>
+        </tbody>
+    </table>
+    <a th:href="@{/}">Home page</a>
+</div>
 
-    </th:block>
-</table>
+
+<!--</head>-->
+<!--<body>-->
+<!--<a href="/comments/create">Comment</a>-->
+<!--<table border="1">-->
+<!--    <th:block th:each="c : ${comment}">-->
+<!--        <tr>-->
+<!--            <td th:text="${c.user.fullName}"></td>-->
+<!--            <td th:text="${c.product.name}"></td>-->
+<!--            <td th:text="${c.date}"></td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--            <td th:text="${c.comment}"></td>-->
+<!--            <td>-->
+<!--                <a th:href="@{/comments/edit/{id}(id=${c.id})}">-->
+<!--                    <button type="button" class="btn btn-success">Edit</button>-->
+<!--                </a>-->
+<!--            </td>-->
+<!--            <td>-->
+<!--                <a th:href="@{/comments/delete/{id}(id=${c.id})}" onclick="return confirm('Do you want delete ?');">-->
+<!--                    <button type="button" class="btn btn-danger">Delete</button>-->
+<!--                </a>-->
+<!--            </td>-->
+<!--        </tr>-->
+
+<!--    </th:block>-->
+<!--</table>-->
+
 </body>
 </html>

@@ -3,19 +3,102 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#newCommentForm').submit(function(event) {
+                var user = $('#user.name').val();
+                var product = $('#product.name').val();
+                var comment = $('#comment').val();
+                var date = $('#date').val();
+                var json = { "user" : user.name, "product" : product.name, "comment": comment,"date":date};
+                $.ajax({
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    type : "POST",
+                    data: JSON.stringify(json),
+                    url: "/comments/create",
+                    success: function(comments) {
+                        var respContent = "";
+                        respContent += "<span class='success'>Comment was created: [";
+                        respContent += comments.user.name + " : ";
+                        respContent += comments.product.name + " : ";
+                        respContent += comments.comment + " : " ;
+                        respContent += comments.date + "]</span>"
+                        $("#commentFromResponse").html(respContent);
+                    }
+                });
+                event.preventDefault();
+            });
+        });
+    </script>
 </head>
 <body>
-<form th:object="${comment}" method="post">
-    <table>
+<div id="container">
+    <h1>Create new Smartphone</h1>
+    <div>
+        <p>Here you can create new Smartphone:</p>
+        <div id="sPhoneFromResponse"></div>
+    </div>
+    <form id="newSmartphoneForm" th:object="${sPhone}">
+        <table>
+            <tbody>
+            <tr>
+                <td>Producer:</td>
+                <td>
+                    <select id="producer">
+                        <option value="NOKIA">Nokia</option>
+                        <option selected="selected" value="IPHONE">iPhone</option>
+                        <option value="HTC">HTC</option>
+                        <option value="SAMSUNG">Samsung</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Model:</td>
+                <td><input th:field="*{model}" /></td>
+            </tr>
+            <tr>
+                <td>Price:</td>
+                <td><input th:field="*{price}" /></td>
+            </tr>
+            <tr>
+                <td><input type="submit" value="Create" /></td>
+                <td></td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
+    <a th:href="@{/smartphones}">List</a>
+</div>
 
-        <tr>
-            <td>Comment:<input type="text" th:field="*{comment}"/></td>
-        </tr>
-        <tr>
-            <td><input type="submit" value="Comment"></td>
-        </tr>
-    </table>
-</form>
+
+<!--<form th:object="${comment}" method="post">-->
+<!--    <table>-->
+<!--        <tr>-->
+<!--            <td>Comment:<input type="text" th:field="*{comment}"/></td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--            <td>date:<input type="datetime-local"  th:field="*{date}"/></td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--            <td>product:<input type="text" th:field="*{product.name}"/></td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--            <td>user:<input type="text" th:field="*{user.fullName}"/></td>-->
+<!--        </tr>-->
+
+<!--        <tr>-->
+
+<!--        </tr>-->
+<!--        <tr>-->
+<!--            <td><input type="submit" value="Comment"></td>-->
+<!--        </tr>-->
+<!--    </table>-->
+<!--</form>-->
 
 <!--<div id="tab3" class="tab-pane fade in">-->
 <!--    <div class="row">-->
@@ -141,5 +224,8 @@
 <!--        </section>-->
 <!--    </div>-->
 <!--</div>-->
+
+
 </body>
+
 </html>
