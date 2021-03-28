@@ -266,7 +266,7 @@
     <!-- Start Shop Detail  -->
     <div class="shop-detail-box-main">
         <div class="container">
-            <form th:action="@{'/products/detail/?id='+${product.id}}" method="get">
+            <form method="post">
             <div class="row">
                 <div class="col-xl-5 col-lg-5 col-md-6">
                     <div id="carousel-example-1" class="single-product-slider carousel slide" data-ride="carousel">
@@ -298,7 +298,7 @@
                 </div>
                 <div class="col-xl-7 col-lg-7 col-md-6">
                     <div class="single-product-details">
-                        <input type="hidden" name="id" th:value="${product.id}">
+<!--                        <input type="hidden" name="id" th:value="${product.id}">-->
                         <h2 th:text="${product.name}"></h2>
                         <h5 th:text="${product.price}"></h5>
                         <p class="available-stock"><span> More than 20 available / <a href="#">8 sold </a></span>

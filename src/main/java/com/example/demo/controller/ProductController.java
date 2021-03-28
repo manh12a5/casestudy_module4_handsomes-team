@@ -20,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.Date;
 import java.util.List;
 
 @Controller
@@ -84,6 +85,9 @@ public class ProductController {
     @PostMapping("/create")
     private ModelAndView create(@ModelAttribute("product") Product product) {
         ModelAndView modelAndView = new ModelAndView("product/create");
+        long millis = System.currentTimeMillis();
+        Date releaseDate = new Date(millis);
+        product.setDate(releaseDate);
         uploadFile(product);
         productService.save(product);
         modelAndView.addObject("product", product);
@@ -116,21 +120,19 @@ public class ProductController {
         return modelAndView;
     }
 
-    @GetMapping("/detail")
-    public ModelAndView viewDetail(@RequestParam Long id) {
+    @GetMapping("/detail/{id}")
+    public ModelAndView viewDetail(@PathVariable Long id) {
         ModelAndView modelAndView = new ModelAndView("view/shop-detail");
         modelAndView.addObject("product", productService.findById(id));
         return modelAndView;
     }
 
-//    @PostMapping("/detail")
-//    public ModelAndView createCartItem(@RequestParam Long id, int size, int quantity){
-//        Product product = productService.findById(id);
-//        product.setSize(size);
-//        CartItem cartItem = new CartItem()
-//        ModelAndView mav = new ModelAndView("view/shop-detail");
-//        return null;
-//    }
+    @PostMapping("/detail")
+    public ModelAndView createCartItem(@PathVariable Long id){
+        Long a = id;
+        ModelAndView mav = new ModelAndView("view/shop-detail");
+        return mav;
+    }
 
     //SearchNameProduct
     @PostMapping("/search")
