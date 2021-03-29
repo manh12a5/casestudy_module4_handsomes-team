@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript">category
+        $(document).ready(function () {
+            $('#editCommentForm').submit(function (event) {
+                var user = $('#user.id').val();
+                var product = $('#product.id.value').val();
+                var comment = $('#comment').val();
+                var date = $('#date').val();
+                // var json = { "uiser" : user.id, "product" : product.id, "comment": comment,"date":date};
+                var json = { "comment" : comment}
+                $.ajax({
+                    url: $("#editCommentForm").attr("action"),
+                    data: JSON.stringify(json),
+                    type: "POST",
+
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader("Accept", "application/json");
+                        xhr.setRequestHeader("Content-Type", "application/json");
+                    }
+                    // ,
+                    // success: function (comment) {
+                    //     var respContent = "";
+                    //
+                    //     respContent += "<span class='success'>Comment was edited: [";
+                    //     respContent += comment.user.id + " : ";
+                    //     respContent += comment.product.id + " : ";
+                    //     respContent += comment.comment + " : " ;
+                    //     respContent += comment.date + "]</span>"
+                    //     $("#commentFromResponse").html(respContent);
+                    // }
+                });
+                event.preventDefault();
+            });
+        });
+    </script>
+</head>
+<body>
+<div id="container">
+    <h1>Edit Smartphone</h1>
+    <form id="editCommentForm" th:object="${comment}">
+        <table>
+            <tbody>
+            <tr>
+                <td>Product:</td>
+                <input type="hidden" th:field="*{user.id}" />
+                <td><input th:field="*{product.id}" /></td>
+            </tr>
+            <tr>
+                <td>Comment:</td>
+                <td><input type="text" th:field="*{comment}"/></td>
+            </tr>
+            <tr>
+                <td>Date:</td>
+                <td><input type="text" th:field="*{date}" disabled="true"/></td>
+            </tr>
+            <tr>
+                <td><input type="submit" value="Edit" /></td>
+                <td></td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
+    <a th:href="@{/comments}">List</a>
+</div>
+
+</body>
+</html>
