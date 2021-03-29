@@ -89,7 +89,10 @@
                         <li>
                             <a sec:authorize="isAnonymous()" href="/login">Login</a>
                         </li>
-                        <li>Hi [[${#request.userPrincipal.principal.username}]]</li>
+                        <li sec:authorize="isAuthenticated()">
+                            <span sec:authentication="principal.username"></span>
+                        </li>
+
                         <li>
                             <a sec:authorize="isAuthenticated()" href="/logout">Logout</a>
                         </li>
