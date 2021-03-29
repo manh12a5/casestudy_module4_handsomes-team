@@ -6,6 +6,8 @@ import com.example.demo.service.Cart.ICartItemService;
 import com.example.demo.service.login.user.IAppUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -41,6 +43,8 @@ public class CartController {
 
     @PostMapping("")
     public ModelAndView selectCartItem(@RequestParam List<Long> stt){
+        ModelAndView modelAndView;
+        modelAndView = new ModelAndView("redirect:/checkout");
         List<Long> checkBoxList = stt;
         Cart cart = appUserService.getCurrentUser().getCart();
         List<CartItem> cartItems = cartItemService.findAllByCartId(cart.getId());
@@ -52,7 +56,7 @@ public class CartController {
                 }
             }
         }
-        return new ModelAndView("redirect:/checkout");
+        return modelAndView;
     }
 
 
