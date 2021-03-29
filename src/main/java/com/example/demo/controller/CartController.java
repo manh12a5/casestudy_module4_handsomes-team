@@ -18,13 +18,13 @@ public class CartController {
     @Autowired
     private IAppUserService appUserService;
 
-//    @GetMapping("")
-//    public ModelAndView showCart(){
-//        ModelAndView mav = new ModelAndView("view/cart");
-//        Cart cart = appUserService.getCurrentUser().getCart();
-//        List<CartItem> cartItems = cart.getCartItem();
-//        mav.addObject("cartItems", cartItems);
-//        return mav;
-//    }
+    @GetMapping("")
+    public ModelAndView showCart(){
+        ModelAndView mav = new ModelAndView("view/cart");
+        Cart cart = appUserService.getCurrentUser().getCart();
+        List<CartItem> cartItems = cart.getCartItem();
+        mav.addObject("cartItems", cartItems);
+        return mav;
+    }
 
 }
