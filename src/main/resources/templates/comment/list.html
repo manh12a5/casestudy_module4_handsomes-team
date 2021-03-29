@@ -59,7 +59,7 @@
                 <td th:text="${c.date}"></td>
                 <td>
                     <a th:href="@{/comments/edit/__${c.id}__}">Edit</a><br/>
-                    <a th:href="@{/comments/delete/__${c.id}__}" onclick="return confirm('Do you want delete ?');">Delete</a><br/>
+                    <a th:href="@{/comments/delete/__${c.id}__}" >Delete</a><br/>
                 </td>
             </tr>
         </th:block>
@@ -67,34 +67,5 @@
     </table>
     <a th:href="@{/}">Home page</a>
 </div>
-
-
-<!--</head>-->
-<!--<body>-->
-<!--<a href="/comments/create">Comment</a>-->
-<!--<table border="1">-->
-<!--    <th:block th:each="c : ${comment}">-->
-<!--        <tr>-->
-<!--            <td th:text="${c.user.fullName}"></td>-->
-<!--            <td th:text="${c.product.name}"></td>-->
-<!--            <td th:text="${c.date}"></td>-->
-<!--        </tr>-->
-<!--        <tr>-->
-<!--            <td th:text="${c.comment}"></td>-->
-<!--            <td>-->
-<!--                <a th:href="@{/comments/edit/{id}(id=${c.id})}">-->
-<!--                    <button type="button" class="btn btn-success">Edit</button>-->
-<!--                </a>-->
-<!--            </td>-->
-<!--            <td>-->
-<!--                <a th:href="@{/comments/delete/{id}(id=${c.id})}" onclick="return confirm('Do you want delete ?');">-->
-<!--                    <button type="button" class="btn btn-danger">Delete</button>-->
-<!--                </a>-->
-<!--            </td>-->
-<!--        </tr>-->
-
-<!--    </th:block>-->
-<!--</table>-->
-
 </body>
 </html>

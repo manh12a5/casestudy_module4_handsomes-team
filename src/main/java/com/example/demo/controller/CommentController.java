@@ -89,10 +89,10 @@ public class CommentController {
         }
         return null;
     }
-
+    @ResponseBody
     @PostMapping(value = "/edit/{id}",
             produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody
+
     public Comment edit(@PathVariable Long id, @RequestBody Comment comment){
         comment.setId(id);
         AppUser appUser=currentUser();
