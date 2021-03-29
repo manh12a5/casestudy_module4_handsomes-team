@@ -31,12 +31,12 @@ public class DefautController {
     private IProductService productService;
 
     @RequestMapping("")
-    public ModelAndView home() {
-        ModelAndView mav = new ModelAndView("/view/index");
-        mav.addObject("categories",categoryService.findAll());
-        return mav;
+    public ModelAndView home(@PageableDefault(size = 5) Pageable pageable) {
+        ModelAndView modelAndView = new ModelAndView("view/index");
+        modelAndView.addObject("categories", categoryServiceImp.findAll());
+        modelAndView.addObject("top5products", productService.findTop5ByOrderByPriceDesc(pageable));
+        return modelAndView;
     }
-
     @RequestMapping("/about")
     public ModelAndView about(){
         return new ModelAndView("/view/about");
