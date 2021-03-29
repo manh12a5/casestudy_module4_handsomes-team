@@ -1,11 +1,14 @@
 package com.example.demo.controller;
 
 import com.example.demo.service.category.ICategoryService;
+import com.example.demo.service.login.user.IAppUserService;
 import com.example.demo.service.product.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.security.Principal;
 
 @Controller
 
@@ -15,7 +18,7 @@ public class DefautController {
     private ICategoryService categoryService;
 
     @Autowired
-    private IProductService productService;
+    private IAppUserService appUserService;
 
 
 

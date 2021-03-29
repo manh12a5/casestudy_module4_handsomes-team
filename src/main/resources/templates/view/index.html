@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <!-- Basic -->
 
 <head>
@@ -87,7 +88,9 @@
                 </div>
                 <div class="our-link">
                     <ul>
-                        <li><a href="/login">Login</a></li>
+                        <li>
+                            <a href="login">Login</a>
+                        </li>
                         <li><a href="#">Our location</a></li>
                         <li><a href="/contact">Contact Us</a></li>
                     </ul>
@@ -505,7 +508,8 @@
                 <div class="col-lg-4 col-md-12 col-sm-12">
                     <div class="footer-widget">
                         <h4>About #NHACCHANLEN</h4>
-                        <p>Những Bước đi đầu tiên của chúng tôi trên con đường này. Mong rằng các bạn ủng hộ và đón nhận.
+                        <p>Những Bước đi đầu tiên của chúng tôi trên con đường này. Mong rằng các bạn ủng hộ và đón
+                            nhận.
                         </p>
                         <ul>
                             <li><a href="#"><i class="fab fa-facebook" aria-hidden="true"></i></a></li>
@@ -536,10 +540,12 @@
                         <h4>Contact Us</h4>
                         <ul>
                             <li>
-                                <p><i class="fas fa-map-marker-alt"></i>CODEGYM số 15 TT04 khu đô thị Moncity đường Hàm Nghi<br>Phường Mỹ Đình 2 quận Nam Từ Liêm Thành Phố Hà Nội<br> Hân Hạnh </p>
+                                <p><i class="fas fa-map-marker-alt"></i>CODEGYM số 15 TT04 khu đô thị Moncity đường Hàm
+                                    Nghi<br>Phường Mỹ Đình 2 quận Nam Từ Liêm Thành Phố Hà Nội<br> Hân Hạnh </p>
                             </li>
                             <li>
-                                <p><i class="fas fa-phone-square"></i>Phone: <span style="color: orange">0989999999</span></p>
+                                <p><i class="fas fa-phone-square"></i>Phone: <span
+                                        style="color: orange">0989999999</span></p>
                             </li>
                             <li>
                                 <p><i class="fas fa-envelope"></i>Email: <span style="color: orange">handsometeam@deptrai.vn</span>

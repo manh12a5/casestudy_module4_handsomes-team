@@ -138,14 +138,13 @@ public class ProductController {
         return modelAndView;
     }
 
-    @PostMapping("/detail/{id}")
+    @PostMapping("/detail/{id}/add")
     public ModelAndView createCartItem(@PathVariable Long id, @ModelAttribute CartItem cartItem) {
         Product product = productService.findById(id);
         cartItem.setProduct(product);
+        Cart cart = appUserService.getCurrentUser().getCart();
+        cartItem.setCart(cart);
         cartItemService.createCartItem(cartItem);
-        AppUser appUser = appUserService.getCurrentUser();
-        appUser.getCart().getCartItem().add(cartItem);
-        appUserService.save(appUser);
         ModelAndView mav = new ModelAndView("redirect:/products/detail/" + id);
         return mav;
     }
