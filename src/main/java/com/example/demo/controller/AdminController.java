@@ -75,10 +75,10 @@ public class AdminController {
         return new ModelAndView("redirect:/admin/");
     }
 
-    @GetMapping("/search")
-    public ModelAndView searchAccountByRole(@ModelAttribute AppRole role) {
-        List<AppUser> list = appUserService.findAllByAppRole(role);
-        System.out.println(list.size());
+    @PostMapping("account/search")
+    public ModelAndView searchAccountByRole(@PageableDefault Pageable pageable, @RequestParam String username) {
+        System.out.println(username);
+        Page<AppUser> list = appUserService.findAllByUsername(username,pageable);
         return new ModelAndView("admin/account/list", "list", list);
     }
 

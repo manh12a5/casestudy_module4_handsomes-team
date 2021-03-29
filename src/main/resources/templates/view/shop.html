@@ -116,10 +116,10 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="navbar-menu">
                 <ul class="nav navbar-nav ml-auto" data-in="fadeInDown" data-out="fadeOutUp">
-                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/about">About Us</a></li>
                     <li class="dropdown active megamenu-fw">
-                        <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">Product</a>
+                        <a href="/products" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">Sản phẩm</a>
                         <ul class="dropdown-menu megamenu-content" role="menu">
                             <li>
                                 <div class="row">
@@ -237,15 +237,17 @@
 <!-- End Main Top -->
 
 <!-- Start Top Search -->
-<div class="top-search">
-    <div class="container">
-        <div class="input-group">
-            <span class="input-group-addon"><i class="fa fa-search"></i></span>
-            <input type="text" class="form-control" placeholder="Search">
-            <span class="input-group-addon close-search"><i class="fa fa-times"></i></span>
+<form action="/products/search" method="post">
+    <div class="top-search">
+        <div class="container">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                <input name="name" type="text" class="form-control" placeholder="Tìm kiếm tên sản phẩm">
+                <span class="input-group-addon close-search"><i class="fa fa-times"></i></span>
+            </div>
         </div>
     </div>
-</div>
+</form>
 <!-- End Top Search -->
 
 <!-- Start All Title Box -->
@@ -255,7 +257,7 @@
             <div class="col-lg-12">
                 <h2>Shop</h2>
                 <ul class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
                     <li class="breadcrumb-item active">Shop</li>
                 </ul>
             </div>
@@ -271,24 +273,24 @@
             <div class="col-xl-3 col-lg-3 col-sm-12 col-xs-12 sidebar-shop-left">
                 <div class="product-categori">
                     <div class="search-product">
-                        <form action="#">
-                            <input class="form-control" placeholder="Search here..." type="text">
-                            <button type="submit"><i class="fa fa-search"></i></button>
+                        <form action="/products/search" method="post">
+                            <input name="name"c placeholder="Tìm kiếm tên sản phẩm" type="text">
+                            <button type="submit" style="height: 50px"><i class="fa fa-search"></i></button>
                         </form>
                     </div>
                     <div class="filter-sidebar-left">
                         <div class="title-left">
-                            <h3>Categories</h3>
+                            <h3>Hãng giầy</h3>
                         </div>
-                        <th:block th:each="c:${categoriesProduct}">
-                            <div class="list-group list-group-collapse list-group-sm list-group-tree">
-
-                                <a th:href="@{'category/'+${c.id}}" class="list-group-item list-group-item-action"><span th:text="${c.name}" style="color: red"></span>
-                                    <small class="text-muted"><span th:text="${productSize}" style="color: #007bff"></span></small></a>
-                            </div>
-                        </th:block>
+                        <form action="/products/searchcategory" th:method="post">
+                            <select style="width: 200px; height: 50px" name="id">
+                                <th:block th:each="c:${listCategory}">
+                                    <option th:value="${c.id}" th:text="${c.name}"></option>
+                                </th:block>
+                            </select>
+                            <button type="submit" style="width: 50px; height: 50px"><i class="fa fa-search"></i></button>
+                        </form>
                     </div>
-
 
                     <div class="filter-price-left">
                         <div class="title-left">
@@ -311,16 +313,16 @@
                     <div class="product-item-filter row">
                         <div class="col-12 col-sm-8 text-center text-sm-left">
                             <div class="toolbar-sorter-right">
-                                <span>Sort by </span>
+                                <span>Sắp xếp:</span>
                                 <select id="basic" class="selectpicker show-tick form-control" data-placeholder="$ USD">
                                     <option data-display="Select">Nothing</option>
-                                    <option value="1">Popularity</option>
-                                    <option value="2">High Price → High Price</option>
-                                    <option value="3">Low Price → High Price</option>
-                                    <option value="4">Best Selling</option>
+                                    <option value="1">A → Z</option>
+                                    <option value="2">Z → A</option>
+                                    <option value="3">High Price → Low Price</option>
+                                    <option value="4">Low Price → High Price</option>
                                 </select>
                             </div>
-                            <p>Showing all <span th:text="${numberOfProducts}" style="color: red"></span> results</p>
+                            <p>Có: <span th:text="${numberOfProducts}" style="color: red"></span> sản phẩm</p>
                         </div>
                         <div class="col-12 col-sm-4 text-center text-sm-right">
                             <ul class="nav nav-tabs ml-auto">
@@ -345,9 +347,6 @@
                                     <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4" th:each="p: ${products}">
                                         <div class="products-single fix">
                                             <div class="box-img-hover">
-                                                <div class="type-lb">
-                                                    <p class="sale">Sale</p>
-                                                </div>
                                                 <img th:src="${'../'+p.image}" class="img-fluid" alt="Image">
                                                 <div class="mask-icon">
                                                     <ul>

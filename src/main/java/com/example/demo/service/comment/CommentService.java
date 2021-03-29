@@ -32,13 +32,4 @@ public class CommentService implements ICommentService{
         commentRepository.deleteById(id);
     }
 
-    @Override
-    public Iterable<Comment> findAllByProduct(Product product) {
-        return commentRepository.findAllByProductOrderByIdDesc(product);
-    }
-
-    @Override
-    public Integer countAllByProduct(Product product) {
-        return commentRepository.countAllByProduct(product);
-    }
 }

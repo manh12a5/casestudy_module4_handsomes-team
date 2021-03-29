@@ -35,8 +35,11 @@ dependencies {
     testImplementation 'io.projectreactor:reactor-test'
 //    testImplementation 'org.springframework.security:spring-security-test'
 
+
     compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.11.0'
     compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.11.0'
+
+    implementation group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-springsecurity5', version: '3.0.4.RELEASE'
 }
 
 test {

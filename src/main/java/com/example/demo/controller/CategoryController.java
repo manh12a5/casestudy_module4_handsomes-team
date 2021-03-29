@@ -1,11 +1,18 @@
 package com.example.demo.controller;
 
 import com.example.demo.model.category.Category;
+import com.example.demo.model.product.Product;
 import com.example.demo.service.category.CategoryServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.io.File;
+import java.io.IOException;
 
 @Controller
 @RequestMapping("/categories")
@@ -13,6 +20,9 @@ public class CategoryController {
 
     @Autowired
     private CategoryServiceImp categoryServiceImp;
+
+    @Autowired
+    Environment environment;
 
     @GetMapping("")
     public ModelAndView showCategories(){
@@ -29,9 +39,19 @@ public class CategoryController {
 
     @PostMapping("/create-cate")
     public ModelAndView createCate(@ModelAttribute Category category){
-        categoryServiceImp.save(category);
         ModelAndView mav = new ModelAndView("/category/create");
-        mav.addObject("category",new Category());
+        MultipartFile multipartFile = category.getAvatar();
+        String fileName = multipartFile.getOriginalFilename();
+        String fileUpload = environment.getProperty("upload.path");
+        String newFile = fileUpload + fileName;
+        try {
+            FileCopyUtils.copy(multipartFile.getBytes(), new File(newFile));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        category.setImage(fileName);
+        categoryServiceImp.save(category);
+        mav.addObject("category", category);
         mav.addObject("message", "New customer created successfully");
         return mav;
     }
@@ -45,15 +65,24 @@ public class CategoryController {
             return modelAndView;
 
         }else {
-            ModelAndView modelAndView = new ModelAndView("/error.404");
-            return modelAndView;
+            return new ModelAndView("/error.404");
         }
     }
 
     @PostMapping("/edit-cate")
-    public ModelAndView updateCate(@ModelAttribute("category") Category category){
-        categoryServiceImp.save(category);
+    public ModelAndView updateCate(@ModelAttribute("category") Category category) {
         ModelAndView modelAndView = new ModelAndView("/category/edit");
+        MultipartFile multipartFile = category.getAvatar();
+        String fileName = multipartFile.getOriginalFilename();
+        String fileUpload = environment.getProperty("upload.path");
+        String newFile = fileUpload + fileName;
+        try {
+            FileCopyUtils.copy(multipartFile.getBytes(), new File(newFile));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        category.setImage(fileName);
+        categoryServiceImp.save(category);
         modelAndView.addObject("category", category);
         modelAndView.addObject("message", "Category updated successfully");
         return modelAndView;
@@ -68,18 +97,14 @@ public class CategoryController {
             return modelAndView;
 
         }else {
-            ModelAndView modelAndView = new ModelAndView("/error.404");
-            return modelAndView;
+            return new ModelAndView("/error.404");
         }
     }
 
     @PostMapping("/del-cate")
     public ModelAndView deleteCate(@ModelAttribute("category") Category category){
         categoryServiceImp.remove(category.getId());
-        ModelAndView mav = new ModelAndView("redirect:/categories");
-        return mav;
+        return new ModelAndView("redirect:/categories");
     }
-
-
 
 }

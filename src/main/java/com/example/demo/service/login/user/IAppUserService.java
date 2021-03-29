@@ -13,5 +13,6 @@ public interface IAppUserService extends IService<AppUser> {
     AppUser getCurrentAccount();
     Page<AppUser> findAll(Pageable pageable);
     List<AppUser> findAllByAppRole(AppRole appRole);
+    Page<AppUser> findAllByUsername(String username, Pageable pageable);
     AppUser getCurrentUser();
 }

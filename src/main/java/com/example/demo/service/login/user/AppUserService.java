@@ -70,8 +70,16 @@ public class AppUserService implements IAppUserService, UserDetailsService {
 
     @Override
     public List<AppUser> findAllByAppRole(AppRole appRole) {
-        return appUserRepository.getAllByAppRole(appRole);
+        return appUserRepository.findAllByAppRole(appRole);
     }
+
+    @Override
+    public Page<AppUser> findAllByUsername(String username, Pageable pageable) {
+        username = "%" + username + "%";
+        return appUserRepository.findUserByUserName(username,pageable);
+    }
+
+
     public AppUser getCurrentUser() {
         Authentication authentication= SecurityContextHolder.getContext().getAuthentication();
         String userName = authentication.getName();

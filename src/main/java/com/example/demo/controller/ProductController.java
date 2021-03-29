@@ -61,7 +61,7 @@ public class ProductController {
         Long numberOfProducts = productPage.getTotalElements();
         modelAndView.addObject("products",productPage );
         modelAndView.addObject("categoriesProduct",categories);
-        modelAndView.addObject("numberOfProducts",numberOfProducts );
+        modelAndView.addObject("numberOfProducts",numberOfProducts);
         return modelAndView;
     }
 
@@ -121,7 +121,6 @@ public class ProductController {
         return modelAndView;
     }
 
-    //SearchNameProduct
     @PostMapping("/search")
     public ModelAndView showSearchNameProduct(@RequestParam String name, @PageableDefault(size = 6) Pageable pageable) {
         ModelAndView modelAndView = new ModelAndView("view/shop");
@@ -131,16 +130,23 @@ public class ProductController {
         return modelAndView;
     }
 
-    @PostMapping("/searchCategory")
+    @PostMapping("/searchcategory")
     public ModelAndView searchProductByCategory(@RequestParam Long id, @PageableDefault(size = 6) Pageable pageable) {
         Page<Product> productPage = productService.findProductByCategoryName(id, pageable);
-        return new ModelAndView("view/shop", "products", productPage);
+        return new ModelAndView("view/shop", "categories", productPage);
     }
 
-    @GetMapping("/top5priceMax")
-    public ModelAndView find5PriceMax(@PageableDefault(size = 6) Pageable pageable) {
+    @GetMapping("/sortpricemax")
+    public ModelAndView sortPriceMax(@PageableDefault(size = 6) Pageable pageable) {
         ModelAndView modelAndView = new ModelAndView("view/shop");
-        modelAndView.addObject("top5price", productService.findTop5ByOrderByPriceDesc(pageable));
+        modelAndView.addObject("products", productService.findAllByOrderByPriceDesc(pageable));
+        return modelAndView;
+    }
+
+    @GetMapping("/sortpricemin")
+    public ModelAndView sortPriceMin(@PageableDefault(size = 6) Pageable pageable) {
+        ModelAndView modelAndView = new ModelAndView("view/shop");
+        modelAndView.addObject("products", productService.findTop5ByOrderByPriceDesc(pageable));
         return modelAndView;
     }
 
