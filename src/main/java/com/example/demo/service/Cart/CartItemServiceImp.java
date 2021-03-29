@@ -65,4 +65,9 @@ public class CartItemServiceImp implements ICartItemService {
             }
         }
     }
+
+    @Override
+    public List<CartItem> findAllByCartId(Long id) {
+        return cartItemRepository.findAllByCartId(id);
+    }
 }
