@@ -14,21 +14,19 @@ public class Cart {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Date date;
-    private double total;
     @OneToMany
-    private List<CartItem> cartItem;
+    private List<CartItem> cartItemList;
     @OneToOne
     private AppUser appUser;
 
     public Cart() {
-        this.cartItem = new ArrayList<>();
+        this.cartItemList = new ArrayList<>();
     }
 
-    public Cart(Long id, Date date, double total, List<CartItem> cartItem, AppUser appUser) {
+    public Cart(Long id, Date date, List<CartItem> cartItem, AppUser appUser) {
         this.id = id;
         this.date = date;
-        this.total = total;
-        this.cartItem = cartItem;
+        this.cartItemList = cartItem;
         this.appUser = appUser;
     }
 
@@ -40,20 +38,12 @@ public class Cart {
         this.date = date;
     }
 
-    public double getTotal() {
-        return total;
-    }
-
-    public void setTotal(double total) {
-        this.total = total;
-    }
-
     public List<CartItem> getCartItem() {
-        return cartItem;
+        return cartItemList;
     }
 
     public void setCartItem(List<CartItem> cartItem) {
-        this.cartItem = cartItem;
+        this.cartItemList = cartItem;
     }
 
     public AppUser getAppUser() {

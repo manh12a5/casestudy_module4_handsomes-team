@@ -11,8 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class CartController {
     @GetMapping("")
     public ModelAndView showCart(){
-        ModelAndView mav = new ModelAndView("cart/cart");
-        mav.addObject("product1", new Product());
+        ModelAndView mav = new ModelAndView("view/cart");
         return mav;
     }
 
