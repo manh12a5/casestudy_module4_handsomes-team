@@ -26,7 +26,7 @@ public class CartController {
     public ModelAndView showCart() {
         ModelAndView mav = new ModelAndView("view/cart");
         Cart cart = appUserService.getCurrentUser().getCart();
-        List<CartItem> cartItems = cartItemService.findCartItemsByStatus(1,2,cart.getId());
+        List<CartItem> cartItems = cartItemService.findCartItemsByStatus(1, 2, cart.getId());
         int tax = 5;
         double subTotal = 0;
         for (CartItem c :
@@ -34,7 +34,7 @@ public class CartController {
             double total = c.getProduct().getPrice() * c.getQuantity();
             subTotal += total;
         }
-        double grandTotal = subTotal - + ((subTotal / 100) * tax);
+        double grandTotal = subTotal - +((subTotal / 100) * tax);
         mav.addObject("cartItems", cartItems);
         mav.addObject("subTotal", subTotal);
         mav.addObject("grandTotal", grandTotal);
@@ -42,23 +42,22 @@ public class CartController {
     }
 
     @PostMapping("")
-    public ModelAndView selectCartItem(@RequestParam List<Long> stt){
-        ModelAndView modelAndView;
-        modelAndView = new ModelAndView("redirect:/checkout");
-        List<Long> checkBoxList = stt;
+    public ModelAndView selectCartItem(@RequestParam List<Long> selected, int size, int quantity) {
+        List<Long> checkBoxList = selected;
         Cart cart = appUserService.getCurrentUser().getCart();
         List<CartItem> cartItems = cartItemService.findAllByCartId(cart.getId());
         for (int i = 0; i < cartItems.size(); i++) {
             for (int j = 0; j < checkBoxList.size(); j++) {
                 if (cartItems.get(i).getId() == checkBoxList.get(j)) {
+                    cartItems.get(i).setSize(size);
+                    cartItems.get(i).setQuantity(quantity);
                     cartItems.get(i).setStatus(2);
                     cartItemService.save(cartItems.get(i));
                 }
             }
         }
-        return modelAndView;
+        return new ModelAndView("redirect:/checkout");
     }
-
 
 
 }

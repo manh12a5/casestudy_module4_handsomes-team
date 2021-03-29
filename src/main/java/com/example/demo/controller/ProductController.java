@@ -164,20 +164,7 @@ public class ProductController {
     }
 
     //SearchNameProduct
-    @PostMapping("/search")
-    public ModelAndView showSearchNameProduct(@RequestParam String name, @PageableDefault(size = 6) Pageable pageable) {
-        ModelAndView modelAndView = new ModelAndView("view/shop");
-        String nameProduct = "%" + name + "%";
-        Page<Product> productList = productService.findProductByName(nameProduct, pageable);
-        modelAndView.addObject("products", productList);
-        return modelAndView;
-    }
 
-    @PostMapping("/searchCategory")
-    public ModelAndView searchProductByCategory(@RequestParam Long id, @PageableDefault(size = 6) Pageable pageable) {
-        Page<Product> productPage = productService.findProductByCategoryName(id, pageable);
-        return new ModelAndView("view/shop", "products", productPage);
-    }
 
     @GetMapping("/top5priceMax")
     public ModelAndView find5PriceMax(@PageableDefault(size = 6) Pageable pageable) {

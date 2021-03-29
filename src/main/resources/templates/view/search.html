@@ -56,10 +56,10 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
-                <h2>Shop</h2>
+                <h2>Search</span></h2>
                 <ul class="breadcrumb">
                     <li class="breadcrumb-item"><a href="/">Home</a></li>
-                    <li class="breadcrumb-item active">Shop</li>
+                    <li class="breadcrumb-item active">Search</li>
                 </ul>
             </div>
         </div>
@@ -83,7 +83,7 @@
                         <div class="title-left">
                             <h3>Categories</h3>
                         </div>
-                        <th:block th:each="c:${categoriesProduct}">
+                        <th:block th:each="c:${categories}">
                             <div class="list-group list-group-collapse list-group-sm list-group-tree">
 
                                 <a th:href="@{/category/{id}(id=${c.id})}" class="list-group-item list-group-item-action"><span
@@ -124,7 +124,7 @@
                                     <option value="4">Best Selling</option>
                                 </select>
                             </div>
-                            <p>Showing all <span th:text="${numberOfProducts}" style="color: red"></span> results</p>
+                            <p>Showing all <span th:text="${numberOfProductsSearch}" style="color: red"></span> results</p>
                         </div>
                         <div class="col-12 col-sm-4 text-center text-sm-right">
                             <ul class="nav nav-tabs ml-auto">
@@ -146,7 +146,7 @@
                         <div class="tab-content">
                             <div role="tabpanel" class="tab-pane fade show active" id="grid-view">
                                 <div class="row">
-                                    <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4" th:each="p: ${products}">
+                                    <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4" th:each="p: ${productList}">
                                         <div class="products-single fix">
                                             <div class="box-img-hover">
                                                 <div class="type-lb">
@@ -178,7 +178,7 @@
                             </div>
                             <div role="tabpanel" class="tab-pane fade" id="list-view">
                                 <div class="list-view-box">
-                                    <div class="row" th:each="p: ${products}">
+                                    <div class="row" th:each="p: ${productList}">
                                         <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
                                             <div class="products-single fix">
                                                 <div class="box-img-hover">

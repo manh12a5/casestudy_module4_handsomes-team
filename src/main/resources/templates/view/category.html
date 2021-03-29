@@ -56,10 +56,10 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
-                <h2>Shop</h2>
+                <h2>Category <span style="text-transform: capitalize" th:text="${category.name}"></span></h2>
                 <ul class="breadcrumb">
                     <li class="breadcrumb-item"><a href="/">Home</a></li>
-                    <li class="breadcrumb-item active">Shop</li>
+                    <li class="breadcrumb-item active">Categori</li>
                 </ul>
             </div>
         </div>
@@ -83,14 +83,10 @@
                         <div class="title-left">
                             <h3>Categories</h3>
                         </div>
-                        <th:block th:each="c:${categoriesProduct}">
-                            <div class="list-group list-group-collapse list-group-sm list-group-tree">
-
-                                <a th:href="@{/category/{id}(id=${c.id})}" class="list-group-item list-group-item-action"><span
-                                        th:text="${c.name}" style="color: red"></span>
-                                </a>
-                            </div>
-                        </th:block>
+                        <div class="list-group list-group-collapse list-group-sm list-group-tree">
+                            <a style="color: red" th:href="@{/category/{id}(id=${category.id})}"
+                               th:text="${category.name}" class="list-group-item list-group-item-action">
+                            </a></div>
                     </div>
 
 
@@ -124,7 +120,7 @@
                                     <option value="4">Best Selling</option>
                                 </select>
                             </div>
-                            <p>Showing all <span th:text="${numberOfProducts}" style="color: red"></span> results</p>
+                            <p>Showing all <span th:text="${numberOfProductsCate}" style="color: red"></span> results</p>
                         </div>
                         <div class="col-12 col-sm-4 text-center text-sm-right">
                             <ul class="nav nav-tabs ml-auto">

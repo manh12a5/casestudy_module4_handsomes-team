@@ -12,13 +12,9 @@ import java.util.List;
 @Repository
 public interface ProductRepository extends PagingAndSortingRepository<Product, Long> {
 
-    //Tìm kiếm sản phẩm theo tên
-    @Query(value = "select * from product where product.name like ?", nativeQuery = true)
-    Page<Product> findProductByName(String name, Pageable pageable);
+    List<Product> findAllByNameContaining(String name);
 
-    //Tìm kiếm sản phẩm theo category
-    @Query(value = "select * from product where product.category_id = ?", nativeQuery = true)
-    Page<Product> findProductByCategoryName(Long id, Pageable pageable);
+    List<Product> findAllByCategoryId(Long id);
 
     //Sắp xếp
     Page<Product> findAllByOrderByPriceAsc(Pageable pageable);

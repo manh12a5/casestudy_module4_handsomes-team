@@ -2,21 +2,18 @@ package com.example.demo.controller;
 
 import com.example.demo.model.cart.Cart;
 import com.example.demo.model.cart.CartItem;
+import com.example.demo.model.product.Product;
 import com.example.demo.service.Cart.ICartItemService;
 import com.example.demo.service.category.ICategoryService;
 import com.example.demo.service.login.user.IAppUserService;
 import com.example.demo.service.product.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-
-import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -31,6 +28,10 @@ public class DefautController {
 
     @Autowired
     private ICartItemService cartItemService;
+
+    @Autowired
+    private IProductService productService;
+
 
 
     @RequestMapping("")
@@ -158,6 +159,45 @@ public class DefautController {
         mav.addObject("cartItems", cartItems);
         mav.addObject("subTotal", subTotal);
         return mav;
+    }
+
+    @RequestMapping("/category/{id}")
+    public ModelAndView searchProductByCategory(@PathVariable Long id) {
+        List<Product> productList = productService.findAllByCategoryId(id);
+        ModelAndView modelAndView = new ModelAndView("view/category", "products", productList);
+        Cart cart = appUserService.getCurrentUser().getCart();
+        List<CartItem> cartItems = cartItemService.findCartItemsByStatus(1,2,cart.getId());
+        double subTotal = 0;
+        for (CartItem c :
+                cartItems) {
+            double total = c.getProduct().getPrice() * c.getQuantity();
+            subTotal += total;
+        }
+        modelAndView.addObject("cartItems", cartItems);
+        modelAndView.addObject("subTotal", subTotal);
+        modelAndView.addObject("numberOfProductsCate",productList.size());
+        modelAndView.addObject("category", categoryService.findById(id));
+        return modelAndView;
+    }
+
+    @GetMapping("/search")
+    public ModelAndView showSearchNameProduct(@RequestParam String name) {
+        ModelAndView modelAndView = new ModelAndView("view/search");
+        List<Product> productList = productService.findAllByName(name);
+        Cart cart = appUserService.getCurrentUser().getCart();
+        List<CartItem> cartItems = cartItemService.findCartItemsByStatus(1,2,cart.getId());
+        double subTotal = 0;
+        for (CartItem c :
+                cartItems) {
+            double total = c.getProduct().getPrice() * c.getQuantity();
+            subTotal += total;
+        }
+        modelAndView.addObject("cartItems", cartItems);
+        modelAndView.addObject("subTotal", subTotal);
+        modelAndView.addObject("productList", productList);
+        modelAndView.addObject("numberOfProductsSearch",productList.size());
+        modelAndView.addObject("categories",categoryService.findAll());
+        return modelAndView;
     }
 
 }

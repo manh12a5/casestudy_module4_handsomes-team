@@ -202,11 +202,13 @@
 <!-- Start Top Search -->
 <div class="top-search" th:fragment="top-search">
     <div class="container">
-        <div class="input-group">
-            <span class="input-group-addon"><i class="fa fa-search"></i></span>
-            <input type="text" class="form-control" placeholder="Search">
+        <form th:action="@{/search}" method="get">
+            <div class="input-group">
+            <span class="input-group-addon"><button type="submit"><i class="fa fa-search"></i></button></span>
+            <input type="text" name="name" class="form-control" placeholder="Search">
             <span class="input-group-addon close-search"><i class="fa fa-times"></i></span>
-        </div>
+            </div>
+        </form>
     </div>
 </div>
 <!-- End Top Search -->
@@ -265,8 +267,8 @@
             <th:block th:each="c:${categories}">
                 <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                     <div class="shop-cat-box">
-                        <img th:src="'../'+${c.image}" alt="image_cate" width="350" height="350"/>
-                        <a class="btn hvr-hover" href="#" th:text="${c.name}"></a>
+                        <img th:src="@{|/${c.image}|}" alt="image_cate" width="350" height="350"/>
+                        <a class="btn hvr-hover" th:href="@{/category/{id}(id=${c.id})}" th:text="${c.name}"></a>
                     </div>
                 </div>
             </th:block>
