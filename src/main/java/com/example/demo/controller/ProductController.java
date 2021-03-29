@@ -138,7 +138,7 @@ public class ProductController {
         return modelAndView;
     }
 
-    @PostMapping("/detail/{id}/add")
+    @PostMapping("/detail/{id}")
     public ModelAndView createCartItem(@PathVariable Long id, @ModelAttribute CartItem cartItem) {
         Product product = productService.findById(id);
         cartItem.setProduct(product);
