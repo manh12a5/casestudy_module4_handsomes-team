@@ -7,12 +7,19 @@
     <script type="text/javascript">category
         $(document).ready(function () {
             $('#editCommentForm').submit(function (event) {
-                var user = $('#user.id').val();
-                var product = $('#product.id.value').val();
-                var comment = $('#comment').val();
-                var date = $('#date').val();
+                // var user = $('#user.id').val();
+                // var product = $('#ee').val();
+                var comment = $('#comment' +
+                    '').val();
+                // var date = $('#date').val();
                 // var json = { "uiser" : user.id, "product" : product.id, "comment": comment,"date":date};
-                var json = { "comment" : comment}
+                var json = {
+                    comment : comment
+                    // ,
+                    // product :{
+                    //     id:product
+                    // }
+                }
                 $.ajax({
                     url: $("#editCommentForm").attr("action"),
                     data: JSON.stringify(json),
@@ -41,22 +48,14 @@
 </head>
 <body>
 <div id="container">
-    <h1>Edit Smartphone</h1>
+<!--    <input id="ee" value="1">-->
+    <h1>Edit Comment</h1>
     <form id="editCommentForm" th:object="${comment}">
         <table>
             <tbody>
             <tr>
-                <td>Product:</td>
-                <input type="hidden" th:field="*{user.id}" />
-                <td><input th:field="*{product.id}" /></td>
-            </tr>
-            <tr>
                 <td>Comment:</td>
                 <td><input type="text" th:field="*{comment}"/></td>
-            </tr>
-            <tr>
-                <td>Date:</td>
-                <td><input type="text" th:field="*{date}" disabled="true"/></td>
             </tr>
             <tr>
                 <td><input type="submit" value="Edit" /></td>

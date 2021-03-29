@@ -1,5 +1,6 @@
 package com.example.demo.service.product;
 
+import com.example.demo.model.login.AppUser;
 import com.example.demo.model.product.Product;
 import com.example.demo.service.IService;
 import org.springframework.data.domain.Page;
@@ -24,5 +25,7 @@ public interface IProductService extends IService<Product> {
 
     //Sắp xếp
     Page<Product> findAllByOrderByPriceDesc(Pageable pageable);
+
+    Product getCurrentProduct();
 
 }

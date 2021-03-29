@@ -9,16 +9,17 @@
         $(document).ready(function() {
             $('#newCommentForm').submit(function(event) {
                 // var user = $('#user.id').val();
-                var product = $('#aa').val();
+                // var product = $('#aa').val();
                 var comment = $('#comment' +
                     '').val();
                 // var date = $('#date').val();
                 // var json = { "user" : user.id, "product" : product.id, "comment": comment};
                 var json = {
-                    comment : comment,
-                    product:{
-                        id:product
-                    }
+                    comment : comment
+                    // ,
+                    // product:{
+                    //     id:product
+                    // }
 
                 };
                 $.ajax({
@@ -47,8 +48,7 @@
 </head>
 <body>
 <div id="container">
-    <h1>Product</h1>
-    <input id="aa" value="1">
+<!--    <input id="aa">-->
     <h1>Create new Comment</h1>
     <form id="newCommentForm" th:object="${comment}">
         <table>
@@ -66,158 +66,6 @@
     </form>
     <a th:href="@{/comments}">List</a>
 </div>
-
-
-<!--<form th:object="${comment}" method="post">-->
-<!--    <table>-->
-<!--        <tr>-->
-<!--            <td>Comment:<input type="text" th:field="*{comment}"/></td>-->
-<!--        </tr>-->
-<!--        <tr>-->
-<!--            <td>date:<input type="datetime-local"  th:field="*{date}"/></td>-->
-<!--        </tr>-->
-<!--        <tr>-->
-<!--            <td>product:<input type="text" th:field="*{product.name}"/></td>-->
-<!--        </tr>-->
-<!--        <tr>-->
-<!--            <td>user:<input type="text" th:field="*{user.fullName}"/></td>-->
-<!--        </tr>-->
-
-<!--        <tr>-->
-
-<!--        </tr>-->
-<!--        <tr>-->
-<!--            <td><input type="submit" value="Comment"></td>-->
-<!--        </tr>-->
-<!--    </table>-->
-<!--</form>-->
-
-<!--<div id="tab3" class="tab-pane fade in">-->
-<!--    <div class="row">-->
-<!--        <section class="content-item" id="comments">-->
-<!--            <div class="container">-->
-<!--                <div class="row">-->
-<!--                    <div class="col-sm-2"></div>-->
-<!--                    <script>-->
-<!--                        function postComment() {-->
-<!--                            let id = $('#idProduct').val();-->
-<!--                            let message = $('#message').val();-->
-
-<!--                            let comments= {-->
-<!--                                comment: message,-->
-<!--                                product:{-->
-<!--                                    id: id-->
-<!--                                }-->
-<!--                            }-->
-<!--                            $.ajax({-->
-<!--                                headers: {-->
-<!--                                    'Accept': 'application/json',-->
-<!--                                    'Content-Type': 'application/json'-->
-<!--                                },-->
-<!--                                type:"POST",-->
-<!--                                data: JSON.stringify(comments),-->
-<!--                                //tên API-->
-<!--                                url:"/comment/create",-->
-<!--                                //xử lý khi thành công-->
-<!--                                success: function () {-->
-<!--                                    $('#message').val("");-->
-<!--                                    successHandler1();-->
-<!--                                    successHandler();-->
-
-<!--                                }-->
-<!--                            })-->
-<!--                            event.preventDefault();-->
-<!--                        }-->
-
-<!--                        function successHandler1() {-->
-<!--                            let id = $('#idProduct').val()-->
-<!--                            $.ajax({-->
-<!--                                type:"GET",-->
-<!--                                url:"/comment/sum/" +id,-->
-<!--                                success: function (cmtSum){-->
-<!--                                    let content1= `<h3>${cmtSum} Comments</h3>`-->
-<!--                                    document.getElementById('sum').innerHTML = content1;-->
-<!--                                    console.log(content1);-->
-<!--                                }-->
-<!--                            })-->
-
-<!--                        }-->
-
-<!--                        function successHandler() {-->
-<!--                            let id = $('#idProduct').val()-->
-<!--                            console.log(id)-->
-<!--                            $.ajax({-->
-<!--                                type:"GET",-->
-<!--                                url:"/comment/" +id,-->
-<!--                                success: function (list){-->
-<!--                                    let content= ""-->
-<!--                                    for(let i = 0; i < list.length; i++){-->
-<!--                                        content += getComment(list[i]);-->
-<!--                                    }-->
-<!--                                    document.getElementById('commentContent').innerHTML = content;-->
-<!--                                }-->
-<!--                            })-->
-
-<!--                        }-->
-
-<!--                        function getComment(comment) {-->
-<!--                            let content = `<div class="media"><div class="media-body">`-->
-<!--                            if (comment.user != null){-->
-<!--                                content += `<h4 class="media-heading"">${comment.user.fullname}</h4>`-->
-<!--                            }else {-->
-<!--                                content += `<h4 class="media-heading">Đầu Cắt Moi</h4>`-->
-<!--                            }-->
-<!--                            content += `<p>${comment.comment}</p>-->
-<!--                                   <ul class="list-unstyled list-inline media-detail pull-left">-->
-<!--                                        <li ><i class="fa fa-calendar"></i>${comment.date}</li>-->
-<!--                                   </ul>-->
-<!--                                                                    </div>-->
-<!--                                                                </div>`-->
-<!--                            return content;-->
-
-<!--                        }-->
-<!--                    </script>-->
-<!--                    <div class="col-sm-8">-->
-<!--                        <form>-->
-<!--                            <input type="hidden" id="idProduct" th:value="${product.id}" >-->
-<!--                            <h3 class="pull-left">New Comment</h3>-->
-<!--                            <button type="submit" class="btn btn-normal pull-right" onclick="postComment()">Submit</button>-->
-<!--                            <fieldset>-->
-<!--                                <div class="row">-->
-<!--                                    <div class="form-group col-xs-12 col-sm-12 col-lg-12">-->
-<!--                                        <textarea class="form-control" id="message" placeholder="Your message" required=""></textarea>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                            </fieldset>-->
-<!--                        </form>-->
-<!--                        <div class="row" id="sum">-->
-<!--                            <h3 th:text="${cmtSum} + ' ' + Comments"> </h3>-->
-<!--                        </div>-->
-<!--                        <div class="row" id="commentContent">-->
-<!--                            &lt;!&ndash; COMMENT 1 - START &ndash;&gt;-->
-<!--                            <th:block th:each="comment : ${comments}">-->
-<!--                                <div class="media">-->
-<!--                                    <div class="media-body">-->
-<!--                                        &lt;!&ndash;<h4 class="media-heading" th:if="${comment.user.getRole() == 1}" style="color: red" th:text="${comment.user.full_name} "></h4>&ndash;&gt;-->
-<!--                                        <h4 class="media-heading" th:if="${comment.user}" th:text="${comment.user.fullName} "></h4>-->
-<!--                                        <h4 class="media-heading" th:if="${comment.user} == null">Đầu Cắt Moi</h4>-->
-<!--                                        <p th:text="${comment.comment}"></p>-->
-<!--                                        <ul class="list-unstyled list-inline media-detail pull-left">-->
-<!--                                            <li th:text="${comment.date}" ><i class="fa fa-calendar"></i></li>-->
-<!--                                        </ul>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                            </th:block>-->
-<!--                            &lt;!&ndash; COMMENT 1 - END &ndash;&gt;-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </section>-->
-<!--    </div>-->
-<!--</div>-->
-
-
 </body>
 
 </html>

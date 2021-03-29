@@ -1,5 +1,6 @@
 package com.example.demo.repository;
 
+import com.example.demo.model.login.AppUser;
 import com.example.demo.model.product.Product;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -31,5 +32,7 @@ public interface ProductRepository extends PagingAndSortingRepository<Product, L
 
     //Top 5 Price Min
     Page<Product> findTop5ByOrderByPriceAsc(Pageable pageable);
+
+    Product getProductByName(String product);
 
 }

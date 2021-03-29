@@ -38,6 +38,11 @@ public class CommentController {
 
         return appUserService.getCurrentUser();
     }
+    @ModelAttribute()
+    public Product currentProduct(){
+
+        return productService.getCurrentProduct();
+    }
 
     @GetMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
@@ -65,8 +70,11 @@ public class CommentController {
     @ResponseBody
     public Comment create(@RequestBody Comment comment){
         AppUser appUser=currentUser();
+        Product product=currentProduct();
         Date date=new Date(System.currentTimeMillis());
         comment.setUser(appUser);
+        comment.setProduct(product);
+        System.out.println("id"+product);
         comment.setDate(date);
         return commentService.save(comment);
     }
@@ -87,13 +95,13 @@ public class CommentController {
     @ResponseBody
     public Comment edit(@PathVariable Long id, @RequestBody Comment comment){
         comment.setId(id);
-        Product product=productService.findById(comment.getProduct().getId());
-        AppUser appUser=appUserService.findById(comment.getUser().getId());
+        AppUser appUser=currentUser();
+        Product product=currentProduct();
         Date date=new Date(System.currentTimeMillis());
-        Comment comment1=new Comment();
-        comment1.setProduct(product);
-        comment1.setUser(appUser);
-        comment1.setDate(date);
+        comment.setUser(appUser);
+        comment.setProduct(product);
+        System.out.println(product);
+        comment.setDate(date);
         return commentService.save(comment);
     }
 

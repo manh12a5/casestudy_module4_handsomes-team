@@ -1,10 +1,13 @@
 package com.example.demo.service.product;
 
+import com.example.demo.model.login.AppUser;
 import com.example.demo.model.product.Product;
 import com.example.demo.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -68,6 +71,14 @@ public class ProductService implements IProductService {
     @Override
     public Page<Product> findAllByOrderByPriceDesc(Pageable pageable) {
         return productRepository.findAllByOrderByPriceDesc(pageable);
+    }
+
+    @Override
+    public Product getCurrentProduct() {
+        Authentication authentication= SecurityContextHolder.getContext().getAuthentication();
+        String product = authentication.getName();
+        Product product1= productRepository.getProductByName(product);
+        return product1;
     }
 
 }
