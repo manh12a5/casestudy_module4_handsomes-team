@@ -44,8 +44,6 @@ public class ProductController {
     @Autowired
     private Environment environment;
 
-
-
     @ModelAttribute("listCategory")
     public List<Category> listCate() {
         return categoryService.findAll();
