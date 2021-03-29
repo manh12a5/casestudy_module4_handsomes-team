@@ -86,10 +86,10 @@
                 </div>
                 <div class="our-link">
                     <ul>
-
                         <li>
                             <a sec:authorize="isAnonymous()" href="/login">Login</a>
                         </li>
+                        <li>Hi [[${#request.userPrincipal.principal.username}]]</li>
                         <li>
                             <a sec:authorize="isAuthenticated()" href="/logout">Logout</a>
                         </li>
