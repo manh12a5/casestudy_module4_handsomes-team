@@ -186,7 +186,7 @@
                                                     <div class="type-lb">
                                                         <p class="new">New</p>
                                                     </div>
-                                                    <img th:src="${'../'+p.image}" class="img-fluid" alt="Image">
+                                                    <img th:src="@{|/${p.image}|}" class="img-fluid" alt="Image">
                                                     <div class="mask-icon">
                                                         <ul>
                                                             <li><a href="#" data-toggle="tooltip" data-placement="right"

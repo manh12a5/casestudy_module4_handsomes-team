@@ -2,13 +2,11 @@ package com.example.demo.controller;
 
 import com.example.demo.model.cart.Cart;
 import com.example.demo.model.cart.CartItem;
-import com.example.demo.model.product.Product;
 import com.example.demo.service.Cart.ICartItemService;
 import com.example.demo.service.login.user.IAppUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -26,9 +24,7 @@ public class CartController {
     public ModelAndView showCart() {
         ModelAndView mav = new ModelAndView("view/cart");
         Cart cart = appUserService.getCurrentUser().getCart();
-        List<CartItem> cartItems = cartItemService.findAllByCartId(cart.getId());
-        int discount = 0;
-        int couponDiscount = 0;
+        List<CartItem> cartItems = cartItemService.findCartItemsByStatus(1,2,cart.getId());
         int tax = 5;
         double subTotal = 0;
         for (CartItem c :
@@ -36,14 +32,29 @@ public class CartController {
             double total = c.getProduct().getPrice() * c.getQuantity();
             subTotal += total;
         }
-        double grandTotal = subTotal-discount-couponDiscount+((subTotal/100)*5);
+        double grandTotal = subTotal - + ((subTotal / 100) * tax);
         mav.addObject("cartItems", cartItems);
         mav.addObject("subTotal", subTotal);
-        mav.addObject("discount", discount);
-        mav.addObject("couponDiscount", couponDiscount);
-        mav.addObject("tax", tax);
         mav.addObject("grandTotal", grandTotal);
         return mav;
     }
+
+    @PostMapping("")
+    public ModelAndView selectCartItem(@RequestParam List<Long> stt){
+        List<Long> checkBoxList = stt;
+        Cart cart = appUserService.getCurrentUser().getCart();
+        List<CartItem> cartItems = cartItemService.findAllByCartId(cart.getId());
+        for (int i = 0; i < cartItems.size(); i++) {
+            for (int j = 0; j < checkBoxList.size(); j++) {
+                if (cartItems.get(i).getId() == checkBoxList.get(j)) {
+                    cartItems.get(i).setStatus(2);
+                    cartItemService.save(cartItems.get(i));
+                }
+            }
+        }
+        return new ModelAndView("redirect:/checkout");
+    }
+
+
 
 }

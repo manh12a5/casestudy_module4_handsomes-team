@@ -70,4 +70,18 @@ public class CartItemServiceImp implements ICartItemService {
     public List<CartItem> findAllByCartId(Long id) {
         return cartItemRepository.findAllByCartId(id);
     }
+
+    @Override
+    public List<CartItem> findAllByStatus(int stt) {
+        return cartItemRepository.findAllByStatus(stt);
+    }
+
+    @Override
+    public List<CartItem> findAllByCartIdAndStatus(Long id, int stt) {
+        return cartItemRepository.findAllByCartIdAndStatus(id,stt);
+    }
+    @Override
+    public List<CartItem> findCartItemsByStatus(Integer stt1, Integer stt2, Long cartId){
+        return cartItemRepository.findCartItemsByStatus(stt1,stt2,cartId);
+    }
 }

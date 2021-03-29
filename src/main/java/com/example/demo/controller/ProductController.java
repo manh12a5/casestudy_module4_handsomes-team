@@ -3,10 +3,8 @@ package com.example.demo.controller;
 import com.example.demo.model.cart.Cart;
 import com.example.demo.model.cart.CartItem;
 import com.example.demo.model.category.Category;
-import com.example.demo.model.login.AppUser;
 import com.example.demo.model.product.Product;
 import com.example.demo.service.Cart.CartItemServiceImp;
-import com.example.demo.service.cartItem.ICartItemService;
 import com.example.demo.service.category.ICategoryService;
 import com.example.demo.service.login.user.IAppUserService;
 import com.example.demo.service.product.IProductService;
@@ -15,9 +13,6 @@ import org.springframework.core.env.Environment;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
@@ -72,6 +67,15 @@ public class ProductController {
         List<Category> categories = categoryService.findAll();
         Page<Product> productPage = productService.findAll(pageable);
         Long numberOfProducts = productPage.getTotalElements();
+        Cart cart = appUserService.getCurrentUser().getCart();
+        List<CartItem> cartItems = cartItemService.findAllByCartId(cart.getId());
+        double subTotal = 0;
+        for (CartItem c : cartItems) {
+            double total = c.getProduct().getPrice() * c.getQuantity();
+            subTotal += total;
+        }
+        modelAndView.addObject("cartItems", cartItems);
+        modelAndView.addObject("subTotal", subTotal);
         modelAndView.addObject("products", productPage);
         modelAndView.addObject("categoriesProduct", categories);
         modelAndView.addObject("numberOfProducts", numberOfProducts);
@@ -135,6 +139,16 @@ public class ProductController {
         ModelAndView modelAndView = new ModelAndView("/view/shop-detail");
         modelAndView.addObject("product", productService.findById(id));
         modelAndView.addObject("cartItem", new CartItem());
+        Cart cart = appUserService.getCurrentUser().getCart();
+        List<CartItem> cartItems = cartItemService.findAllByCartId(cart.getId());
+        double subTotal = 0;
+        for (CartItem c : cartItems) {
+            double total = c.getProduct().getPrice() * c.getQuantity();
+            subTotal += total;
+        }
+        modelAndView.addObject("cartItems", cartItems);
+        modelAndView.addObject("subTotal", subTotal);
+        modelAndView.addObject("categories",categoryService.findAll());
         return modelAndView;
     }
 
