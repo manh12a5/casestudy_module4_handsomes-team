@@ -2395,10 +2395,29 @@
      vertical-align: middle;
      white-space: nowrap;
 }
- 
+/*button custom*/
+.btcustom {
+    display: inline-block;
+    padding: 20px 25px;
+    font-size: 10px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: #fff;
+    background-color: #FF3300;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 9px #999;
+}
 
+.btcustom:hover {background-color: #FF0000}
 
-
+.btcustom:active {
+    background-color: #660000;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+}
 
 
 

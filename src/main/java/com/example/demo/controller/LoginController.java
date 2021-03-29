@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.model.cart.Cart;
 import com.example.demo.model.login.AppRole;
 import com.example.demo.model.login.AppUser;
+import com.example.demo.service.Cart.ICartService;
 import com.example.demo.service.login.role.IAppRoleService;
 import com.example.demo.service.login.user.IAppUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,9 @@ public class LoginController {
     @Autowired
     IAppUserService appUserService;
 
+    @Autowired
+    ICartService cartService;
+
     @ModelAttribute("listRole")
     public List<AppRole> appRoleList() {
         return appRoleService.findAll();
@@ -46,9 +50,22 @@ public class LoginController {
         return new ModelAndView("login/create", "user", new AppUser());
     }
 
+
+    // tạo mới user hàng với giỏ
     @PostMapping("/register")
     public ModelAndView createAccount(@ModelAttribute AppUser appUser) {
-        appUserService.save(appUser);
+        // khi gọi phương thức thì tạo ta 1 giỏ
+        Cart cart = new Cart();
+        // lưu cart vào trong database
+        Cart insertCart = cartService.save(cart);
+        // user lưu thông tin cart đã có trong database vào thuộc tính user
+        appUser.setCart(insertCart);
+        // lưu user vào database
+        AppUser inSertAppUser = appUserService.save(appUser);
+        // bổ sung thông tin user đã có trong databse vào thuộc tính cart
+        insertCart.setAppUser(inSertAppUser);
+        // cập nhật cart lên database
+        cartService.save(insertCart);
         return new ModelAndView("redirect:/login");
     }
 

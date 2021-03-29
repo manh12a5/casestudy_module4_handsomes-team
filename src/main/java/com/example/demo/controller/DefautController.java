@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-
 @Controller
 @RequestMapping("")
 public class DefautController {
@@ -46,17 +45,11 @@ public class DefautController {
     public ModelAndView checkout(){
         return new ModelAndView("/view/checkout");
     }
-    
-    @RequestMapping("/my-account")
-    public ModelAndView myAccount(){
-        return new ModelAndView("/view/my-account");
-    }
 
     @RequestMapping("/contact")
     public ModelAndView contact(){
         return new ModelAndView("/view/contact-us");
     }
-
 
     @PostMapping("/search")
     public ModelAndView showSearchNameProduct(@RequestParam String name, @PageableDefault(size = 6) Pageable pageable) {
@@ -66,6 +59,7 @@ public class DefautController {
         modelAndView.addObject("products", productList);
         return modelAndView;
     }
+
     @RequestMapping("/my-account")
     public ModelAndView myAccount(){
         return new ModelAndView("/view/my-account");
@@ -77,17 +71,7 @@ public class DefautController {
     }
 
     @RequestMapping("/wishlist")
-    public ModelAndView wishList(){
-        return new ModelAndView("/view/wishlist");
-    }
-
-    @RequestMapping("/service")
-    public ModelAndView service(){
-        return new ModelAndView("/view/service");
-    }
-
-    @RequestMapping("/wishlist")
-    public ModelAndView wishList(){
+    public ModelAndView wishList() {
         return new ModelAndView("/view/wishlist");
     }
 

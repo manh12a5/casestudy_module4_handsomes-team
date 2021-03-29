@@ -14,26 +14,23 @@ public class Product {
     private Long id;
     private String name;
     private double price;
-    private int size;
     private String image;
     private Date date;
+    private String description;
     @Transient
     private MultipartFile avatar;
-
-    private String description;
-
     @ManyToOne
     private Category category;
 
     public Product() {
     }
 
-    public Product(Long id, String name, double price, int size, String image, MultipartFile avatar, String description, Category category) {
+    public Product(Long id, String name, double price, String image, Date date, MultipartFile avatar, String description, Category category) {
         this.id = id;
         this.name = name;
         this.price = price;
-        this.size = size;
         this.image = image;
+        this.date = date;
         this.avatar = avatar;
         this.description = description;
         this.category = category;
@@ -63,20 +60,20 @@ public class Product {
         this.price = price;
     }
 
-    public int getSize() {
-        return size;
-    }
-
-    public void setSize(int size) {
-        this.size = size;
-    }
-
     public String getImage() {
         return image;
     }
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     public MultipartFile getAvatar() {

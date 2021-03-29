@@ -34,6 +34,8 @@ dependencies {
     }
     testImplementation 'io.projectreactor:reactor-test'
 //    testImplementation 'org.springframework.security:spring-security-test'
+
+    implementation group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-springsecurity5', version: '3.0.4.RELEASE'
 }
 
 test {
