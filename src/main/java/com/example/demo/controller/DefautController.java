@@ -60,6 +60,19 @@ public class DefautController {
         return modelAndView;
     }
 
+    @GetMapping("/searchcategory/{id}")
+    public ModelAndView showSearchCategory(@PathVariable Long id) {
+        ModelAndView modelAndView = new ModelAndView("product/search-category");
+        modelAndView.addObject("categories", productService.findById(id));
+        return modelAndView;
+    }
+
+    @PostMapping("/searchcategory/{id}")
+    public ModelAndView searchProductByCategory(@PathVariable Long id, @PageableDefault(size = 6) Pageable pageable) {
+        Page<Product> productPage = productService.findProductByCategoryName(id, pageable);
+        return new ModelAndView("product/search-category", "categories", productPage);
+    }
+
     @RequestMapping("/my-account")
     public ModelAndView myAccount(){
         return new ModelAndView("/view/my-account");

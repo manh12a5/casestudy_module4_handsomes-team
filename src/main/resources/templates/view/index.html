@@ -251,13 +251,13 @@
 <!-- End Slider -->
 
 <!-- Start Categories  -->
-<div class="categories-shop" >
+<div class="categories-shop">
     <div class="container">
         <div class="row">
             <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12" th:each="c:${categories}">
                 <div class="shop-cat-box">
                     <img th:src="${'../'+c.image}" alt="adidas" width="350" height="350"/>
-                    <a class="btn hvr-hover" href="#" th:text="${c.name}"></a>
+                    <a class="btn hvr-hover" th:href="@{/searchcategory/{id}(id=${c.id})}" th:text="${c.name}"></a>
                 </div>
             </div>
         </div>
