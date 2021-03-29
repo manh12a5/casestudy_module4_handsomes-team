@@ -90,7 +90,7 @@
                             <a sec:authorize="isAnonymous()" href="/login">Login</a>
                         </li>
                         <li sec:authorize="isAuthenticated()">
-                            <span sec:authentication="principal.username"></span>
+                             <a href="/" sec:authentication="principal.username"></a>
                         </li>
 
                         <li>
