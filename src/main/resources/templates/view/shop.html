@@ -274,22 +274,21 @@
                 <div class="product-categori">
                     <div class="search-product">
                         <form action="/products/search" method="post">
-                            <input name="name" class="form-control" placeholder="Tìm kiếm tên sản phẩm" type="text">
-                            <button type="submit"><i class="fa fa-search"></i></button>
+                            <input name="name"c placeholder="Tìm kiếm tên sản phẩm" type="text">
+                            <button type="submit" style="height: 50px"><i class="fa fa-search"></i></button>
                         </form>
                     </div>
                     <div class="filter-sidebar-left">
                         <div class="title-left">
                             <h3>Hãng giầy</h3>
                         </div>
-                        <form action="/products/searchCategory" method="post">
-                            <th:block th:each="c:${categoriesProduct}">
-                                <div class="list-group list-group-collapse list-group-sm list-group-tree">
-                                    <a href="/products/searchcategory" class="list-group-item list-group-item-action">
-                                        <span th:value="${c.id}" th:text="${c.name}" style="color: red"></span>
-                                    </a>
-                                </div>
-                            </th:block>
+                        <form action="/products/searchcategory" th:method="post">
+                            <select style="width: 200px; height: 50px" name="id">
+                                <th:block th:each="c:${listCategory}">
+                                    <option th:value="${c.id}" th:text="${c.name}"></option>
+                                </th:block>
+                            </select>
+                            <button type="submit" style="width: 50px; height: 50px"><i class="fa fa-search"></i></button>
                         </form>
                     </div>
 
