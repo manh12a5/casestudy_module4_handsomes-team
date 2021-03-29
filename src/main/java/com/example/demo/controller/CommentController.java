@@ -35,6 +35,7 @@ public class CommentController {
 
     @ModelAttribute()
     public AppUser currentUser(){
+
         return appUserService.getCurrentUser();
     }
 
@@ -165,9 +166,14 @@ public class CommentController {
         return mav;
     }
 
-    @PostMapping(value = "/create",produces = MediaType.APPLICATION_JSON_VALUE,consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/createNewC",
+            produces = MediaType.APPLICATION_JSON_VALUE,consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public Comment create(@RequestBody Comment comment) {
+    public Comment create(@RequestBody Comment comment){
+        AppUser appUser=currentUser();
+        Date date=new Date(System.currentTimeMillis());
+        comment.setUser(appUser);
+        comment.setDate(date);
         return commentService.save(comment);
     }
 
@@ -182,11 +188,18 @@ public class CommentController {
         return null;
     }
 
-    @RequestMapping(value = "/edit/{id}", method = RequestMethod.POST,
+    @PostMapping(value = "/edit/{id}",
             produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public Comment edit(@PathVariable Long id, @RequestBody Comment comment){
         comment.setId(id);
+        Product product=productService.findById(comment.getProduct().getId());
+        AppUser appUser=appUserService.findById(comment.getUser().getId());
+        Date date=new Date(System.currentTimeMillis());
+        Comment comment1=new Comment();
+        comment1.setProduct(product);
+        comment1.setUser(appUser);
+        comment1.setDate(date);
         return commentService.save(comment);
     }
 

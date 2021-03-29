@@ -4,7 +4,7 @@ import com.example.demo.model.login.AppUser;
 import com.example.demo.model.product.Product;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
+import java.util.Date;
 
 @Entity
 public class Comment {
@@ -20,7 +20,7 @@ public class Comment {
     @ManyToOne
     private Product product;
 
-    private Timestamp date;
+    private Date date;
 
     public Comment() {
     }
@@ -35,7 +35,7 @@ public class Comment {
 
 
 
-    public Comment(Long id, String comment, AppUser user, Product product, Timestamp date) {
+    public Comment(Long id, String comment, AppUser user, Product product, Date date) {
         this.id = id;
         this.comment = comment;
         this.user = user;
@@ -66,11 +66,11 @@ public class Comment {
         this.product = product;
     }
 
-    public Timestamp getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(Timestamp date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 }

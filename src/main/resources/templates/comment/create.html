@@ -8,11 +8,19 @@
     <script type="text/javascript">
         $(document).ready(function() {
             $('#newCommentForm').submit(function(event) {
-                var user = $('#user.id').val();
-                var product = $('#product.id').val();
-                var comment = $('#comment').val();
-                var date = $('#date').val();
-                var json = { "user" : user.id, "product" : product.id, "comment": comment,"date":date};
+                // var user = $('#user.id').val();
+                var product = $('#aa').val();
+                var comment = $('#comment' +
+                    '').val();
+                // var date = $('#date').val();
+                // var json = { "user" : user.id, "product" : product.id, "comment": comment};
+                var json = {
+                    comment : comment,
+                    product:{
+                        id:product
+                    }
+
+                };
                 $.ajax({
                     headers: {
                         'Accept': 'application/json',
@@ -20,16 +28,17 @@
                     },
                     type : "POST",
                     data: JSON.stringify(json),
-                    url: "/comments/create",
-                    success: function(comments) {
-                        var respContent = "";
-                        respContent += "<span class='success'>Comment was created: [";
-                        respContent += comments.user.id + " : ";
-                        respContent += comments.product.id + " : ";
-                        respContent += comments.comment + " : " ;
-                        respContent += comments.date + "]</span>"
-                        $("#commentFromResponse").html(respContent);
-                    }
+                    url: "/comments/createNewC"
+                    // ,
+                    // success: function(comments) {
+                    //     var respContent = "";
+                    //     respContent += "<span class='success'>Comment was created: [";
+                    //     respContent += comments.user.id + " : ";
+                    //     respContent += comments.product.id + " : ";
+                    //     respContent += comments.comment + " : " ;
+                    //     respContent += comments.date + "]</span>"
+                    //     $("#commentFromResponse").html(respContent);
+                    // }
                 });
                 event.preventDefault();
             });
@@ -38,37 +47,15 @@
 </head>
 <body>
 <div id="container">
+    <h1>Product</h1>
+    <input id="aa" value="1">
     <h1>Create new Comment</h1>
-    <div>
-        <p>Here you can create new Comment:</p>
-        <div id="commentFromResponse"></div>
-    </div>
-    <form id="newCommentForm"th:object="${comment}">
+    <form id="newCommentForm" th:object="${comment}">
         <table>
             <tbody>
             <tr>
-                <td>user:</td>
-<!--                <td>-->
-<!--                    <select id="producer">-->
-<!--                        <option value="NOKIA">Nokia</option>-->
-<!--                        <option selected="selected" value="IPHONE">iPhone</option>-->
-<!--                        <option value="HTC">HTC</option>-->
-<!--                        <option value="SAMSUNG">Samsung</option>-->
-<!--                    </select>-->
-<!--                </td>-->
-                <td><input type="number" th:field="*{user.id}" /></td>
-            </tr>
-            <tr>
-                <td>product:</td>
-                <td><input type="number" th:field="*{product.id}" /></td>
-            </tr>
-            <tr>
                 <td>Comment:</td>
                 <td><input type="text" th:field="*{comment}" /></td>
-            </tr>
-            <tr>
-                <td>Date:</td>
-                <td><input type="datetime-local" th:field="*{date}" /></td>
             </tr>
             <tr>
                 <td><input type="submit" value="Create" /></td>
