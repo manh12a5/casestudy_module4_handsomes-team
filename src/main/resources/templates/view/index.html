@@ -90,7 +90,7 @@
                             <a sec:authorize="isAnonymous()" href="/login">Login</a>
                         </li>
                         <li sec:authorize="isAuthenticated()">
-                            <span sec:authentication="principal.username"></span>
+                             <a href="/" sec:authentication="principal.username"></a>
                         </li>
 
                         <li>
@@ -251,7 +251,7 @@
 <!-- End Slider -->
 
 <!-- Start Categories  -->
-<div class="categories-shop" >
+<div class="categories-shop">
     <div class="container">
         <div class="row">
             <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12" th:each="c:${categories}">

@@ -9,9 +9,11 @@
 </head>
 <body>
 <div class="input-group">
-    <form method="post" th:object="${category}" >
+    <form method="post" th:object="${category}" enctype="multipart/form-data">
         <span class="input-group-text">Category Name</span>
         <input type="text" aria-label="Last name" class="form-control" th:field="*{name}">
+        <span class="input-group-text">Category IMG</span>
+        <input type="file" aria-label="Last name" class="form-control" th:field="*{avatar}">
         <input type="submit" value="Edit">
     </form>
 </div>
