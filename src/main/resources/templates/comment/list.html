@@ -21,7 +21,7 @@
                         var rowToDelete = $(event.target).closest("tr");
                         rowToDelete.remove();
                         respContent += "<span class='success'>Comment was deleted: [";
-                        respContent += comment.c+ " : ";
+                        respContent += comment.comment+ " : ";
                         respContent += comment.product.name + " : ";
                         respContent += comment.user.name + " : ";
                         respContent += comment.day+ "]</span>";

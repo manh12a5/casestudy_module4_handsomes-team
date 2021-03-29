@@ -98,17 +98,31 @@ public class CommentController {
         AppUser appUser=currentUser();
         Product product=currentProduct();
         Date date=new Date(System.currentTimeMillis());
-        comment.setUser(appUser);
-        comment.setProduct(product);
-        System.out.println(product);
-        comment.setDate(date);
-        return commentService.save(comment);
+        if (appUser.equals(appUser.getUsername())&&product.equals(product.getName())){
+            comment.setUser(appUser);
+            comment.setProduct(product);
+            System.out.println(product);
+            comment.setDate(date);
+            return commentService.save(comment);
+        }else {
+            return null;
+        }
+
     }
 
     @PostMapping(value = "/delete/{id}",produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public void delete(@PathVariable Long id) {
-        commentService.remove(id);
+    public ResponseEntity<Comment> delete(@PathVariable Long id) {
+            AppUser appUser=currentUser();
+        String a = commentService.findById(id).getUser().getUsername();
+        boolean b = appUser.getUsername().equals(a);
+        if (b){
+            commentService.remove(id);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }else {
+            return new ResponseEntity<>(null,HttpStatus.NOT_FOUND);
+        }
+
     }
 
 }
