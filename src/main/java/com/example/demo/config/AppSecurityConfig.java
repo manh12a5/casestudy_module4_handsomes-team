@@ -4,6 +4,7 @@ package com.example.demo.config;
 import com.example.demo.service.login.user.IAppUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -38,6 +39,7 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter implements W
                 authorizeRequests().antMatchers("/products/create").hasRole("ADMIN").and().
                 authorizeRequests().antMatchers("/products/edit/{id}").hasRole("ADMIN").and().
                 authorizeRequests().antMatchers("/products/delete/{id}").hasRole("ADMIN").and().
+                authorizeRequests().antMatchers(HttpMethod.POST ,"/products/detail/{id}").authenticated().and().
                 authorizeRequests().antMatchers("/products/**").permitAll().and().
                 formLogin().successHandler(customizeSuccessHandle).loginPage("/login").permitAll().and()
                 .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).and().exceptionHandling().accessDeniedPage("/403");

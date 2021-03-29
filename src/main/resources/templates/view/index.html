@@ -86,7 +86,13 @@
                 </div>
                 <div class="our-link">
                     <ul>
-                        <li><a href="/login">Login</a></li>
+                        <li>
+                            <a sec:authorize="isAnonymous()" href="/login">Login</a>
+                        </li>
+                        <li>Hi [[${#request.userPrincipal.principal.username}]]</li>
+                        <li>
+                            <a sec:authorize="isAuthenticated()" href="/logout">Logout</a>
+                        </li>
                         <li><a href="#">Our location</a></li>
                         <li><a href="#">Contact Us</a></li>
                     </ul>
