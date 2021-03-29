@@ -83,27 +83,17 @@
                         <div class="title-left">
                             <h3>Hãng giầy</h3>
                         </div>
-<<<<<<< HEAD
                         <form action="/products/searchCategory" method="post">
                             <th:block th:each="c:${categoriesProduct}">
                                 <div class="list-group list-group-collapse list-group-sm list-group-tree">
-                                    <a href="/products/searchcategory" class="list-group-item list-group-item-action">
-                                        <span th:value="${c.id}" th:text="${c.name}" style="color: red"></span>
+
+                                    <a th:href="@{'category/'+${c.id}}" class="list-group-item list-group-item-action">
+                                        <span th:text="${c.name}" style="color: red"></span>
+                                        <!--                                    <small class="text-muted"><span th:text="${productSize}" style="color: #007bff"></span></small>-->
                                     </a>
                                 </div>
                             </th:block>
                         </form>
-=======
-                        <th:block th:each="c:${categoriesProduct}">
-                            <div class="list-group list-group-collapse list-group-sm list-group-tree">
-
-                                <a th:href="@{'category/'+${c.id}}" class="list-group-item list-group-item-action"><span
-                                        th:text="${c.name}" style="color: red"></span>
-                                    <!--                                    <small class="text-muted"><span th:text="${productSize}" style="color: #007bff"></span></small>-->
-                                </a>
-                            </div>
-                        </th:block>
->>>>>>> khai
                     </div>
 
                     <div class="filter-price-left">

@@ -72,15 +72,9 @@ public class ProductController {
         List<Category> categories = categoryService.findAll();
         Page<Product> productPage = productService.findAll(pageable);
         Long numberOfProducts = productPage.getTotalElements();
-<<<<<<< HEAD
-        modelAndView.addObject("products",productPage );
-        modelAndView.addObject("categoriesProduct",categories);
-        modelAndView.addObject("numberOfProducts",numberOfProducts);
-=======
         modelAndView.addObject("products", productPage);
         modelAndView.addObject("categoriesProduct", categories);
         modelAndView.addObject("numberOfProducts", numberOfProducts);
->>>>>>> khai
         return modelAndView;
     }
 
@@ -144,8 +138,6 @@ public class ProductController {
         return modelAndView;
     }
 
-<<<<<<< HEAD
-=======
     @PostMapping("/detail/{id}/add")
     public ModelAndView createCartItem(@PathVariable Long id, @ModelAttribute CartItem cartItem) {
         Product product = productService.findById(id);
@@ -158,7 +150,6 @@ public class ProductController {
     }
 
     //SearchNameProduct
->>>>>>> khai
     @PostMapping("/search")
     public ModelAndView showSearchNameProduct(@RequestParam String name, @PageableDefault(size = 6) Pageable pageable) {
         ModelAndView modelAndView = new ModelAndView("view/shop");
@@ -174,7 +165,7 @@ public class ProductController {
         return new ModelAndView("view/shop", "categories", productPage);
     }
 
-<<<<<<< HEAD
+
     @GetMapping("/sortpricemax")
     public ModelAndView sortPriceMax(@PageableDefault(size = 6) Pageable pageable) {
         ModelAndView modelAndView = new ModelAndView("view/shop");
@@ -186,12 +177,13 @@ public class ProductController {
     public ModelAndView sortPriceMin(@PageableDefault(size = 6) Pageable pageable) {
         ModelAndView modelAndView = new ModelAndView("view/shop");
         modelAndView.addObject("products", productService.findTop5ByOrderByPriceDesc(pageable));
-=======
+        return modelAndView;
+    }
+
     @GetMapping("/top5priceMax")
     public ModelAndView find5PriceMax(@PageableDefault(size = 6) Pageable pageable) {
         ModelAndView modelAndView = new ModelAndView("/view/shop");
         modelAndView.addObject("top5price", productService.findTop5ByOrderByPriceDesc(pageable));
->>>>>>> khai
         return modelAndView;
     }
 
