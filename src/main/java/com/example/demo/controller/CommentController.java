@@ -93,19 +93,22 @@ public class CommentController {
     @PostMapping(value = "/edit/{id}",
             produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 
-    public Comment edit(@PathVariable Long id, @RequestBody Comment comment){
+    public ResponseEntity<Comment> edit(@PathVariable Long id, @RequestBody Comment comment){
         comment.setId(id);
         AppUser appUser=currentUser();
         Product product=currentProduct();
         Date date=new Date(System.currentTimeMillis());
-        if (appUser.equals(appUser.getUsername())&&product.equals(product.getName())){
+        String a = commentService.findById(id).getUser().getUsername();
+        boolean b = appUser.getUsername().equals(a);
+        if (b){
             comment.setUser(appUser);
             comment.setProduct(product);
             System.out.println(product);
             comment.setDate(date);
-            return commentService.save(comment);
+            commentService.save(comment);
+            return new ResponseEntity<>(HttpStatus.OK);
         }else {
-            return null;
+            return new ResponseEntity<>(null,HttpStatus.NOT_FOUND);
         }
 
     }
