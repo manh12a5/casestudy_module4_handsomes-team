@@ -12,6 +12,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
@@ -90,14 +91,21 @@ public class DefautController {
     }
 
     @PostMapping("/checkout")
-    public ModelAndView placeOrder(@RequestParam Long placeOrder) {
+    public ModelAndView placeOrder(@RequestParam String placeOrder ) {
         ModelAndView modelAndView;
         modelAndView = new ModelAndView("view/checkout");
-        List<CartItem> cartItems = cartItemService.findAllByCartIdAndStatus(placeOrder, 2);
-        for (int i = 0; i < cartItems.size(); i++) {
-            cartItems.get(i).setStatus(3);
-            cartItemService.save(cartItems.get(i));
+        if(placeOrder ==null) {System.out.println("loi");}
+        else {
+            Long card_id=Long.parseLong(placeOrder);
+            List<CartItem> cartItems = cartItemService.findAllByCartIdAndStatus(card_id, 2);
+
+            for (int i = 0; i < cartItems.size(); i++) {
+                cartItems.get(i).setStatus(3);
+                cartItemService.save(cartItems.get(i));
+            }
+
         }
+
         return modelAndView;
     }
 
@@ -198,6 +206,11 @@ public class DefautController {
         modelAndView.addObject("numberOfProductsSearch",productList.size());
         modelAndView.addObject("categories",categoryService.findAll());
         return modelAndView;
+    }
+
+    @GetMapping("/comment")
+    public ModelAndView comment(){
+        return new ModelAndView("view/comment");
     }
 
 }

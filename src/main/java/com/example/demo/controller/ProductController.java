@@ -68,7 +68,7 @@ public class ProductController {
         Page<Product> productPage = productService.findAll(pageable);
         Long numberOfProducts = productPage.getTotalElements();
         Cart cart = appUserService.getCurrentUser().getCart();
-        List<CartItem> cartItems = cartItemService.findAllByCartId(cart.getId());
+        List<CartItem> cartItems = cartItemService.findCartItemsByStatus(1, 2, cart.getId());
         double subTotal = 0;
         for (CartItem c : cartItems) {
             double total = c.getProduct().getPrice() * c.getQuantity();
@@ -140,7 +140,7 @@ public class ProductController {
         modelAndView.addObject("product", productService.findById(id));
         modelAndView.addObject("cartItem", new CartItem());
         Cart cart = appUserService.getCurrentUser().getCart();
-        List<CartItem> cartItems = cartItemService.findAllByCartId(cart.getId());
+        List<CartItem> cartItems = cartItemService.findCartItemsByStatus(1, 2, cart.getId());
         double subTotal = 0;
         for (CartItem c : cartItems) {
             double total = c.getProduct().getPrice() * c.getQuantity();

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+     >
 <!-- Basic -->
 
 <head>
@@ -91,6 +91,10 @@
                         <li>
                             <a sec:authorize="isAnonymous()" href="/login">Login</a>
                         </li>
+                        <li sec:authorize="isAuthenticated()">
+                            <a href="/" sec:authentication="principal.username"></a>
+                        </li>
+
                         <li>
                             <a sec:authorize="isAuthenticated()" href="/logout">Logout</a>
                         </li>
@@ -150,7 +154,7 @@
                         <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">SHOP</a>
                         <ul class="dropdown-menu">
                             <li><a href="/cart">Cart</a></li>
-                            <li><a href="checkout">Checkout</a></li>
+                            <li><a href="/checkout">Checkout</a></li>
                             <li><a href="/my-account">My Account</a></li>
                             <li><a href="/wishlist">Wishlist</a></li>
                         </ul>
@@ -204,9 +208,9 @@
     <div class="container">
         <form th:action="@{/search}" method="get">
             <div class="input-group">
-            <span class="input-group-addon"><button type="submit"><i class="fa fa-search"></i></button></span>
-            <input type="text" name="name" class="form-control" placeholder="Search">
-            <span class="input-group-addon close-search"><i class="fa fa-times"></i></span>
+                <span class="input-group-addon"><button type="submit"><i class="fa fa-search"></i></button></span>
+                <input type="text" name="name" class="form-control" placeholder="Search">
+                <span class="input-group-addon close-search"><i class="fa fa-times"></i></span>
             </div>
         </form>
     </div>
