@@ -38,14 +38,16 @@
 <table class="table table-hover">
     <thead>
     <tr>
-
         <th scope="col">Category Name</th>
+        <th scope="col">Category Image</th>
         <th scope="col">Action</th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="p:${list}">
         <td th:text="${p.name}"></td>
+        <td>
+           <img th:src="${'../'+p.image}" th:width="100"></td>
         <td >
             <a class="btn btn-success" role="button" th:href="@{'/admin/category/edit/'+${p.id}}">Edit</a>
             <a class="btn btn-danger" role="button" th:href="@{'/admin/category/delete/'+${p.id}}"
